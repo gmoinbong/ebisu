@@ -1,0 +1,71 @@
+.collectionBlock {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  display: block;
+  align-items: center;
+}
+
+.header {
+  text-align: center;
+}
+
+.title {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.subtitle {
+  font-size: 12px;
+  color: gray;
+}
+
+.imageBlock {
+  display: flex;
+  margin-top: 10px;
+  justify-content: center;
+  width: 75%;
+  margin: 0 auto;
+padding-top: 10px;
+}
+
+.imageContainer {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+
+}
+
+.image {
+  width: 100%;
+  height: auto;
+}
+
+
+.left{
+  position: relative;
+  top: -60px;
+  left: 80px;
+}
+.right{
+  top: -60px;
+  position: relative;
+  right:80px;
+}
+
+.button:hover {
+  color: #000;
+}
+
+.button:hover::before {
+  opacity: 1;
+}
+
+.collectionBlock {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+

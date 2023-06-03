@@ -1,11 +1,13 @@
 import React from 'react';
-import BookTitle from './components/BookTitle';
+import Header from './components/header';
+import MainPage from './pages/main';
 
 const App: React.FC = () => {
   return (
-    <div>
-      <BookTitle />
-    </div>
+    <>
+      <Header />
+      <MainPage />
+    </>
   );
 };
 
