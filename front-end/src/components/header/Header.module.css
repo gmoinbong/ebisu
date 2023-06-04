@@ -7,7 +7,11 @@
   width: 100%;
   background: none;
   z-index: 1
-}
+ }
+ .header:hover{
+  background: linear-gradient(to bottom,#1b1b1b,rgba(27,27,27,.8) 100%);
+
+ }
 .scrolled{
   background: linear-gradient(to bottom,#1b1b1b,rgba(27,27,27,.8) 100%);
 }
@@ -23,8 +27,7 @@
   padding-bottom: 5px;
   filter: brightness(0) invert(1);
 }
-.scrolled {
-}
+
 .switcher{
   padding: 5px;
   display: flex;
@@ -52,6 +55,11 @@
 }
 .links li{
   padding-left: 10px;
+  cursor: pointer;
+}
+.helpPannel{
+  cursor: pointer;
+
 }
 
 @media (max-width: 767px) {

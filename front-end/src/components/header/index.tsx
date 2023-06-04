@@ -7,8 +7,13 @@ import { CgProfile } from 'react-icons/cg'
 import styles from './Header.module.css'
 import { useEffect, useState } from 'react'
 
+
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false)
+
+  const handleFocus = () => {
+    setIsFocused(true)
+  }
 
   useEffect(() => {
     const handleScroll = () => {
@@ -23,7 +28,7 @@ const Header = () => {
 
 
   return (
-    <header className={`${styles.header} ${isScrolled ? styles.scrolled : ""}`}>
+    <header onFocus={handleFocus} className={`${styles.header} ${isScrolled ? styles.scrolled : ""}`}>
       <nav className={styles.nav}>
         <div className={styles.burgerMenu}>
           <BurgerMenu />

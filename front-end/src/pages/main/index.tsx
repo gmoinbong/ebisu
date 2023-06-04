@@ -17,7 +17,6 @@ const MainPage = () => {
       <SingleBlock {...BlockData1} />
       <CollectionBlock {...collectionData2} />
       <SingleBlock {...BlockData2} />
-      <Footer />
     </>
   )
 }
