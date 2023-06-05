@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from './ProductCard.module.css'
 import Button from '../button';
 
@@ -16,14 +16,14 @@ interface Product {
 
 function ProductCard() {
   const [items, setItems] = useState<Product[]>([])
-  const [isFocused, setIsFocused] = useState(false);
-
-  const handleCardFocus = () => {
-    setIsFocused(true);
+  const [isHovered, setIsHovered] = useState(false);
+  const isMobile = window.innerWidth <= 768
+  const handleCardMouseEnter = () => {
+    setIsHovered(true);
   };
 
-  const handleCardBlur = () => {
-    setIsFocused(false);
+  const handleCardMouseLeave = () => {
+    setIsHovered(false);
   };
 
   useEffect(() => {
@@ -39,18 +39,18 @@ function ProductCard() {
 
 
   return (
-    <div
-      className={`${styles['product-card']} ${isFocused ? styles.focused : ''}`}
-      onFocus={handleCardFocus}
-      onBlur={handleCardBlur}
-    >
+    <div className={styles['product-card']} >
       {items.map((item, index) => (
-        <div key={index} className={styles.card}>
-          <img src={item.url} alt="Product" />
-          <h2>{item.name}</h2>
-          <h3>{item.color}</h3>
-          <p>$ {item.price}</p>
-          <Button text='Add to Cart'></Button>
+        <div key={index} className={styles.card}
+          onMouseEnter={handleCardMouseEnter} onMouseLeave={handleCardMouseLeave}>
+          <img key={index} src={item.url} alt="Product" />
+          <h2 key={index} >{item.name}</h2>
+          <h3 key={index} className={styles.color}>{item.color}</h3>
+          <div key={index} className={styles.wrapper}>
+            <p key={index} className={styles.price}>$ {item.price}</p>
+            {isMobile ? <Button text='Add to cart' className={styles.button} />
+              : isHovered && <Button key={index} text='Add to cart' className={styles.button} />}
+          </div>
         </div>
       ))}
     </div>

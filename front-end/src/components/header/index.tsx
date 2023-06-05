@@ -6,13 +6,15 @@ import { AiOutlineShopping } from 'react-icons/ai'
 import { CgProfile } from 'react-icons/cg'
 import styles from './Header.module.css'
 import { useEffect, useState } from 'react'
+import { useLocation } from 'react-router-dom'
 
 
 const Header = () => {
+  const location = useLocation()
   const [isScrolled, setIsScrolled] = useState(false)
 
   const handleFocus = () => {
-    setIsFocused(true)
+    setIsScrolled(true)
   }
 
   useEffect(() => {
@@ -27,8 +29,11 @@ const Header = () => {
   }, [])
 
 
+
   return (
-    <header onFocus={handleFocus} className={`${styles.header} ${isScrolled ? styles.scrolled : ""}`}>
+    <header onFocus={handleFocus} className={`${styles.header} 
+      ${location.pathname !== '/' ? styles.scrolled : ''}
+      ${isScrolled ? styles.scrolled : ""}`}>
       <nav className={styles.nav}>
         <div className={styles.burgerMenu}>
           <BurgerMenu />
@@ -50,7 +55,7 @@ const Header = () => {
           <CgProfile style={{ marginRight: "16px", color: '#fff' }} />
         </div>
       </nav>
-      <ul className={`${styles.links} ${isScrolled ? styles.scrolled : ""}`}>
+      <ul className={`${styles.links} `}>
         <li>WHAT'S NEW</li>
         <li>MEN</li>
         <li>ANYTHING ELSE</li>

@@ -3,9 +3,11 @@
 *::after {
   box-sizing: border-box;
 }
+
 ul {
   list-style: none;
 }
+
 ul[class],
 ol[class] {
   padding: 0;
@@ -30,7 +32,6 @@ dd {
 }
 
 body {
-  background: #f4f4f4;
   min-height: 100vh;
   scroll-behavior: smooth;
   text-rendering: optimizeSpeed;
@@ -51,7 +52,7 @@ img {
   display: block;
 }
 
-article > * + * {
+article>*+* {
   margin-top: 1em;
 }
 
