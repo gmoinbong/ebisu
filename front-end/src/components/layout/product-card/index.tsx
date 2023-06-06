@@ -4,7 +4,6 @@ import styles from './ProductCard.module.css'
 import Button from '../button';
 
 interface Product {
-  _id: string;
   price: string,
   name: string,
   category: string,
@@ -43,13 +42,14 @@ function ProductCard() {
       {items.map((item, index) => (
         <div key={index} className={styles.card}
           onMouseEnter={handleCardMouseEnter} onMouseLeave={handleCardMouseLeave}>
-          <img key={index} src={item.url} alt="Product" />
-          <h2 key={index} >{item.name}</h2>
-          <h3 key={index} className={styles.color}>{item.color}</h3>
-          <div key={index} className={styles.wrapper}>
-            <p key={index} className={styles.price}>$ {item.price}</p>
+          <img key={item.url} src={item.url} alt="Product" />
+          <h2 key={item.name} >{item.name}</h2>
+          <h3 key={item.color} className={styles.color}>{item.color}</h3>
+          <div key={item.category + index} className={styles.wrapper}>
+            <p key={item.price} className={styles.price}>$ {item.price}</p>
             {isMobile ? <Button text='Add to cart' className={styles.button} />
-              : isHovered && <Button key={index} text='Add to cart' className={styles.button} />}
+              : isHovered && <Button key={item.gender + index}
+                text='Add to cart' className={styles.button} />}
           </div>
         </div>
       ))}
