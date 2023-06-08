@@ -1,44 +1,50 @@
 .container {
-  color: white;
   position: relative;
-  text-shadow: 0 3px 6px #000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
-
+  color: #ffff
 }
 
-.image {
-  width: 100%;
+.imageBlock {
+  max-width: 100%;
   height: auto;
-  max-width: none;
+  width: 100%;
 }
 
-.title {
+.wrapper {
+  align-items: center;
   position: absolute;
-  top: 70%;
+  bottom: 0;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translateX(-50%);
+  text-align: center;
+  width: 100%;
+  box-sizing: border-box;
   font-size: 2.8125vw;
-  font-weight: bold;
+  text-shadow: 0 3px 6px #000;
 }
 
 .subtitle {
-  position: absolute;
-  top: 75%;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 16px;
   font-size: 1.35416666667vw;
-
 }
 
-.singleBlockButton {
-  position: absolute;
-  top: 80%;
-  left: 50%;
-  transform: translateX(-50%);
-  margin-top: 16px;
+.btn {
+  min-width: 8.22916666667vw;
 }
 
-@media(max-width: 768px) {
-  .image {}
+@media (max-width: 768px) {
+  .title {
+    font-size: 5.60747663551vw;
+    font-weight: 700;
+  }
+
+  .imageBlock {
+    height: 240px;
+  }
+
+  .subtitle {
+    font-size: 4.20560747664vw;
+  }
 }

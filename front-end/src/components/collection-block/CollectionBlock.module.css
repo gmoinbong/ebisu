@@ -78,4 +78,15 @@
     flex-direction: column;
     width: 100%;
   }
+
+  .subtitle {
+    font-size: 5.60747663551vw;
+    margin-bottom: 2.33644859813vw
+  }
+}
+
+@media(min-width: 768px) {
+  .subtitle {
+    font-size: 1.66666666667vw;
+  }
 }

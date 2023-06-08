@@ -7,12 +7,14 @@ export interface NewComponentProps extends Omit<collectionProps, "image2" | "but
 
 const SingleBlock: React.FC<NewComponentProps> = ({ button1Text, image1, subtitle, title }) => {
   return (
-    <picture className={styles.container}>
-      <img className={styles.image} src={image1} alt="" />
-      <h4 className={styles.title}>{title}</h4>
-      <p className={styles.subtitle}>{subtitle}</p>
-      <Button className={styles.singleBlockButton} text={button1Text} />
-    </picture>
+    <div className={styles.container}>
+      <img className={styles.imageBlock} src={image1} alt="" />
+      <div className={styles.wrapper}>
+        <h4 className={styles.title}>{title}</h4>
+        <p className={styles.subtitle}>{subtitle}</p>
+        <Button className={styles.btn} text={button1Text} />
+      </div>
+    </div>
   )
 }
 

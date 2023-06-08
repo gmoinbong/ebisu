@@ -2,6 +2,7 @@
   margin: 0 auto 10px;
   max-height: 40px;
   max-width: 75px;
+  width: auto;
 }
 
 .inner {
@@ -120,7 +121,7 @@
   box-shadow: none;
 }
 
-@media(max-width: 768px) {
+@media(max-width: 1199px) {
   .footer {
     flex-flow: wrap;
   }
@@ -143,4 +144,16 @@
     max-width: none;
   }
 
+
+}
+
+@media(min-width: 1199px) {
+  .list {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .list span {
+    padding-left: 1vh;
+  }
 }
