@@ -2,7 +2,7 @@ import { body, validationResult } from "express-validator";
 
 export const validateClothes = [
   body('name').notEmpty(),
-  body('collection').notEmpty(),
+  body('collection'),
   body('category').notEmpty(),
   body('gender').notEmpty(),
   body('color').notEmpty(),

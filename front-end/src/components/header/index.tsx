@@ -1,42 +1,43 @@
-import logo from '../../assets/logo.svg'
-import { BurgerMenu } from './BurgerMenu'
-import { CiSearch } from 'react-icons/ci'
-import { BsSuitHeart, BsGeoAlt } from 'react-icons/bs'
-import { AiOutlineShopping } from 'react-icons/ai'
-import { CgProfile } from 'react-icons/cg'
-import styles from './Header.module.css'
-import { useEffect, useState } from 'react'
-import { useLocation } from 'react-router-dom'
+import logo from '../../assets/logo.svg';
+import { BurgerMenu } from './BurgerMenu';
+import { BsGeoAlt, BsX } from 'react-icons/bs';
+import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
+import HelpPannel from './HelpPannel';
 
+import styles from './Header.module.css';
 
 const Header = () => {
-  const location = useLocation()
-  const [isScrolled, setIsScrolled] = useState(false)
+  const location = useLocation();
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const headerStyles = `${styles.header} ${location.pathname !== '/' ? styles.scrolled : ''} ${isScrolled || menuOpen ? styles.scrolled : ''}`;
 
   const handleFocus = () => {
-    setIsScrolled(true)
-  }
+    setIsScrolled(true);
+  };
+
+  const handleMobileMenuToggle = () => {
+    setMenuOpen(!menuOpen);
+  };
 
   useEffect(() => {
     const handleScroll = () => {
-      const scrollTop = window.scrollY || document.documentElement.scrollTop
-      setIsScrolled(scrollTop > 0)
-    }
-    window.addEventListener("scroll", handleScroll);
+      const scrollTop = window.scrollY || document.documentElement.scrollTop;
+      setIsScrolled(scrollTop > 0);
+    };
+    window.addEventListener('scroll', handleScroll);
     return () => {
-      window.removeEventListener('scroll', handleScroll)
-    }
-  }, [])
-
-
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   return (
-    <header onFocus={handleFocus} className={`${styles.header} 
-      ${location.pathname !== '/' ? styles.scrolled : ''}
-      ${isScrolled ? styles.scrolled : ""}`}>
-      <nav className={styles.nav}>
+    <header onFocus={handleFocus} className={headerStyles}>
+      <nav className={`${styles.nav} ${menuOpen ? styles.mobileNav : ''}`}>
         <div className={styles.burgerMenu}>
-          <BurgerMenu />
+          <BurgerMenu toggleMenu={handleMobileMenuToggle} isOpen={menuOpen} />
         </div>
         <div className={styles.switcher}>
           <p>
@@ -45,17 +46,15 @@ const Header = () => {
           </p>
           <p>USD</p>
         </div>
-        <div className={styles.row}>
-          <img src={logo} alt="logo" className={styles.logo} />
+        <div className={menuOpen ? styles.row : styles.mobileRow}>
+          <img src={logo} alt="logo" className={`${styles.logo} ${menuOpen ? styles.mobileLogo : ''}`} />
+          {menuOpen && (
+            <BsX size={24} className={`${styles.crossIcon} crossIcon`} onClick={handleMobileMenuToggle} />
+          )}
         </div>
-        <div className={styles.helpPannel}>
-          <CiSearch style={{ marginRight: "16px", color: '#fff' }} />
-          <BsSuitHeart style={{ marginRight: "16px", color: '#fff' }} />
-          <AiOutlineShopping style={{ marginRight: "16px", color: '#fff' }} />
-          <CgProfile style={{ marginRight: "16px", color: '#fff' }} />
-        </div>
+        {menuOpen ? null : <HelpPannel />}
       </nav>
-      <ul className={`${styles.links} `}>
+      <ul className={`${styles.links} ${menuOpen ? styles.mobileLinks : ''}`}>
         <li>WHAT'S NEW</li>
         <li>MEN</li>
         <li>ANYTHING ELSE</li>
@@ -63,7 +62,7 @@ const Header = () => {
         <li>SALE</li>
       </ul>
     </header>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;

@@ -25,7 +25,7 @@
   justify-content: center;
   width: 75%;
   margin: 0 auto;
-padding-top: 10px;
+  padding-top: 10px;
 }
 
 .imageContainer {
@@ -43,15 +43,16 @@ padding-top: 10px;
 }
 
 
-.left{
+.left {
   position: relative;
   top: -60px;
   left: 80px;
 }
-.right{
+
+.right {
   top: -60px;
   position: relative;
-  right:80px;
+  right: 80px;
 }
 
 .button:hover {
@@ -68,4 +69,13 @@ padding-top: 10px;
   position: relative;
 }
 
+.upblock {
+  margin-bottom: -40px;
+}
 
+@media(max-width: 768px) {
+  .imageBlock {
+    flex-direction: column;
+    width: 100%;
+  }
+}

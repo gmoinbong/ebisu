@@ -7,7 +7,7 @@ import styles from './Footer.module.css'
 
 const FooterBlocks = () => {
   return (
-    <div className={styles.container}>
+    <div className={styles.inner}>
       <ul className={styles.footer}>
         <li className={styles.list}>
           <img className={styles.img} src={footer1} />

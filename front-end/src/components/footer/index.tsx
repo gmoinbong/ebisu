@@ -32,7 +32,7 @@ const Footer = () => {
               <li className={styles.footerLinkItem}>Terms & Conditions</li>
             </ul>
           </div>
-          <div className={styles.footerColumn}>
+          <div className={`${styles.footerColumn} ${styles.follow}`}>
             <h4 className={styles.footerHeading}>FOLLOW US</h4>
             <ul className={styles.footerSocialLinks}>
               <li className={styles.footerSocialLinkItem}>
@@ -56,8 +56,10 @@ const Footer = () => {
                 </a>
               </li>
             </ul>
-            <input type='email' className={styles.input} placeholder='Input e-mail address here' />
-            <Button className={styles.subscribe} text='Subscribe' />
+            <div className={styles.wrapper}>
+              <input type='email' className={styles.input} placeholder='Input e-mail address here' />
+              <Button className={styles.subscribe} text='Subscribe' />
+            </div>
           </div>
         </div>
         <div className={styles.footerBottom}>

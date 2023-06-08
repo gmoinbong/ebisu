@@ -1,28 +1,30 @@
-import React, { useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
+// import styles from './Header.module.css'
+type Props = {
+  isOpen: boolean;
+  toggleMenu: () => void;
+};
 
-export function BurgerMenu() {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const toggleMenu = () => {
-    setIsOpen(!isOpen);
-  };
-
+export function BurgerMenu({ isOpen, toggleMenu }: Props) {
   return (
-    <div>
-      <GiHamburgerMenu size={24} onClick={toggleMenu} />
+    <>
+      {isOpen ? (
+        <GiHamburgerMenu style={{ display: 'none' }} onClick={toggleMenu} size={24} />
+      ) : (
+        <GiHamburgerMenu onClick={toggleMenu} size={24} />
+      )}
       {isOpen && (
-        <ul>
+        <ul >
           <li>WHAT'S NEW</li>
           <li>MEN</li>
           <li>WOMEN</li>
           <li>ANYTHING ELSE</li>
           <li>EVISU STORIES</li>
           <li>SALE</li>
-          <li>REGION & LANGUAGE</li>
           <li>ACCOUNT</li>
+          <li>REGION & LANGUAGE</li>
         </ul>
       )}
-    </div>
+    </>
   );
 }

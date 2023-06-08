@@ -6,7 +6,26 @@
   left: 0;
   width: 100%;
   background: none;
-  z-index: 1;
+  z-index: 3;
+  color: #ffff;
+}
+
+.row {
+  display: flex;
+  padding-bottom: 10px;
+  justify-content: space-between;
+  width: 90%;
+  border-bottom: 1px solid white;
+  margin: 0 auto;
+
+}
+
+.mobileNav {
+  flex-direction: column-reverse;
+}
+
+.mobileLogo {
+  margin: 0 auto;
 }
 
 .header:hover {
@@ -51,7 +70,6 @@
 .nav {
   display: flex;
   align-content: flex-start;
-  align-items: center;
   justify-content: space-between;
 }
 
@@ -67,8 +85,18 @@
 }
 
 .helpPannel {
+  display: flex;
+  align-items: center;
   cursor: pointer;
+}
 
+.ul {
+  border-bottom: 1px solid white;
+}
+
+.mobileRow {
+  align-items: center;
+  display: flex;
 }
 
 @media (max-width: 767px) {

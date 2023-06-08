@@ -1,9 +1,12 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import styles from './ProductCard.module.css'
+import { isMobile } from '../../../utils/isMobile';
 import Button from '../button';
 
+import styles from './ProductCard.module.css'
+
 interface Product {
+  collection: string,
   price: string,
   name: string,
   category: string,
@@ -16,7 +19,6 @@ interface Product {
 function ProductCard() {
   const [items, setItems] = useState<Product[]>([])
   const [isHovered, setIsHovered] = useState(false);
-  const isMobile = window.innerWidth <= 768
   const handleCardMouseEnter = () => {
     setIsHovered(true);
   };
@@ -43,11 +45,14 @@ function ProductCard() {
         <div key={index} className={styles.card}
           onMouseEnter={handleCardMouseEnter} onMouseLeave={handleCardMouseLeave}>
           <img key={item.url} src={item.url} alt="Product" />
-          <h2 key={item.name} >{item.name}</h2>
-          <h3 key={item.color} className={styles.color}>{item.color}</h3>
+          <div className={styles.wrapperItems}>
+            <p key={item.category} className={styles.color}>{item.collection}</p>
+            <h2 key={item.name} >{item.name}</h2>
+            <h3 key={item.color} className={styles.color}>{item.color}</h3>
+          </div>
           <div key={item.category + index} className={styles.wrapper}>
             <p key={item.price} className={styles.price}>$ {item.price}</p>
-            {isMobile ? <Button text='Add to cart' className={styles.button} />
+            {isMobile ? < Button text='Add to cart' className={styles.button} />
               : isHovered && <Button key={item.gender + index}
                 text='Add to cart' className={styles.button} />}
           </div>
