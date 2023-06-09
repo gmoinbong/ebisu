@@ -1,24 +1,30 @@
-import axios from 'axios';
+import { AnyAction, ThunkDispatch } from '@reduxjs/toolkit';
 import { useEffect, useState } from 'react';
-import { isMobile } from '../../../utils/isMobile';
+import { useDispatch, useSelector } from 'react-redux';
 import Button from '../button';
 
-import styles from './ProductCard.module.css'
+import styles from './ProductCard.module.css';
+import { isMobile } from '../../../utils/isMobile';
+import { fetchProducts } from '../../../redux/slices/productSlice';
+import { RootState } from '../../../app/store';
 
-interface Product {
-  collection: string,
-  price: string,
-  name: string,
-  category: string,
-  gender: string,
-  color: string,
-  size: string,
-  url: string
+export interface Product {
+  collection: string;
+  price: string;
+  name: string;
+  category: string;
+  gender: string;
+  color: string;
+  size: string;
+  url: string;
 }
 
 function ProductCard() {
-  const [items, setItems] = useState<Product[]>([])
+  const dispatch: ThunkDispatch<RootState, undefined, AnyAction> = useDispatch();
+  const selectProducts = (state: RootState) => state.products.products;
+  const products = useSelector(selectProducts);
   const [isHovered, setIsHovered] = useState(false);
+
   const handleCardMouseEnter = () => {
     setIsHovered(true);
   };
@@ -28,33 +34,45 @@ function ProductCard() {
   };
 
   useEffect(() => {
-    axios.get<Product[]>('http://localhost:5172/api/Clothes')
-      .then((response) => {
-        setItems(response.data)
-        console.log(response.data);
-      })
-      .catch((error) => {
-        console.log('Error fetching clothes', error);
-      })
-  }, [])
+    dispatch(fetchProducts());
+  }, [dispatch]);
 
+
+
+  if (!products) {
+    return <div>Loading...</div>;
+  }
 
   return (
-    <div className={styles['product-card']} >
-      {items.map((item, index) => (
-        <div key={index} className={styles.card}
-          onMouseEnter={handleCardMouseEnter} onMouseLeave={handleCardMouseLeave}>
-          <img key={item.url} src={item.url} alt="Product" />
+    <div className={styles['product-card']}>
+      {products.map((product: Product, index) => (
+        <div
+          key={index}
+          className={styles.card}
+          onMouseEnter={handleCardMouseEnter}
+          onMouseLeave={handleCardMouseLeave}
+        >
+          <img key={product.url} src={product.url} alt="Product" />
           <div className={styles.wrapperItems}>
-            <p key={item.category} className={styles.color}>{item.collection}</p>
-            <h2 key={item.name} >{item.name}</h2>
-            <h3 key={item.color} className={styles.color}>{item.color}</h3>
+            <p key={product.category} className={styles.color}>
+              {product.collection}
+            </p>
+            <h2 key={product.name}>{product.name}</h2>
+            <h3 key={product.color} className={styles.color}>
+              {product.color}
+            </h3>
           </div>
-          <div key={item.category + index} className={styles.wrapper}>
-            <p key={item.price} className={styles.price}>$ {item.price}</p>
-            {isMobile ? < Button text='Add to cart' className={styles.button} />
-              : isHovered && <Button key={item.gender + index}
-                text='Add to cart' className={styles.button} />}
+          <div key={product.category + index} className={styles.wrapper}>
+            <p key={product.price} className={styles.price}>
+              $ {product.price}
+            </p>
+            {isMobile ? (
+              <Button text="Add to cart" className={styles.button} />
+            ) : (
+              isHovered && (
+                <Button key={product.gender + index} text="Add to cart" className={styles.button} />
+              )
+            )}
           </div>
         </div>
       ))}

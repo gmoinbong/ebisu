@@ -6,9 +6,16 @@ import { validateClothes } from "../validation/validation.js";
 const router = express.Router()
 
 router.get('/', async (req, res) => {
-  let collection = await db.collection("Clothes");
-  let results = await collection.find({}).toArray();
-  res.send(results).status(200)
+  const gender = req.query.gender;
+  const query = gender ? { gender: gender } : {};
+  try {
+    let collection = await db.collection("Clothes");
+    let results = await collection.find(query).toArray();
+    res.send(results).status(200)
+  } catch (error) {
+    res.status(500).send("Internal Server Error")
+  }
+
 })
 
 router.post('/', validateClothes, async (req, res) => {
