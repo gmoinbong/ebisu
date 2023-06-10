@@ -10,3 +10,10 @@ export const validateClothes = [
   body('url').notEmpty(),
   body('price').notEmpty(),
 ];
+export const userSchema = new mongoose.Schema({
+  name: String,
+  email: String,
+  password: String
+})
+
+export const User = new mongoose.model("User", userSchema)

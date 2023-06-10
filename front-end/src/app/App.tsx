@@ -5,7 +5,7 @@ import Footer from '../components/footer';
 import { Route, Routes } from 'react-router-dom';
 import ProductPage from '../pages/products';
 import { FormClothesCreate } from '../admin/form-create';
-
+import RegisterComponent from '../auth/register'
 
 const App: React.FC = () => {
   return (
@@ -14,7 +14,9 @@ const App: React.FC = () => {
       <Routes >
         <Route path='/' element={<MainPage />} />
         <Route path='/product/*' element={<ProductPage />} />
-        <Route path='/admin' element={<FormClothesCreate />}></Route>
+        <Route path='/admin' element={<FormClothesCreate />} />
+        <Route path='/register' element={<RegisterComponent />} />
+        <Route />
       </Routes >
       <Footer />
     </>

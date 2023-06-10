@@ -8,11 +8,11 @@ export const fetchProducts = createAsyncThunk<Product[], FetchProductsOptions>(
   'products/fetchProducts',
   async (options = {}) => {
     const { gender } = options;
-
     if (gender) {
       const response = await getClothesByGender(gender);
       return response.data;
-    } else {
+    }
+    else {
       const response = await axios.get<Product[]>('http://localhost:5172/api/Clothes');
       return response.data;
     }

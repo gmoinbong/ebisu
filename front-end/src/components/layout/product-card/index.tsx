@@ -31,7 +31,7 @@ function ProductCard() {
 
 
   if (!products) {
-    return loaderGif;
+    return <div>{loaderGif}</div>;
   }
 
   return (
