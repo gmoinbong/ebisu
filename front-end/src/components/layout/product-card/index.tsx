@@ -1,12 +1,10 @@
-import { AnyAction, ThunkDispatch } from '@reduxjs/toolkit';
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useState } from 'react';
+import loaderGif from '../../../assets/loader-1.gif'
 import Button from '../button';
+import { isMobile } from '../../../utils/isMobile';
 
 import styles from './ProductCard.module.css';
-import { isMobile } from '../../../utils/isMobile';
-import { fetchProducts } from '../../../redux/slices/productSlice';
-import { RootState } from '../../../app/store';
+import { useFetchProducts } from '../../../hooks/useFetchProducts';
 
 export interface Product {
   collection: string;
@@ -20,9 +18,7 @@ export interface Product {
 }
 
 function ProductCard() {
-  const dispatch: ThunkDispatch<RootState, undefined, AnyAction> = useDispatch();
-  const selectProducts = (state: RootState) => state.products.products;
-  const products = useSelector(selectProducts);
+  const products = useFetchProducts()
   const [isHovered, setIsHovered] = useState(false);
 
   const handleCardMouseEnter = () => {
@@ -33,19 +29,14 @@ function ProductCard() {
     setIsHovered(false);
   };
 
-  useEffect(() => {
-    dispatch(fetchProducts());
-  }, [dispatch]);
-
-
 
   if (!products) {
-    return <div>Loading...</div>;
+    return loaderGif;
   }
 
   return (
     <div className={styles['product-card']}>
-      {products.map((product: Product, index) => (
+      {Array.isArray(products) ? (products.map((product: Product, index) => (
         <div
           key={index}
           className={styles.card}
@@ -75,7 +66,8 @@ function ProductCard() {
             )}
           </div>
         </div>
-      ))}
+      )))
+        : <div>{loaderGif}</div>}
     </div>
   );
 }

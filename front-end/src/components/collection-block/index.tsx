@@ -2,9 +2,6 @@ import { useNavigate } from "react-router-dom";
 import { isMobile } from "../../utils/isMobile";
 import Button from "../layout/button";
 import styles from "./CollectionBlock.module.css";
-import { getClothesByGender } from "../../utils/api";
-import { useDispatch } from "react-redux";
-import { setProducts } from "../../redux/slices/productSlice";
 
 export interface collectionProps {
   title: string;
@@ -15,30 +12,16 @@ export interface collectionProps {
   button2Text: string;
 }
 const CollectionBlock = ({ title, subtitle, image1, image2, button1Text, button2Text, }: collectionProps) => {
-  const dispatch = useDispatch()
   const navigate = useNavigate()
   const routeChange = (path: string) => {
     navigate(path)
   }
 
   const handleClickRouteToMen = async (): Promise<void> => {
-    try {
-      routeChange('/product/men')
-      const response = (await getClothesByGender("men")).data;
-      dispatch(setProducts(response))
-      console.log(response);
-    } catch (error) {
-      console.error(error);
-    }
+    routeChange('/product/men')
   };
   const handleClickRouteToWoman = async (): Promise<void> => {
-    try {
-      routeChange('/product/woman')
-      const response = (await getClothesByGender("woman")).data;
-      console.log(response);
-    } catch (error) {
-      console.error(error);
-    }
+    routeChange('/product/woman')
   }
 
   if (isMobile) return (
