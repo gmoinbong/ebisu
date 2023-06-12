@@ -1,5 +1,5 @@
 import express from "express";
-import db from "../db/conn.mjs";
+import dbProducts from "../db/conn.mjs";
 import { validationResult } from "express-validator";
 import { validateClothes } from "../validation/validation.js";
 
@@ -9,7 +9,7 @@ router.get('/', async (req, res) => {
   const gender = req.query.gender;
   const query = gender ? { gender: gender } : {};
   try {
-    let collection = await db.collection("Clothes");
+    let collection = await dbProducts.collection("Clothes");
     let results = await collection.find(query).toArray();
     res.send(results).status(200)
   } catch (error) {
@@ -32,7 +32,7 @@ router.post('/', validateClothes, async (req, res) => {
   };
 
   try {
-    const collection = await db.collection("Clothes");
+    const collection = await dbProducts.collection("Clothes");
     const result = await collection.insertOne(newDocument);
     res.sendStatus(204);
   }
