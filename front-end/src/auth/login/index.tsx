@@ -9,7 +9,7 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('/auth/login', { email, password });
+      const response = await axios.post('http://localhost:5172/api/login', { email, password });
       // Обработка успешного входа
       console.log(response.data);
     } catch (error) {

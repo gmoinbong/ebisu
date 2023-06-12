@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { isMobile } from "../../utils/isMobile";
 import Button from "../layout/button";
 import styles from "./CollectionBlock.module.css";
+import { useRouteChange } from "../../hooks/useRouteChange";
 
 export interface collectionProps {
   title: string;
@@ -12,15 +13,12 @@ export interface collectionProps {
   button2Text: string;
 }
 const CollectionBlock = ({ title, subtitle, image1, image2, button1Text, button2Text, }: collectionProps) => {
-  const navigate = useNavigate()
-  const routeChange = (path: string) => {
-    navigate(path)
-  }
+  const routeChange = useRouteChange()
 
-  const handleClickRouteToMen = async (): Promise<void> => {
+  const handleClickMen = async (): Promise<void> => {
     routeChange('/product/men')
   };
-  const handleClickRouteToWoman = async (): Promise<void> => {
+  const handleClickWoman = async (): Promise<void> => {
     routeChange('/product/woman')
   }
 
@@ -33,11 +31,11 @@ const CollectionBlock = ({ title, subtitle, image1, image2, button1Text, button2
       <div className={styles.imageBlock}>
         <div className={`${styles.imageContainer} ${styles.upblock}`}>
           <img src={image1} alt="Image 1" className={styles.image} />
-          <Button onClick={handleClickRouteToMen} text={button1Text} className={`${styles.button} ${styles.left}`} />
+          <Button onClick={handleClickMen} text={button1Text} className={`${styles.button} ${styles.left}`} />
         </div>
         <div className={styles.imageContainer}>
           <img src={image2} alt="Image 2" className={styles.image} />
-          <Button onClick={handleClickRouteToWoman}
+          <Button onClick={handleClickWoman}
             text={button2Text} className={`${styles.button} ${styles.right}`} />
         </div>
       </div>
@@ -52,11 +50,11 @@ const CollectionBlock = ({ title, subtitle, image1, image2, button1Text, button2
         <div className={styles.imageBlock}>
           <div className={styles.imageContainer}>
             <img src={image1} alt="Image 1" className={styles.image} />
-            <Button onClick={handleClickRouteToMen} text={button1Text} className={`${styles.button} ${styles.left}`} />
+            <Button onClick={handleClickMen} text={button1Text} className={`${styles.button} ${styles.left}`} />
           </div>
           <div className={styles.imageContainer}>
             <img src={image2} alt="Image 2" className={styles.image} />
-            <Button onClick={handleClickRouteToWoman} text={button2Text} className={`${styles.button} ${styles.right}`} />
+            <Button onClick={handleClickWoman} text={button2Text} className={`${styles.button} ${styles.right}`} />
           </div>
         </div>
       </div>

@@ -19,6 +19,8 @@ export interface Product {
 
 function ProductCard() {
   const products = useFetchProducts()
+  console.log(products);
+
   const [isHovered, setIsHovered] = useState(false);
 
   const handleCardMouseEnter = () => {
@@ -30,46 +32,48 @@ function ProductCard() {
   };
 
 
-  if (!products) {
-    return <div>{loaderGif}</div>;
+  if (products.length === 0) {
+    return <div><img style={{ width: 'auto', margin: "0 auto" }} src={loaderGif} /></div>;
+  }
+  else {
+    return (
+      <div className={styles['product-card']}>
+        {Array.isArray(products) ? (products.map((product: Product, index) => (
+          <div
+            key={index}
+            className={styles.card}
+            onMouseEnter={handleCardMouseEnter}
+            onMouseLeave={handleCardMouseLeave}
+          >
+            <img key={product.url} src={product.url} alt="Product" />
+            <div className={styles.wrapperItems}>
+              <p key={product.category} className={styles.color}>
+                {product.collection}
+              </p>
+              <h2 key={product.name}>{product.name}</h2>
+              <h3 key={product.color} className={styles.color}>
+                {product.color}
+              </h3>
+            </div>
+            <div key={product.category + index} className={styles.wrapper}>
+              <p key={product.price} className={styles.price}>
+                $ {product.price}
+              </p>
+              {isMobile ? (
+                <Button text="Add to cart" className={styles.button} />
+              ) : (
+                isHovered && (
+                  <Button key={product.gender + index} text="Add to cart" className={styles.button} />
+                )
+              )}
+            </div>
+          </div>
+        )))
+          : <div><img style={{ margin: "0 auto" }} src={loaderGif} /></div>})
+      </div>
+    );
   }
 
-  return (
-    <div className={styles['product-card']}>
-      {Array.isArray(products) ? (products.map((product: Product, index) => (
-        <div
-          key={index}
-          className={styles.card}
-          onMouseEnter={handleCardMouseEnter}
-          onMouseLeave={handleCardMouseLeave}
-        >
-          <img key={product.url} src={product.url} alt="Product" />
-          <div className={styles.wrapperItems}>
-            <p key={product.category} className={styles.color}>
-              {product.collection}
-            </p>
-            <h2 key={product.name}>{product.name}</h2>
-            <h3 key={product.color} className={styles.color}>
-              {product.color}
-            </h3>
-          </div>
-          <div key={product.category + index} className={styles.wrapper}>
-            <p key={product.price} className={styles.price}>
-              $ {product.price}
-            </p>
-            {isMobile ? (
-              <Button text="Add to cart" className={styles.button} />
-            ) : (
-              isHovered && (
-                <Button key={product.gender + index} text="Add to cart" className={styles.button} />
-              )
-            )}
-          </div>
-        </div>
-      )))
-        : <div>{loaderGif}</div>}
-    </div>
-  );
 }
 
 export default ProductCard;

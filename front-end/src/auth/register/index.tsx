@@ -1,37 +1,60 @@
 import React, { useState } from 'react';
-import axios from "axios";
+import axios from 'axios';
 
 const RegisterComponent = () => {
   const [user, setUser] = useState({
-    name: "",
-    email: "",
-    password: ""
+    fullName: '',
+    email: '',
+    password: ''
   });
 
-  const handleChange = e => {
+  const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setUser({
-      ...user,
+    setUser(prevUser => ({
+      ...prevUser,
       [name]: value
-    });
+    }));
   };
 
-  const reg = () => {
-    const { name, email, password } = user;
-    if (name && email && password) {
-      axios.post("http://localhost:5172/Register", user)
-        .then(res => console.log(res));
+  const handleRegister = async (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    const { fullName, email, password } = user;
+    if (fullName && email && password) {
+      try {
+        const response = await axios.post('http://localhost:5172/api/register', user);
+        console.log(response);
+      } catch (error) {
+        console.error(error);
+      }
     } else {
-      alert("Invalid input");
+      alert('Invalid input');
     }
   };
 
   return (
-    <form action="#" style={{ margin: "200px" }}>
-      <input type="text" id="create-account-pseudo" name="name" value={user.name} onChange={handleChange} placeholder="FullName" />
-      <input type="text" id="create-account-first-name" name="email" value={user.email} onChange={handleChange} placeholder="Email" />
-      <input type="password" id="create-account-email" name="password" value={user.password} onChange={handleChange} placeholder="Password" />
-      <button type="submit" onClick={reg}>
+    <form style={{ margin: '200px' }}>
+      <input
+        type="text"
+        name="fullName"
+        value={user.fullName}
+        onChange={handleChange}
+        placeholder="FullName"
+      />
+      <input
+        type="text"
+        name="email"
+        value={user.email}
+        onChange={handleChange}
+        placeholder="Email"
+      />
+      <input
+        type="password"
+        name="password"
+        value={user.password}
+        onChange={handleChange}
+        placeholder="Password"
+      />
+      <button type="submit" onClick={handleRegister}>
         Register
       </button>
     </form>

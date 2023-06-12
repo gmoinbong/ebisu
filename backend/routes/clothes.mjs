@@ -1,5 +1,5 @@
 import express from "express";
-import dbProducts from "../db/conn.mjs";
+import { dbProducts } from "../db/conn.mjs";
 import { validationResult } from "express-validator";
 import { validateClothes } from "../validation/validation.js";
 
