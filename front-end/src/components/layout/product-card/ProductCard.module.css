@@ -5,16 +5,35 @@
 }
 
 .card {
-  height: auto;
   width: 100%;
   max-width: calc(25% - 10px);
-  margin-bottom: 20px;
   margin-right: 10px;
   padding: 10px;
   border-radius: 5px;
   transition: box-shadow 0.3s ease;
   text-align: start;
   overflow: hidden;
+  text-transform: uppercase;
+}
+
+.sizeList {}
+
+.sizeList ul,
+{
+padding: 0;
+}
+
+.sizeList {
+  padding: 0;
+  margin: 0 auto;
+  display: block;
+  background-color: rgb(242, 241, 241);
+  text-align: center;
+
+}
+
+.sizeList:hover {
+  cursor: pointer;
 }
 
 .card img {
@@ -30,6 +49,17 @@
   margin-bottom: 5px;
   cursor: pointer;
 }
+
+.wrapper {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 5px;
+  height: 30px;
+}
+
+.wrapperContent {}
 
 .card h3 {
   font-size: 14px;

@@ -14,13 +14,13 @@ export function useFetchProducts() {
     const fetchData = async () => {
       try {
         if (location.pathname.includes('/product/men')) {
-          dispatch(fetchProducts({ gender: 'men' }));
+          await dispatch(fetchProducts({ gender: 'men' }));
         }
         else if (location.pathname.includes('/product/woman')) {
-          dispatch(fetchProducts({ gender: 'woman' }));
+          await dispatch(fetchProducts({ gender: 'woman' }));
         }
         else {
-          dispatch(fetchProducts({}));
+          await dispatch(fetchProducts({}));
         }
       } catch (error) {
         console.error(error);

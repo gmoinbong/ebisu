@@ -17,6 +17,7 @@ app.use(express.urlencoded({ extended: true }));
 
 
 app.use('/api/Clothes', clothesRoutes)
+app.use('/api/cart')
 app.post('/api/login', loginValidation, handleValidationErrors, login);
 app.post('/api/register', registerValidation, handleValidationErrors, register);
 

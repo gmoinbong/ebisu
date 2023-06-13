@@ -1,0 +1,42 @@
+.cartBlock {
+  color: black;
+  background-color: white;
+  right: 0;
+  position: fixed;
+  width: 40%;
+  z-index: 5;
+  height: 100%;
+}
+
+.heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.heading h3 {
+  margin: 0 auto;
+}
+
+.cart {
+  padding-bottom: 5px;
+}
+
+.cartBlock h3 {
+  text-align: center;
+  background: none;
+}
+
+.cartBlock ul {
+  padding: 10px;
+  margin: 0;
+}
+
+.listItem {
+  display: flex;
+  justify-content: space-between;
+}
+
+.closeIcon {
+  cursor: pointer;
+}

@@ -11,6 +11,7 @@ export interface collectionProps {
   image2: string
   button1Text: string;
   button2Text: string;
+  className?: string;
 }
 const CollectionBlock = ({ title, subtitle, image1, image2, button1Text, button2Text, }: collectionProps) => {
   const routeChange = useRouteChange()

@@ -1,10 +1,10 @@
-import React from "react";
+import { MouseEventHandler } from "react";
 import styles from "./Button.module.css";
 
 interface Props {
   text: string;
   className?: string;
-  onClick?: () => void;
+  onClick?: MouseEventHandler<HTMLButtonElement>;
 }
 
 const Button = ({ text, className, onClick }: Props) => {

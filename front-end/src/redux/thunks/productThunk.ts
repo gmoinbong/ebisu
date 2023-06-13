@@ -18,3 +18,8 @@ export const fetchProducts = createAsyncThunk<Product[], FetchProductsOptions>(
     }
   }
 );
+export const sendCartData = createAsyncThunk('cart/sendCartData',
+  async (cartItems) => {
+    const response = await axios.post('http://localhost:5172/api/cart', cartItems);
+    return response.data;
+  });
