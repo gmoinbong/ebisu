@@ -15,11 +15,11 @@ type Props = {
 const CartComponent = ({ isVisible, setIsVisible }: Props) => {
   const dispatch = useDispatch()
   const cartItems: CartItem[] = useSelector(state => state.cartItems)
-  console.log(cartItems);
 
   const handleClick = () => {
     setIsVisible(!isVisible)
   }
+
   const handleRemoveClick = (item: string) => {
     dispatch(removeFromCart(item))
   }
@@ -35,12 +35,14 @@ const CartComponent = ({ isVisible, setIsVisible }: Props) => {
         <ul>
           {cartItems && cartItems.map((item: CartItem, index: number) =>
             <li className={styles.listItem} key={index}>
-              <img src={item.url} alt="product" />
-              <p>{item.name}</p>
-              <p>Size: {item.size}</p>
-              <p>{item.price}</p>
-              <AiOutlineClose onClick={() => handleRemoveClick(item.id)}
-                className={styles.closeIcon} />
+              <img className={styles.img} src={item.url} alt="product" />
+              <div className={styles.wrapper}>
+                <p>{item.name}</p>
+                <p>Size: {item.size}</p>
+                <p>{item.price}</p>
+                <AiOutlineClose onClick={() => handleRemoveClick(item.id)}
+                  className={styles.closeIcon} />
+              </div>
             </li>
           )}
         </ul>

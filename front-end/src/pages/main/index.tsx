@@ -9,8 +9,8 @@ const MainPage = () => {
   return (
     <section style={{ backgroundColor: "#f4f4f4" }}>
       <Slider>
-        <SliderItem><img src={sliderItem} alt="" /></SliderItem>
-        <SliderItem><img src={sliderItem2} alt="" /></SliderItem>
+        <SliderItem><img style={{ width: '100%' }} src={sliderItem} alt="" /></SliderItem>
+        <SliderItem><img style={{ width: '100%' }} src={sliderItem2} alt="" /></SliderItem>
       </Slider>
       <CollectionBlock  {...collectionData1} />
       <SingleBlock {...BlockData1} />

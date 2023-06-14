@@ -5,17 +5,23 @@ import { CiSearch } from 'react-icons/ci'
 import styles from './Header.module.css'
 import CartComponent from '../cart'
 import { useState } from 'react'
+import SearchComponent from '../search'
 const HelpPannel = () => {
-  const [isVisible, setIsVisible] = useState(false)
-  const toggleSideBar = () => {
-    setIsVisible(!isVisible)
+  const [isCartVisible, setIsCartVisible] = useState(false)
+  const [isSearchVisible, setIsSearchtVisible] = useState(false)
+  const toggleCart = () => {
+    setIsCartVisible(!isCartVisible)
   }
-
+  const toggleSearch = () => {
+    setIsSearchtVisible(!isCartVisible)
+  }
   return (
-    <> {isVisible && <CartComponent isVisible={isVisible} setIsVisible={setIsVisible} />}
+    <>
+      {isCartVisible && <CartComponent isVisible={isCartVisible} setIsVisible={setIsCartVisible} />}
+      {isSearchVisible && <SearchComponent isVisible={isSearchVisible} setIsVisible={setIsSearchtVisible} />}
       <div className={styles.helpPannel}>
-        <CiSearch style={{ marginRight: '16px', color: '#fff' }} />
-        <BsSuitHeart onClick={toggleSideBar} style={{ marginRight: '16px', color: '#fff' }} />
+        <CiSearch onClick={toggleSearch} style={{ marginRight: '16px', color: '#fff' }} />
+        <BsSuitHeart onClick={toggleCart} style={{ marginRight: '16px', color: '#fff' }} />
         <AiOutlineShopping style={{ marginRight: '16px', color: '#fff' }} />
         <CgProfile style={{ marginRight: '16px', color: '#fff' }} />
       </div>

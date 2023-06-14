@@ -94,12 +94,20 @@
   cursor: pointer;
 }
 
+img {
+  width: 30%;
+}
+
 .ul {
   border-bottom: 1px solid white;
 }
 
 .mobileRow {
   align-items: center;
+  display: flex;
+}
+
+.wrapper {
   display: flex;
 }
 
