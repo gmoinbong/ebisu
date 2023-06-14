@@ -6,6 +6,8 @@
   width: 40%;
   z-index: 5;
   height: 100%;
+  overflow-y: scroll;
+
 }
 
 .heading {
@@ -34,6 +36,7 @@
 
 .listItem {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
 }
 

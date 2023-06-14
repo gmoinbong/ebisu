@@ -12,7 +12,7 @@ const HelpPannel = () => {
   }
 
   return (
-    <> {isVisible && <CartComponent />}
+    <> {isVisible && <CartComponent isVisible={isVisible} setIsVisible={setIsVisible} />}
       <div className={styles.helpPannel}>
         <CiSearch style={{ marginRight: '16px', color: '#fff' }} />
         <BsSuitHeart onClick={toggleSideBar} style={{ marginRight: '16px', color: '#fff' }} />

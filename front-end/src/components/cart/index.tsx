@@ -1,27 +1,51 @@
+import styles from './Cart.module.css'
 import { AiOutlineClose } from 'react-icons/ai';
 import { BlockData1 } from '../../data/data';
 import SingleBlock from '../single-block';
-import styles from './Cart.module.css'
+import { useDispatch, useSelector } from 'react-redux';
+import { CartItem, removeFromCart } from '../../redux/slices/cartSlice';
 
-const products = ['item1', 'item2']
+
+type Props = {
+  isVisible: boolean;
+  setIsVisible: React.Dispatch<React.SetStateAction<boolean>>;
+}
 
 
-const CartComponent = () => {
+const CartComponent = ({ isVisible, setIsVisible }: Props) => {
+  const dispatch = useDispatch()
+  const cartItems: CartItem[] = useSelector(state => state.cartItems)
+  console.log(cartItems);
+
+  const handleClick = () => {
+    setIsVisible(!isVisible)
+  }
+  const handleRemoveClick = (item: string) => {
+    dispatch(removeFromCart(item))
+  }
+
   return (
     <div className={styles.cart}>
       <div className={styles.cartBlock} >
         <div className={styles.heading}>
           <h3 >Shopping basket </h3>
-          <AiOutlineClose className={styles.closeIcon} />
+          <AiOutlineClose onClick={handleClick} className={styles.closeIcon} />
         </div>
         <SingleBlock  {...BlockData1} />
-        {products.length > 0 ? products.map((item, index) =>
-          <ul>
-            <li className={styles.listItem} key={index}>{item}
-              <AiOutlineClose className={styles.closeIcon} />
+        <ul>
+          {cartItems && cartItems.map((item: CartItem, index: number) =>
+            <li className={styles.listItem} key={index}>
+              <img src={item.url} alt="product" />
+              <p>{item.name}</p>
+              <p>Size: {item.size}</p>
+              <p>{item.price}</p>
+              <AiOutlineClose onClick={() => handleRemoveClick(item.id)}
+                className={styles.closeIcon} />
             </li>
-          </ul>
-        ) : <p>Your cart is empty</p>}
+          )}
+        </ul>
+        <h4>Summary:</h4>
+        {/* <p>SubTotal<span>{item.size}</span></p> */}
       </div>
     </div >
   )

@@ -5,8 +5,8 @@ import { isMobile } from '../../../utils/isMobile';
 
 import styles from './ProductCard.module.css';
 import { useFetchProducts } from '../../../hooks/useFetchProducts';
-import { addToCart, removeFromCart, updateCartItem } from '../../../redux/slices/cartSlice';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { CartItem, addToCart } from '../../../redux/slices/cartSlice';
 
 export interface Product {
   collection: string;
@@ -21,25 +21,32 @@ export interface Product {
 
 function ProductCard() {
   const products = useFetchProducts()
+  const dispatch = useDispatch()
   const [menuOpenIndex, setMenuOpenIndex] = useState(-1)
   const [hoveredIndex, setHoveredIndex] = useState(-1);
 
-  const handleCardMouseEnter = (index: any) => {
+  const handleCardMouseEnter = (index: number) => {
     setHoveredIndex(index);
   };
 
   const handleCardMouseLeave = () => {
     setHoveredIndex(-1);
   };
-  const handleButtonClick = (index: any) => {
+
+  const handleButtonClick = (index: number,) => {
     setMenuOpenIndex((prevIndex) => (prevIndex === index ? -1 : index))
     setHoveredIndex(index);
-    handleAddToCart(products === index)
-
   }
-  const handleMenuClose = () => {
-    setMenuOpenIndex(-1);
-  };
+
+  const handleCartAdd = (index: number) => {
+    dispatch(addToCart({
+      price: products[index].price,
+      color: products[index].color,
+      name: products[index].name,
+      size: products[index].size,
+      url: products[index].url
+    }));
+  }
 
   if (products.length === 0) {
     return <div><img style={{ width: 'auto', margin: "0 auto" }} src={loaderGif} /></div>;
@@ -48,12 +55,10 @@ function ProductCard() {
     return (
       <div className={styles['product-card']}>
         {Array.isArray(products) ? (products.map((product: Product, index) => (
-          <div
-            key={index}
+          <div key={index}
             className={styles.card}
             onMouseEnter={() => handleCardMouseEnter(index)}
-            onMouseLeave={handleCardMouseLeave}
-          >
+            onMouseLeave={handleCardMouseLeave}>
             <img key={product.url} src={product.url} alt="Product" />
             <div className={styles.wrapperContent}>
               <div className={styles.wrapperItems}>
@@ -66,8 +71,9 @@ function ProductCard() {
                 </h3>
               </div>
               {menuOpenIndex === index && hoveredIndex === index && (
-                <ul className={styles.sizeList}>
-                  <li onMouseEnter={() => handleCardMouseEnter(index)}>{product.size}</li>
+                <ul onMouseEnter={() => handleCardMouseEnter(index)} className={styles.sizeList}>
+                  <li>
+                    <p onClick={() => handleCartAdd(index)}> {product.size}</p> </li>
                 </ul>
               )}
               <div className={styles.wrapper}>
@@ -75,23 +81,19 @@ function ProductCard() {
                   $ {product.price}
                 </p>
                 {isMobile ? (
-                  <Button text="Add to cart" className={styles.button} />
+                  <Button onClick={() => handleButtonClick(index)} text="Add to cart" className={styles.button} />
                 ) : (
                   hoveredIndex === index && (
                     <Button onClick={() => handleButtonClick(index)} text="Add to cart" className={styles.button} />
-                  )
-                )
-                }
+                  ))}
               </div>
             </div>
           </div>
         )))
-          : <div><img style={{ margin: "0 auto" }} src={loaderGif} /></div>}
-        {(menuOpenIndex !== -1 && hoveredIndex !== menuOpenIndex) && handleMenuClose()}
-      </div>
+          : <div><img style={{ margin: "0 auto" }} src={loaderGif} /></div>
+        }
+      </div >
     );
   }
-
 }
-
-export default ProductCard;
+export default ProductCard
