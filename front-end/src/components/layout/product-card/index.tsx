@@ -5,24 +5,14 @@ import { isMobile } from '../../../utils/isMobile';
 
 import styles from './ProductCard.module.css';
 import { useFetchProducts } from '../../../hooks/useFetchProducts';
-import { useDispatch, useSelector } from 'react-redux';
-import { CartItem, addToCart } from '../../../redux/slices/cartSlice';
-
-export interface Product {
-  collection: string;
-  price: string;
-  name: string;
-  category: string;
-  gender: string;
-  color: string;
-  size: string;
-  url: string;
-}
+import { useDispatch } from 'react-redux';
+import { addToCart } from '../../../redux/slices/cartSlice';
+import { Product } from '../../../redux/slices/productSlice';
 
 function ProductCard() {
   const products = useFetchProducts()
-
   const dispatch = useDispatch()
+
   const [menuOpenIndex, setMenuOpenIndex] = useState(-1)
   const [hoveredIndex, setHoveredIndex] = useState(-1);
 

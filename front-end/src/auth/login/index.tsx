@@ -7,7 +7,6 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     try {
       const response = await axios.post('http://localhost:5172/api/login', { email, password });
       // Обработка успешного входа

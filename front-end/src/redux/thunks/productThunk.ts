@@ -1,7 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { Product } from "../../components/layout/product-card";
-import { FetchProductsOptions } from "../slices/productSlice";
+import { FetchProductsOptions, Product } from "../slices/productSlice";
 import { getClothesByGender } from "../../utils/api";
 
 export const fetchProducts = createAsyncThunk<Product[], FetchProductsOptions>(
@@ -18,6 +17,7 @@ export const fetchProducts = createAsyncThunk<Product[], FetchProductsOptions>(
     }
   }
 );
+
 export const sendCartData = createAsyncThunk('cart/sendCartData',
   async (cartItems) => {
     const response = await axios.post('http://localhost:5172/api/cart', cartItems);

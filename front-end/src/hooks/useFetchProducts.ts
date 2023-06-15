@@ -13,15 +13,15 @@ export function useFetchProducts() {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        let gender: string | undefined;
+
         if (location.pathname.includes('/product/men')) {
-          await dispatch(fetchProducts({ gender: 'men' }));
+          gender = 'men';
+        } else if (location.pathname.includes('/product/woman')) {
+          gender = 'woman';
         }
-        else if (location.pathname.includes('/product/woman')) {
-          await dispatch(fetchProducts({ gender: 'woman' }));
-        }
-        else {
-          await dispatch(fetchProducts({}));
-        }
+
+        await dispatch(fetchProducts({ gender }));
       } catch (error) {
         console.error(error);
       }

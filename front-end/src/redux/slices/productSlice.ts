@@ -1,9 +1,19 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Product } from '../../components/layout/product-card';
 import { fetchProducts } from '../thunks/productThunk';
 
 export interface FetchProductsOptions {
   gender?: string
+}
+
+export interface Product {
+  collection: string;
+  price: string;
+  name: string;
+  category: string;
+  gender: string;
+  color: string;
+  size: string;
+  url: string;
 }
 
 interface ProductState {
