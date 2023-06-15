@@ -4,7 +4,6 @@ const instance = axios.create({
   baseURL: 'http://localhost:5172/api/'
 })
 
-
 export const getClothesByGender = async (gender: string) => {
   try {
     const res = await instance.get('/Clothes', {
@@ -16,5 +15,18 @@ export const getClothesByGender = async (gender: string) => {
   } catch (error) {
     console.error(error)
     throw new Error('An error occurred while fetching clothes by gender.');
+  }
+}
+export const getClothesBySearch = async (search: string) => {
+  try {
+    const res = await instance.get('/Clothes', {
+      params: {
+        search: search
+      }
+    })
+    return res
+  } catch (error) {
+    console.error(error)
+    throw new Error('An error occurred while fetching clothes by search.');
   }
 }

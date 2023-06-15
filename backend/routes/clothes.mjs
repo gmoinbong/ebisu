@@ -6,8 +6,14 @@ import { validateClothes } from "../validation/validation.js";
 const router = express.Router()
 
 router.get('/', async (req, res) => {
-  const gender = req.query.gender;
-  const query = gender ? { gender: gender } : {};
+  const { gender, search } = req.query;
+  const query = {};
+  if (gender) {
+    query.gender = gender
+  }
+  if (search) {
+    query.name = { $regex: search, $options: 'i' };
+  }
   try {
     let collection = await dbProducts.collection("Clothes");
     let results = await collection.find(query).toArray();

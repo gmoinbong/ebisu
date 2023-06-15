@@ -1,8 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { fetchProducts } from '../thunks/productThunk';
+import { fetchProducts, searchProducts } from '../thunks/productThunk';
 
 export interface FetchProductsOptions {
-  gender?: string
+  gender?: string;
+  search?: string
 }
 
 export interface Product {
@@ -33,12 +34,16 @@ const productSlice = createSlice({
       state.products = action.payload;
     },
   },
-
   extraReducers: (builder) => {
-    builder.addCase(fetchProducts.fulfilled, (state, action: PayloadAction<Product[]>) => {
-      state.products = action.payload;
-    });
+    builder
+      .addCase(fetchProducts.fulfilled, (state, action: PayloadAction<Product[]>) => {
+        state.products = action.payload;
+      })
+      .addCase(searchProducts.fulfilled, (state, action: PayloadAction<Product[]>) => {
+        state.products = action.payload;
+      });
   },
+
 });
 
 export const { setProducts } = productSlice.actions;

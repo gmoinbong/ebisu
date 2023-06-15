@@ -2,12 +2,11 @@ import { useState } from 'react';
 import loaderGif from '../../../assets/loader-1.gif'
 import Button from '../button';
 import { isMobile } from '../../../utils/isMobile';
-
-import styles from './ProductCard.module.css';
 import { useFetchProducts } from '../../../hooks/useFetchProducts';
 import { useDispatch } from 'react-redux';
 import { addToCart } from '../../../redux/slices/cartSlice';
 import { Product } from '../../../redux/slices/productSlice';
+import styles from './ProductCard.module.css';
 
 function ProductCard() {
   const products = useFetchProducts()

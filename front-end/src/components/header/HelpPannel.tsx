@@ -6,11 +6,11 @@ import styles from './Header.module.css'
 import CartComponent from '../cart'
 import { useState } from 'react'
 import SearchComponent from '../search'
-import AuthModal from '../../auth/modal'
+import Dropdown from './Dropdown'
 const HelpPannel = () => {
   const [isCartVisible, setIsCartVisible] = useState(false)
   const [isSearchVisible, setIsSearchtVisible] = useState(false)
-  const [isAuthVisible, setIsAuthVisible] = useState(false)
+  const [showAuthModal, setShowAuthModal] = useState(false);
 
   const toggleCart = () => {
     setIsCartVisible(!isCartVisible)
@@ -18,19 +18,20 @@ const HelpPannel = () => {
   const toggleSearch = () => {
     setIsSearchtVisible(!isCartVisible)
   }
-  const toggleAuthModal = () => {
-    setIsAuthVisible(!isAuthVisible)
-  }
+
+  const handleProfileClick = () => {
+    setShowAuthModal(!showAuthModal);
+  };
+
   return (
     <>
       {isCartVisible && <CartComponent isVisible={isCartVisible} setIsVisible={setIsCartVisible} />}
       {isSearchVisible && <SearchComponent isVisible={isSearchVisible} setIsVisible={setIsSearchtVisible} />}
-      {isAuthVisible && <AuthModal isVisible={isAuthVisible} setIsVisible={setIsAuthVisible} />}
+      {showAuthModal && <Dropdown handleProfileClick={handleProfileClick} />}
       <div className={styles.helpPannel}>
         <CiSearch onClick={toggleSearch} style={{ marginRight: '16px', color: '#fff' }} />
-        <BsSuitHeart onClick={toggleCart} style={{ marginRight: '16px', color: '#fff' }} />
-        <AiOutlineShopping style={{ marginRight: '16px', color: '#fff' }} />
-        <CgProfile onClick={toggleAuthModal} style={{ marginRight: '16px', color: '#fff' }} />
+        <AiOutlineShopping onClick={toggleCart} style={{ marginRight: '16px', color: '#fff' }} />
+        <CgProfile onClick={handleProfileClick} style={{ marginRight: '16px', color: '#fff' }} />
       </div>
     </>
   )
