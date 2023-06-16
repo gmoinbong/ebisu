@@ -20,7 +20,6 @@ export function useFetchProducts() {
         } else if (location.pathname.includes('/product/woman')) {
           gender = 'woman';
         }
-
         await dispatch(fetchProducts({ gender }));
       } catch (error) {
         console.error(error);

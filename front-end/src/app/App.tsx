@@ -8,6 +8,8 @@ import { FormClothesCreate } from '../admin/form-create';
 import Login from '../auth/login';
 import SearchComponent from '../components/search';
 import RegPage from '../auth/register';
+
+import styles from './App.module.css'
 type Props = {
   isSearchVisible: boolean;
   setIsSearchtVisible: React.Dispatch<React.SetStateAction<boolean>>
@@ -17,7 +19,6 @@ type Props = {
 const App = ({ isSearchVisible, setIsSearchtVisible }: Props) => {
   return (
     <>
-      {isSearchVisible && <SearchComponent isVisible={isSearchVisible} setIsVisible={setIsSearchtVisible} />}
       <Header />
       <Routes >
         <Route path='/' element={<MainPage />} />

@@ -1,12 +1,11 @@
-/* LoginContainer.module.css */
-
 .container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 10px;
-  height: 70vh;
+  height: 100vh;
+  border-bottom: 1px solid;
 }
 
 .form {
@@ -54,9 +53,8 @@ button[type="submit"]:disabled {
 }
 
 .forgotPassword {
-  margin-left: 8px;
+  padding-top: 10px;
   font-size: 12px;
-  color: #007bff;
   background-color: transparent;
   border: none;
   cursor: pointer;
@@ -83,5 +81,6 @@ button[type="submit"]:disabled {
 }
 
 .isMobile {
-  margin-bottom: 71px;
+  margin-top: 71px;
+  height: 100%;
 }

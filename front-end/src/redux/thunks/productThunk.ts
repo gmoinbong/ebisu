@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { FetchProductsOptions, Product } from "../slices/productSlice";
-import { getClothesByGender, getClothesBySearch } from "../../utils/api";
+import { getClothesByGender } from "../../utils/api";
 
 export const fetchProducts = createAsyncThunk<Product[], FetchProductsOptions>(
   'products/fetchProducts',
@@ -20,17 +20,6 @@ export const fetchProducts = createAsyncThunk<Product[], FetchProductsOptions>(
 
 
 
-export const searchProducts = createAsyncThunk<Product[], FetchProductsOptions>(
-  'products/searchProducts',
-  async (options = {}) => {
-    const { search } = options;
-    if (search) {
-      const response = await getClothesBySearch(search);
-      return response.data;
-    } else {
-      return [];
-    }
-  }
-);
+
 
 

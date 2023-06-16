@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styles from './LoginContainer.module.css';
+
 import axios from 'axios';
 import { isMobile } from '../../utils/isMobile';
 import { Link } from 'react-router-dom';
@@ -47,12 +48,12 @@ const LoginContainer: React.FC = () => {
         <div className={styles.inputGroup}>
           <label htmlFor="password">PASSWORD*</label>
           <input type="password" id="password" value={password} onChange={handlePasswordChange} required />
-          <button className={styles.forgotPassword}>Forgot Password</button>
+          <button className={styles.forgotPassword}>Forgot Password &gt;</button>
         </div>
 
         <div className={styles.checkbox}>
           <input type="checkbox" id="rememberMe" checked={rememberMe} onChange={handleRememberMeChange} />
-          <label htmlFor="rememberMe">By using this form you agree with the storage and handling of your data by this website.</label>
+          <label style={{ marginLeft: '10px' }} htmlFor="rememberMe">By using this form you agree with the storage and handling of your data by this website.</label>
         </div>
 
         <Link className={styles.register} to={'/register'} >Register</Link>

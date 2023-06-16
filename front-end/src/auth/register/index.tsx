@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import styles from './RegPage.module.css';
 import axios from 'axios';
+import { isMobile } from '../../utils/isMobile';
 
 
 const RegPage: React.FC = () => {
@@ -41,13 +42,13 @@ const RegPage: React.FC = () => {
   };
 
   return (
-    <div className={styles.container}>
+    <div className={`${isMobile ? styles.isMobile : ''} ${styles.container}`}>
       <h2>CREATE NEW CUSTOMER ACCOUNT</h2>
       <p>Sign-In Information</p>
 
       <form className={styles.form}>
         <div className={styles.inputGroup}>
-          <label htmlFor="fullName">FullName</label>
+          <label htmlFor="fullName">FULLNAME*</label>
           <input type="text" id="fullName" name="fullName" value={user.fullName} onChange={handleChange} required />
         </div>
 
@@ -78,12 +79,11 @@ const RegPage: React.FC = () => {
 
         <div className={styles.checkboxGroup}>
           <input type="checkbox" id="privacyPolicy" required />
-          <label htmlFor="privacyPolicy">
+          <label style={{ paddingLeft: '5px' }} htmlFor="privacyPolicy">
             I HEREBY AGREE TO THE <Link className={styles.link} to="/privacy-policy">PRIVACY POLICY</Link> AND{' '}
             <Link className={styles.link} to="/terms-and-conditions">TERMS AND CONDITIONS</Link> OF THE SITE.
           </label>
         </div>
-
         <button style={{ backgroundColor: 'black' }} type="submit" onClick={handleRegister}>Register</button>
       </form>
 

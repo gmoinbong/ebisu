@@ -1,5 +1,6 @@
+import { searchProducts } from './../thunks/searchThunk';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { fetchProducts, searchProducts } from '../thunks/productThunk';
+import { fetchProducts } from '../thunks/productThunk';
 
 export interface FetchProductsOptions {
   gender?: string;
@@ -19,10 +20,12 @@ export interface Product {
 
 interface ProductState {
   products: Product[];
+  searchProducts: Product[]; // Добавлено поле searchProducts
 }
 
 const initialState: ProductState = {
   products: [],
+  searchProducts: [] // Добавлено поле searchProducts
 };
 
 
@@ -40,10 +43,9 @@ const productSlice = createSlice({
         state.products = action.payload;
       })
       .addCase(searchProducts.fulfilled, (state, action: PayloadAction<Product[]>) => {
-        state.products = action.payload;
+        state.searchProducts = action.payload;
       });
   },
-
 });
 
 export const { setProducts } = productSlice.actions;

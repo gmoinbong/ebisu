@@ -4,6 +4,7 @@ import { BlockData1 } from '../../data/data';
 import SingleBlock from '../single-block';
 import { useDispatch, useSelector } from 'react-redux';
 import { CartItem, removeFromCart } from '../../redux/slices/cartSlice';
+import { RootState } from '../../app/store';
 
 
 type Props = {
@@ -14,7 +15,7 @@ type Props = {
 
 const CartComponent = ({ isVisible, setIsVisible }: Props) => {
   const dispatch = useDispatch()
-  const cartItems: CartItem[] = useSelector(state => state.cartItems)
+  const cartItems: CartItem[] = useSelector((state: RootState) => state.cartItems)
 
   const handleClick = () => {
     setIsVisible(!isVisible)

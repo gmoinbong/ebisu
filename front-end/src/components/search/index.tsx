@@ -1,18 +1,21 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { AiOutlineClose } from 'react-icons/ai';
+import { Link } from 'react-router-dom';
+import { AiOutlineClose, AiOutlineSearch } from 'react-icons/ai';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../app/store';
-import { searchProducts } from '../../redux/thunks/productThunk';
 import { debounce } from 'lodash';
 
+import { searchProducts } from '../../redux/thunks/searchThunk';
+import { RootState } from '../../app/store';
+import styles from './Search.module.css';
+
 type Props = {
-  isVisible: boolean;
-  setIsVisible: React.Dispatch<React.SetStateAction<boolean>>;
+  isSearchVisible: boolean;
+  setIsSearchVisible: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const SearchComponent = ({ isVisible, setIsVisible }: Props) => {
+const SearchComponent = ({ isSearchVisible, setIsSearchVisible }: Props) => {
   const [inputValue, setInputValue] = useState('');
-  const products = useSelector((state: RootState) => state.products.products);
+  const searchedProducts = useSelector((state: RootState) => state.searchProducts.searchedProducts);
   const dispatch = useDispatch();
 
   const debouncedSearch = useCallback(
@@ -27,7 +30,7 @@ const SearchComponent = ({ isVisible, setIsVisible }: Props) => {
   };
 
   const handleClick = () => {
-    setIsVisible(!isVisible);
+    setIsSearchVisible(!isSearchVisible);
   };
 
   useEffect(() => {
@@ -35,12 +38,43 @@ const SearchComponent = ({ isVisible, setIsVisible }: Props) => {
   }, [inputValue, debouncedSearch]);
 
   return (
-    <div style={{ position: 'fixed', top: '0' }}>
-      <input type="text" value={inputValue} onChange={handleInputChange} />
-      {products.map((el) => (
-        <div key={el.name}>{el.name}</div>
-      ))}
-      <AiOutlineClose onClick={handleClick} />
+    <div className={styles.search}>
+      <AiOutlineClose style={{ color: '#ffff' }} className={styles.clearIcon} onClick={handleClick} />
+      <input
+        type="text"
+        value={inputValue}
+        onChange={handleInputChange}
+        className={styles.input}
+        placeholder="Search"
+      />
+      <button className={styles.searchButton}>
+        <AiOutlineSearch className={styles.searchIcon} />
+      </button>
+      {isSearchVisible && inputValue.length > 0 && (
+        <div className={styles.productList}>
+          {searchedProducts.length > 0 ? (
+            searchedProducts.slice(0, 3).map((product) => (
+              <div key={product.name} className={styles.productItem}>
+                {product.name}
+              </div>
+            ))
+          ) : (
+            <div className={styles.noProduct}>
+              No products for query '{inputValue}'
+              <Link to="/products" className={styles.link}>
+                See all products
+              </Link>
+            </div>
+          )}
+          <div className={styles.departments}>
+            See products in all Departments ({searchedProducts.length})
+            <span className={styles.orText}> or </span>
+            <Link to={'/product'} className={styles.link}>
+              See all products
+            </Link>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

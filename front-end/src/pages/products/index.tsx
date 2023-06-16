@@ -4,8 +4,8 @@ import PagesInformer from "../../components/pages-informer"
 const ProductPage = () => {
   return (
     <>
-      <ProductCard />
       <PagesInformer />
+      <ProductCard />
     </>
   )
 }

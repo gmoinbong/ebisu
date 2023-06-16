@@ -2,19 +2,16 @@ import logo from '../../assets/logo.svg';
 import { BurgerMenu } from './BurgerMenu';
 import { BsGeoAlt, BsX } from 'react-icons/bs';
 import { useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
 import HelpPannel from './HelpPannel';
 
 import styles from './Header.module.css';
+import SearchComponent from '../search';
+import { useRouteChange } from '../../hooks/useRouteChange';
 
 const Header = () => {
-  const location = useLocation();
+  const routeChange = useRouteChange()
 
-  const navigate = useNavigate()
-  const routeChange = (path: string) => {
-    navigate(path)
-  }
-
+  const [isSearchVisible, setIsSearchVisible] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -30,6 +27,9 @@ const Header = () => {
   };
   const handleClickRouteToMain = () => routeChange('/')
 
+  const toggleSearch = () => {
+    setIsSearchVisible(!isSearchVisible)
+  }
 
 
   useEffect(() => {
@@ -44,35 +44,38 @@ const Header = () => {
   }, []);
 
   return (
-    <header onFocus={handleFocus} className={headerStyles}>
-      <nav className={`${styles.nav} ${menuOpen ? styles.mobileNav : ''}`}>
-        <div className={styles.burgerMenu}>
-          <BurgerMenu toggleMenu={handleMobileMenuToggle} isOpen={menuOpen} />
-        </div>
-        <div className={styles.switcher}>
-          <p>
-            <BsGeoAlt />
-            Country
-          </p>
-          <p>USD</p>
-        </div>
-        <div className={menuOpen ? styles.row : styles.mobileRow}>
-          <img src={logo} alt="logo" onClick={
-            location.pathname !== '/' ? handleClickRouteToMain : undefined}
-            className={imgStyles} />
-          {menuOpen && (
-            <BsX size={24} className={`${styles.crossIcon} crossIcon`} onClick={handleMobileMenuToggle} />)}
-        </div >
-        {menuOpen ? null : <HelpPannel />}
-      </nav >
-      <ul className={`${styles.links} ${menuOpen ? styles.mobileLinks : ''}`}>
-        <li>WHAT'S NEW</li>
-        <li>MEN</li>
-        <li>ANYTHING ELSE</li>
-        <li>EVISU STORIES</li>
-        <li>SALE</li>
-      </ul>
-    </header >
+    <>
+      <header onFocus={handleFocus} className={headerStyles}>
+        {isSearchVisible && <SearchComponent isSearchVisible={isSearchVisible} setIsSearchVisible={setIsSearchVisible} />}
+        <nav className={`${styles.nav} ${menuOpen ? styles.mobileNav : ''}`}>
+          <div className={styles.burgerMenu}>
+            <BurgerMenu toggleMenu={handleMobileMenuToggle} isOpen={menuOpen} />
+          </div>
+          <div className={styles.switcher}>
+            <p>
+              <BsGeoAlt />
+              Country
+            </p>
+            <p>USD</p>
+          </div>
+          <div className={menuOpen ? styles.row : styles.mobileRow}>
+            <img src={logo} alt="logo" onClick={
+              location.pathname !== '/' ? handleClickRouteToMain : undefined}
+              className={imgStyles} />
+            {menuOpen && (
+              <BsX size={24} className={`${styles.crossIcon} crossIcon`} onClick={handleMobileMenuToggle} />)}
+          </div >
+          {menuOpen ? null : <HelpPannel toggleSearch={toggleSearch} />}
+        </nav >
+        <ul className={`${styles.links} ${menuOpen ? styles.mobileLinks : ''}`}>
+          <li>WHAT'S NEW</li>
+          <li>MEN</li>
+          <li>ANYTHING ELSE</li>
+          <li>EVISU STORIES</li>
+          <li>SALE</li>
+        </ul>
+      </header >
+    </>
   );
 };
 
