@@ -16,16 +16,17 @@ export interface Product {
   color: string;
   size: string;
   url: string;
+  id?: any;
 }
 
 interface ProductState {
   products: Product[];
-  searchProducts: Product[]; // Добавлено поле searchProducts
+  searchProducts: Product[];
 }
 
 const initialState: ProductState = {
   products: [],
-  searchProducts: [] // Добавлено поле searchProducts
+  searchProducts: []
 };
 
 

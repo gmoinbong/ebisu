@@ -9,7 +9,7 @@ export type NewComponentProps = Omit<collectionProps, "image2" | "button2Text">
 const SingleBlock: React.FC<NewComponentProps> = ({ button1Text, image1, subtitle, title }) => {
   const routeChange = useRouteChange()
   const handleClickShop = async () => {
-    routeChange('/product')
+    routeChange('/products')
   }
   return (
     <div className={styles.container}>

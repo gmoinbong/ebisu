@@ -1,12 +1,15 @@
+import styles from './ProductCard.module.css';
+
 import { useState } from 'react';
-import loaderGif from '../../../assets/loader-1.gif'
-import Button from '../button';
-import { isMobile } from '../../../utils/isMobile';
-import { useFetchProducts } from '../../../hooks/useFetchProducts';
 import { useDispatch } from 'react-redux';
+
+import { useFetchProducts } from '../../../hooks/useFetchProducts';
 import { addToCart } from '../../../redux/slices/cartSlice';
 import { Product } from '../../../redux/slices/productSlice';
-import styles from './ProductCard.module.css';
+import { isMobile } from '../../../utils/isMobile';
+import Button from '../button';
+import loaderGif from '../../../assets/loader-1.gif'
+import { Link } from 'react-router-dom';
 
 function ProductCard() {
   const products = useFetchProducts()
@@ -55,7 +58,9 @@ function ProductCard() {
                 <p key={product.category} className={styles.color}>
                   {product.collection}
                 </p>
-                <h2 key={product.name}>{product.name}</h2>
+                <Link to={`/products/item/${product.name}`}>
+                  <h2 key={product.name}>{product.name}</h2>
+                </Link>
                 <h3 key={product.color} className={styles.color}>
                   {product.color}
                 </h3>

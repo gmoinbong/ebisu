@@ -15,9 +15,9 @@ export function useFetchProducts() {
       try {
         let gender: string | undefined;
 
-        if (location.pathname.includes('/product/men')) {
+        if (location.pathname.includes('/products/men')) {
           gender = 'men';
-        } else if (location.pathname.includes('/product/woman')) {
+        } else if (location.pathname.includes('/products/woman')) {
           gender = 'woman';
         }
         await dispatch(fetchProducts({ gender }));

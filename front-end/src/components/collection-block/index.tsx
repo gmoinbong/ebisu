@@ -17,10 +17,10 @@ const CollectionBlock = ({ title, subtitle, image1, image2, button1Text, button2
   const routeChange = useRouteChange()
 
   const handleClickMen = async (): Promise<void> => {
-    routeChange('/product/men')
+    routeChange('/products/men')
   };
   const handleClickWoman = async (): Promise<void> => {
-    routeChange('/product/woman')
+    routeChange('/products/woman')
   }
 
   if (isMobile) return (
