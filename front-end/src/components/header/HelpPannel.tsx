@@ -28,9 +28,9 @@ const HelpPannel = ({ toggleSearch }: Props) => {
       {isCartVisible && <CartComponent isVisible={isCartVisible} setIsVisible={setIsCartVisible} />}
       {showAuth && <Dropdown handleProfileClick={handleProfileClick} />}
       <div className={styles.helpPannel}>
-        <CiSearch onClick={toggleSearch} style={{ marginRight: '16px', color: '#fff' }} />
-        <AiOutlineShopping onClick={toggleCart} style={{ marginRight: '16px', color: '#fff' }} />
-        <CgProfile onClick={handleProfileClick} style={{ marginRight: '16px', color: '#fff' }} />
+        <CiSearch onClick={toggleSearch} style={{ cursor: 'pointer', marginRight: '16px', color: '#fff' }} />
+        <AiOutlineShopping onClick={toggleCart} style={{ cursor: 'pointer', marginRight: '16px', color: '#fff' }} />
+        <CgProfile onClick={handleProfileClick} style={{ cursor: 'pointer', marginRight: '16px', color: '#fff' }} />
       </div>
     </>
   )

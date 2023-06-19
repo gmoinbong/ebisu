@@ -69,7 +69,7 @@ const SearchComponent = ({ isSearchVisible, setIsSearchVisible }: Props) => {
           <div className={styles.departments}>
             See products in all Departments ({searchedProducts.length})
             <span className={styles.orText}> or </span>
-            <Link to={'/product'} className={styles.link}>
+            <Link to={'/products'} className={styles.link}>
               See all products
             </Link>
           </div>

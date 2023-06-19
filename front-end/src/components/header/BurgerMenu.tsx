@@ -13,18 +13,6 @@ export function BurgerMenu({ isOpen, toggleMenu }: Props) {
       ) : (
         <GiHamburgerMenu onClick={toggleMenu} size={24} />
       )}
-      {isOpen && (
-        <ul >
-          <li>WHAT'S NEW</li>
-          <li>MEN</li>
-          <li>WOMEN</li>
-          <li>ANYTHING ELSE</li>
-          <li>EVISU STORIES</li>
-          <li>SALE</li>
-          <li>ACCOUNT</li>
-          <li>REGION & LANGUAGE</li>
-        </ul>
-      )}
     </>
   );
 }

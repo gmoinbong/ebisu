@@ -10,6 +10,35 @@
   color: #ffff;
 }
 
+.dropdown {
+  position: relative;
+}
+
+.open .dropdownMenu {
+  display: block;
+}
+
+.dropdownMenu {
+  position: absolute;
+  top: 100%;
+  min-height: 80px;
+  right: 1%;
+  margin-top: 2px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  display: flex;
+  padding: 5px;
+  flex-direction: column;
+  justify-content: space-evenly;
+  box-shadow: 0 0 3px 0 rgba(0, 0, 0, .1);
+}
+
+.dropdownMenu button {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
 .row {
   display: flex;
   padding-bottom: 10px;
@@ -91,7 +120,6 @@
 .helpPannel {
   display: flex;
   align-items: center;
-  cursor: pointer;
 }
 
 img {
@@ -111,44 +139,24 @@ img {
   display: flex;
 }
 
+.category {
+  display: flex;
+  justify-content: space-between;
+  text-transform: uppercase;
+  margin: 0 24px;
+  padding: 10px 0;
+  width: 90%;
+}
 
 /* SearchComponent.module.css */
-
-
-.dropdown {
-  position: absolute;
-  top: 60%;
-  right: 0;
-  background-color: rgb(244, 244, 244);
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.dropdown button {
-  display: block;
-  width: 100%;
-  padding: 8px;
-  font-size: 14px;
-  color: #333;
-  background-color: transparent;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  text-decoration: underline;
-
-}
-
-.dropdown button:hover {
-  background-color: #f5f5f5;
-}
-
-
 
 @media (max-width: 767px) {
   .logo {
     max-height: 30px;
+  }
+
+  .links {
+    display: none;
   }
 
   .burgerMenu {
@@ -163,5 +171,19 @@ img {
 @media (max-width: 767px) {
   .links {
     display: none;
+  }
+
+  .mobileHeader {
+    height: 100%;
+  }
+
+  .row {
+    align-items: center;
+    padding: 0;
+    padding: 10px 0 10px 0;
+  }
+
+  .logo {
+    padding: 0;
   }
 }

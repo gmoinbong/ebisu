@@ -16,7 +16,7 @@
 .wrapper {
   align-items: center;
   position: absolute;
-  bottom: 0;
+  bottom: 10px;
   left: 50%;
   transform: translateX(-50%);
   text-align: center;

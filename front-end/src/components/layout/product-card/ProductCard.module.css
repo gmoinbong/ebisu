@@ -16,8 +16,6 @@
   text-transform: uppercase;
 }
 
-.sizeList {}
-
 .sizeList ul,
 {
 padding: 0;
@@ -101,6 +99,12 @@ padding: 0;
   text-align: left;
   display: flex;
   flex-direction: column;
+  color: #000
+}
+
+.wrapperItems a {
+  color: #000;
+  text-decoration: none;
 }
 
 .card button:hover {

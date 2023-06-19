@@ -1,8 +1,8 @@
-import { useNavigate } from "react-router-dom";
+import styles from "./CollectionBlock.module.css";
+
+import { useRouteChange } from "../../hooks/useRouteChange";
 import { isMobile } from "../../utils/isMobile";
 import Button from "../layout/button";
-import styles from "./CollectionBlock.module.css";
-import { useRouteChange } from "../../hooks/useRouteChange";
 
 export interface collectionProps {
   title: string;

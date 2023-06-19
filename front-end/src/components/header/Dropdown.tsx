@@ -14,8 +14,8 @@ const Dropdown = ({ handleProfileClick }: Props) => {
   }
 
   return (
-    <div className={styles.dropdown}>
-      <button onClick={() => handleClick("register")}>Sign In</button>
+    <div className={styles.dropdownMenu}>
+      <button style={{ borderBottom: '1px solid #eeecec' }} onClick={() => handleClick("register")}>Sign In</button>
       <button onClick={() => handleClick("login")}>Auth</button>
     </div>
   )

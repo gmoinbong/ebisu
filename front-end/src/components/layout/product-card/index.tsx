@@ -26,6 +26,8 @@ function ProductCard() {
     setHoveredIndex(-1);
   };
 
+  const availableSizes = ['s', 'm', 'l', 'xl'];
+
   const handleButtonClick = (index: number,) => {
     setMenuOpenIndex((prevIndex) => (prevIndex === index ? -1 : index))
     setHoveredIndex(index);
@@ -52,7 +54,9 @@ function ProductCard() {
             className={styles.card}
             onMouseEnter={() => handleCardMouseEnter(index)}
             onMouseLeave={handleCardMouseLeave}>
-            <img key={product.url} src={product.url} alt="Product" />
+            <Link to={`/products/item/${product.name}`}>
+              <img key={product.url} src={product.url} alt="Product" />
+            </Link>
             <div className={styles.wrapperContent}>
               <div className={styles.wrapperItems}>
                 <p key={product.category} className={styles.color}>
@@ -67,8 +71,16 @@ function ProductCard() {
               </div>
               {menuOpenIndex === index && hoveredIndex === index && (
                 <ul onMouseEnter={() => handleCardMouseEnter(index)} className={styles.sizeList}>
-                  <li>
-                    <p onClick={() => handleCartAdd(index)}> {product.size}</p> </li>
+                  {availableSizes.map((size) => (
+                    <li key={size}>
+                      <p
+                        onClick={() => handleCartAdd(index)}
+                        className={!product.size.includes(size) ? styles.outOfStock : ''}
+                      >
+                        {size} {!product.size.includes(size) ? '(Out of stock)' : ''}
+                      </p>
+                    </li>
+                  ))}
                 </ul>
               )}
               <div className={styles.wrapper}>

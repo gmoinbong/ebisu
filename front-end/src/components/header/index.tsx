@@ -7,6 +7,8 @@ import HelpPannel from './HelpPannel';
 import styles from './Header.module.css';
 import SearchComponent from '../search';
 import { useRouteChange } from '../../hooks/useRouteChange';
+import HeaderLinks from './HeaderLinks';
+import MobileLinks from './MobileLinks';
 
 const Header = () => {
   const routeChange = useRouteChange()
@@ -15,7 +17,8 @@ const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const headerStyles = `${styles.header} ${location.pathname !== '/' ? styles.scrolled : ''} ${isScrolled || menuOpen ? styles.scrolled : ''}`;
+  const headerStyles = `${styles.header} ${location.pathname !== '/' ? styles.scrolled : ''}
+   ${isScrolled || menuOpen ? styles.scrolled : ''}  ${menuOpen ? styles.mobileHeader : ''}`;
   const imgStyles = `${styles.logo} ${menuOpen ? styles.mobileLogo : ''} ${location.pathname !== '/' ? styles.hovered : ''}`
 
   const handleFocus = () => {
@@ -67,13 +70,7 @@ const Header = () => {
           </div >
           {menuOpen ? null : <HelpPannel toggleSearch={toggleSearch} />}
         </nav >
-        <ul className={`${styles.links} ${menuOpen ? styles.mobileLinks : ''}`}>
-          <li>WHAT'S NEW</li>
-          <li>MEN</li>
-          <li>ANYTHING ELSE</li>
-          <li>EVISU STORIES</li>
-          <li>SALE</li>
-        </ul>
+        {menuOpen ? <MobileLinks /> : <HeaderLinks />}
       </header >
     </>
   );

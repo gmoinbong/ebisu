@@ -44,18 +44,15 @@ const LoginContainer: React.FC = () => {
           <label htmlFor="email">EMAIL ADDRESS*</label>
           <input type="email" id="email" value={email} onChange={handleEmailChange} required />
         </div>
-
         <div className={styles.inputGroup}>
           <label htmlFor="password">PASSWORD*</label>
           <input type="password" id="password" value={password} onChange={handlePasswordChange} required />
           <button className={styles.forgotPassword}>Forgot Password &gt;</button>
         </div>
-
         <div className={styles.checkbox}>
           <input type="checkbox" id="rememberMe" checked={rememberMe} onChange={handleRememberMeChange} />
           <label style={{ marginLeft: '10px' }} htmlFor="rememberMe">By using this form you agree with the storage and handling of your data by this website.</label>
         </div>
-
         <Link className={styles.register} to={'/register'} >Register</Link>
         <button style={{ backgroundColor: 'black' }} className={styles.submit} type="submit" disabled={!rememberMe}>Sign In</button>
       </form>
