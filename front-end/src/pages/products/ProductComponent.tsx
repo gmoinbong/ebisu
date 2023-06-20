@@ -1,18 +1,20 @@
-import { useParams } from "react-router-dom";
 import styles from './Product.module.css';
+
+import { useParams } from "react-router-dom";
 import { useFetchProduct } from "../../hooks/useFetchProduct";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../redux/slices/cartSlice";
 import Button from "../../components/layout/button";
 import PagesInformer from "../../components/pages-informer";
+import loaderGif from "../../components/layout/loaderGif";
 
-const ProductComponent = () => {
+const ProductComponent: React.FC = () => {
   const { id } = useParams();
   const dispatch = useDispatch()
   const product = useFetchProduct(id);
 
-  if (product == null) {
-    return <div>Loading...</div>;
+  if (product?.length === 0 || product === null) {
+    return <>{loaderGif}</>
   }
 
   const handleCartAdd = () => {

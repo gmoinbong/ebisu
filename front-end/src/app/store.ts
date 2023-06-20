@@ -3,13 +3,16 @@ import productReducer from '../redux/slices/productSlice';
 import selectedProductReducer from '../redux/slices/productSlice';
 import cartReducer from '../redux/slices/cartSlice';
 import searchProductsReducer from '../redux/slices/searchProductsSlice';
+import profileReducer from '../redux/slices/profileSlice'
 
 
 const rootReducer = combineReducers({
   products: productReducer,
   cartItems: cartReducer,
   searchProducts: searchProductsReducer,
-  selectedProduct: selectedProductReducer
+  selectedProduct: selectedProductReducer,
+  setCountry: profileReducer
+
 });
 
 const store = configureStore({

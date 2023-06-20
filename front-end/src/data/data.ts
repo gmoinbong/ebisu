@@ -40,3 +40,16 @@ export const BlockData2 = {
   image1: img5,
   button1Text: SHOP_NOW
 }
+
+export const mainCountries = [
+  'United States',
+  'China',
+  'Ukraine',
+  'Germany',
+  'United Kingdom',
+  'France',
+  'Japan',
+  'Brazil',
+  'Australia',
+  'Canada',
+];

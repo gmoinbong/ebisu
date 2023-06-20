@@ -16,11 +16,10 @@ export function useFetchProducts() {
         let gender: string | undefined;
         if (location.pathname.includes('/products/men')) {
           gender = 'men';
+          await dispatch(fetchProducts({ gender }));
         } else if (location.pathname.includes('/products/woman')) {
           gender = 'woman';
-        }
-        if (gender) {
-          await dispatch(fetchProducts({ gender }));
+          await dispatch(fetchProducts({ gender: gender }));
         }
         else {
           await dispatch(fetchProducts({}))

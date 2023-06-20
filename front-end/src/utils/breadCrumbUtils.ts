@@ -10,7 +10,7 @@ export const breadCrumbUtils = (location: Location): BreadCrumb[] => {
     const path = `/${pathSegments.slice(0, index + 1).join('/')}`;
     let label = decodedSegment;
     if (decodedSegment === 'product') {
-      label = 'All Products';
+      label = 'Products';
     }
     return { path, label };
   });
