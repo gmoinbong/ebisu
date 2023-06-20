@@ -2,11 +2,11 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export interface CartItem {
   id?: string;
-  price: string;
-  color: string;
-  name: string;
-  size: string;
-  url: string;
+  price?: string;
+  color?: string;
+  name?: string;
+  size?: string;
+  url?: string;
 }
 
 const cartSlice = createSlice({

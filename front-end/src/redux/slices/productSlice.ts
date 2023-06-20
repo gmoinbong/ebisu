@@ -4,7 +4,8 @@ import { fetchProducts } from '../thunks/productThunk';
 
 export interface FetchProductsOptions {
   gender?: string;
-  search?: string
+  search?: string;
+  name?: string
 }
 
 export interface Product {
@@ -22,11 +23,14 @@ export interface Product {
 interface ProductState {
   products: Product[];
   searchProducts: Product[];
+  selectedProduct: Product[] | null
+
 }
 
 const initialState: ProductState = {
   products: [],
-  searchProducts: []
+  searchProducts: [],
+  selectedProduct: null
 };
 
 
@@ -37,6 +41,9 @@ const productSlice = createSlice({
     setProducts: (state, action: PayloadAction<Product[]>) => {
       state.products = action.payload;
     },
+    setSelectedProduct: (state, action: PayloadAction<Product>) => {
+      state.selectedProduct = action.payload
+    }
   },
   extraReducers: (builder) => {
     builder
@@ -45,9 +52,9 @@ const productSlice = createSlice({
       })
       .addCase(searchProducts.fulfilled, (state, action: PayloadAction<Product[]>) => {
         state.searchProducts = action.payload;
-      });
+      })
   },
 });
 
-export const { setProducts } = productSlice.actions;
+export const { setProducts, setSelectedProduct } = productSlice.actions;
 export default productSlice.reducer;

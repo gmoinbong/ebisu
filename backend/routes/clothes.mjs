@@ -6,10 +6,13 @@ import { validateClothes } from "../validation/validation.js";
 const router = express.Router()
 
 router.get('/', async (req, res) => {
-  const { gender, search } = req.query;
+  const { gender, search, name } = req.query;
   const query = {};
   if (gender) {
     query.gender = gender
+  }
+  if (name) {
+    query.name = name
   }
   if (search) {
     query.name = { $regex: search, $options: 'i' };

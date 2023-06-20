@@ -11,6 +11,7 @@ export const fetchProducts = createAsyncThunk<Product[], FetchProductsOptions>(
       const response = await getClothesByGender(gender);
       return response.data;
     }
+
     else {
       const response = await axios.get<Product[]>('http://localhost:5172/api/Clothes');
       return response.data;

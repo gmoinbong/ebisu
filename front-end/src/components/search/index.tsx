@@ -60,7 +60,7 @@ const SearchComponent = ({ isSearchVisible, setIsSearchVisible }: Props) => {
             ))
           ) : (
             <div className={styles.noProduct}>
-              No products for query '{inputValue}'
+              No products for query '{inputValue}' {'  '}
               <Link to="/products" className={styles.link}>
                 See all products
               </Link>

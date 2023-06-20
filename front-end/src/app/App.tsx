@@ -6,7 +6,7 @@ import ProductPage from '../pages/products';
 import { FormClothesCreate } from '../admin/form-create';
 import Login from '../auth/login';
 import RegPage from '../auth/register';
-import ProductComponent from '../pages/products/ProductPage';
+import ProductComponent from '../pages/products/ProductComponent';
 
 
 

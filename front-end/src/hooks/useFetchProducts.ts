@@ -14,18 +14,22 @@ export function useFetchProducts() {
     const fetchData = async () => {
       try {
         let gender: string | undefined;
-
         if (location.pathname.includes('/products/men')) {
           gender = 'men';
         } else if (location.pathname.includes('/products/woman')) {
           gender = 'woman';
         }
-        await dispatch(fetchProducts({ gender }));
+        if (gender) {
+          await dispatch(fetchProducts({ gender }));
+        }
+        else {
+          await dispatch(fetchProducts({}))
+        }
       } catch (error) {
         console.error(error);
       }
-    };
 
+    };
     fetchData();
   }, [dispatch, location.pathname]);
 
