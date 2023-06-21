@@ -55,7 +55,9 @@ const SearchComponent = ({ isSearchVisible, setIsSearchVisible }: Props) => {
           {searchedProducts.length > 0 ? (
             searchedProducts.slice(0, 3).map((product) => (
               <div key={product.name} className={styles.productItem}>
-                {product.name}
+                <Link to={`/${product.name}`}>
+                  {product.name}
+                </Link>
               </div>
             ))
           ) : (

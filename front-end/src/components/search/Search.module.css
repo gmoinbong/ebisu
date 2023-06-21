@@ -57,7 +57,13 @@
 }
 
 .productItem {
+
   padding: 4px;
+}
+
+.productItem a {
+  text-decoration: none;
+  color: #000;
 }
 
 .noProduct {

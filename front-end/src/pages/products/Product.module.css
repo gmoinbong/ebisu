@@ -3,6 +3,7 @@
   justify-content: center;
   align-items: flex-start;
   height: 80vh;
+  padding-top: 10px;
 }
 
 .imageContainer {
@@ -16,29 +17,52 @@
 }
 
 .detailsContainer {
-  margin-left: 20px;
   display: flex;
   flex-direction: column;
+  background: #f2f2f2;
+  padding: 20px 25px;
 }
 
 .collection {
   font-size: 18px;
   font-weight: bold;
-  margin-bottom: 10px;
+  font-size: 16px;
+  font-weight: 400;
+  text-transform: uppercase;
+  text-align: left;
+  line-height: 1.25;
+  color: #777;
 }
 
 .name {
-  font-size: 24px;
-  margin-top: 10px;
+  padding-top: 5px;
+  border-bottom: 1px solid #1d1d1d;
+  font-weight: 700;
+  padding-bottom: 5px;
+  color: #1d1d1d;
+  text-align: left;
+  line-height: 1.25;
+  text-transform: uppercase;
+  letter-spacing: 0;
+  font-size: 20px;
 }
 
 .price {
-  margin-top: 10px;
+  padding-top: 10px;
+  font-size: 20px;
+  line-height: 1.25;
+  font-weight: 700;
+  color: #1d1d1d;
 }
 
 .color {
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin: 0 0 10px;
+  display: block;
+  font-size: 16px;
+  color: #1d1d1d;
+  line-height: 1.25;
+  font-weight: 700;
+  text-transform: uppercase;
 }
 
 .category,
@@ -104,6 +128,7 @@
 }
 
 .toggleButton {
+  max-width: 500px;
   width: 99%;
   display: flex;
   justify-content: space-between;
@@ -114,6 +139,17 @@
 
 .toggleButton svg {
   margin-right: 10px;
+}
+
+.collapsed,
+.expanded {
+  max-width: 500px;
+  width: 99%;
+}
+
+.toggleButton p {
+  max-width: 500px;
+  width: 99%;
 }
 
 @keyframes fadeIn {

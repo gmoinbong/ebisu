@@ -8,6 +8,7 @@
   background: none;
   z-index: 3;
   color: #ffff;
+  font-weight: 500;
 
 }
 
@@ -106,9 +107,15 @@
 }
 
 .links {
+  font-size: 14px;
   color: #ffff;
   display: flex;
   justify-content: center;
+}
+
+.links a {
+  color: #fff;
+  text-decoration: none;
 }
 
 .links li {

@@ -6,8 +6,10 @@ import Button from '../../components/layout/button';
 import PagesInformer from '../../components/pages-informer';
 import LoaderGif from '../../components/layout/loaderGif';
 import styles from './Product.module.css';
-import ReturnPolicy from './ReturnPolicy';
 import { availableSizes } from '../../data/data';
+import Accordion from './Accordion';
+import { ReturnPolicy } from './ReturnPolicy';
+import Descrpition from './Descrpition';
 
 const ProductComponent = () => {
   const { id } = useParams();
@@ -51,11 +53,11 @@ const ProductComponent = () => {
           <div className={styles.detailsWrapper}>
             <p className={styles.collection}>{collection}</p>
             <h3 className={styles.name}>{name}</h3>
-            <p className={styles.color}>Color: {color}</p>
+            <p className={styles.price}>$ {price}</p>
           </div>
+          <p className={styles.color}>Color <br /> {color}</p>
           <p className={styles.gender}>Gender: {gender}</p>
           <p className={styles.category}>Category: {category}</p>
-          <p className={styles.price}>Price: {price}</p>
           <div className={styles.sizeBlock}>
             <p>Available Sizes:</p>
             <ul className={styles.sizeList}>
@@ -71,7 +73,8 @@ const ProductComponent = () => {
             text="Add to Cart"
             onClick={handleCartAdd}
           />
-          <ReturnPolicy />
+          <Accordion title='Return Policy' child={<ReturnPolicy />} />
+          <Accordion title='Descrption' child={<Descrpition />} />
         </div>
       </div>
     </>
