@@ -71,7 +71,7 @@ const Header = () => {
     <>
       <header onFocus={handleFocus} className={headerStyles}>
         {isSearchVisible && <SearchComponent isSearchVisible={isSearchVisible} setIsSearchVisible={setIsSearchVisible} />}
-        {showPopup && <CountryPopup onClose={handlePopupClose} onSelectCountry={handleCountrySelect} />}
+        {showPopup && <CountryPopup isOpenPopup={showPopup} onClose={handlePopupClose} onSelectCountry={handleCountrySelect} />}
         <nav className={`${styles.nav} ${menuOpen ? styles.mobileNav : ''}`}>
           <div className={styles.burgerMenu}>
             <BurgerMenu toggleMenu={handleMobileMenuToggle} isOpen={menuOpen} />

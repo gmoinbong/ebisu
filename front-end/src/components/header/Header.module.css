@@ -8,6 +8,7 @@
   background: none;
   z-index: 3;
   color: #ffff;
+
 }
 
 .dropdown {
@@ -150,22 +151,76 @@ img {
   width: 90%;
 }
 
-.countryPopup {
-  position: absolute;
-  top: 100%;
-  left: 20%;
-  transform: translateX(-50%);
-  background-color: #fff;
-  border-radius: 4px;
-  box-shadow: 10px 10px 8px rgba(0, 0, 0, 0.15);
-  padding: 16px;
-  z-index: 7;
-  color: #000;
+.popup {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+  box-shadow: 4px 2px 4px rgba(0, 0, 0, 0.1);
+  text-shadow: 0 0 1px rgba(0, 0, 0, 0.3);
 }
 
-.countryPopup p {
-  color: #000;
+.noScroll {
+  overflow: hidden;
+}
 
+.fadeOut {
+  -webkit-animation-name: fadeOut;
+  animation-name: fadeOut;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+@-webkit-keyframes fadeOut {
+  0% {
+    opacity: 0.9;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+.popupInner {
+  position: absolute;
+  left: 25%;
+  right: 25%;
+  top: 10%;
+  max-width: 300px;
+  max-height: 500px;
+  bottom: 25%;
+  margin: auto;
+  color: #000;
+  background: white;
+  border-radius: 7px;
+}
+
+.popupTitle {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+.popupBackground {
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 .popupTitle {
@@ -173,6 +228,7 @@ img {
   align-items: center;
   font-size: 18px;
   margin-bottom: 12px;
+
 }
 
 .popupTitle svg {
@@ -188,8 +244,10 @@ img {
 
 .countryItem {
   font-size: 16px;
-  margin-bottom: 8px;
   cursor: pointer;
+  padding: 10px;
+  transition: background-color 0.2s ease;
+
 }
 
 .countryPannel {

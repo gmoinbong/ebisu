@@ -54,7 +54,7 @@ function ProductCard() {
             className={styles.card}
             onMouseEnter={() => handleCardMouseEnter(index)}
             onMouseLeave={handleCardMouseLeave}>
-            <Link to={`/products/item/${product.name}`}>
+            <Link to={`/${product.name}`}>
               <img key={product.url} src={product.url} alt="Product" />
             </Link>
             <div className={styles.wrapperContent}>
@@ -62,7 +62,7 @@ function ProductCard() {
                 <p key={product.category} className={styles.color}>
                   {product.collection}
                 </p>
-                <Link to={`/products/item/${product.name}`}>
+                <Link to={`/${product.name}`}>
                   <h2 key={product.name}>{product.name}</h2>
                 </Link>
                 <h3 key={product.color} className={styles.color}>

@@ -12,10 +12,8 @@ export function useFetchProduct(name: string) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        if (name) {
-          const response = await dispatch(fetchProductByName(name));
-          dispatch(setSelectedProduct(response.payload));
-        }
+        const response = await dispatch(fetchProductByName(name));
+        dispatch(setSelectedProduct(response.payload));
       } catch (error) {
         console.error(error);
       }
