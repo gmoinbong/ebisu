@@ -10,6 +10,8 @@ import { availableSizes } from '../../data/data';
 import Accordion from './Accordion';
 import { ReturnPolicy } from './ReturnPolicy';
 import Descrpition from './Descrpition';
+import ProductSlider, { ProductSliderItem } from '../../components/slider/ProductSlider';
+import { useRouteChange } from '../../hooks/useRouteChange';
 
 const ProductComponent = () => {
   const { id } = useParams();
@@ -45,37 +47,51 @@ const ProductComponent = () => {
   return (
     <>
       <PagesInformer />
-      <div className={styles.wrapper}>
-        <div className={styles.imageContainer}>
-          <img className={styles.image} alt="product" src={url} />
-        </div>
-        <div className={styles.detailsContainer}>
-          <div className={styles.detailsWrapper}>
-            <p className={styles.collection}>{collection}</p>
-            <h3 className={styles.name}>{name}</h3>
-            <p className={styles.price}>$ {price}</p>
+      <div className={styles.productComponent}>
+        <div className={styles.wrapper}>
+          <div className={styles.imageContainer}>
+            <ProductSlider maxWidth={'500px'} width={'100%'}>
+              <ProductSliderItem><img className={styles.image} alt="product" src={url} /></ProductSliderItem>
+              <ProductSliderItem><img className={styles.image} alt="product" src={url} /></ProductSliderItem>
+            </ProductSlider>
           </div>
-          <p className={styles.color}>Color <br /> {color}</p>
-          <p className={styles.gender}>Gender: {gender}</p>
-          <p className={styles.category}>Category: {category}</p>
-          <div className={styles.sizeBlock}>
-            <p>Available Sizes:</p>
-            <ul className={styles.sizeList}>
-              {availableSizes.map((sizeOption) => (
-                <li key={sizeOption} className={styles.sizeOption}>
-                  {sizeOption}
-                </li>
-              ))}
-            </ul>
+          <div className={styles.detailsContainer}>
+            <div className={styles.detailsWrapper}>
+              <p className={styles.collection}>{collection}</p>
+              <h3 className={styles.name}>{name}</h3>
+              <p className={styles.price}>$ {price}</p>
+            </div>
+            <p className={styles.color}>{color} COLOR</p>
+            <div className={styles.sizeBlock}>
+              <p>Available Sizes:</p>
+              <ul className={styles.sizeList}>
+                {availableSizes.map((sizeOption) => (
+                  <li key={sizeOption} className={styles.sizeOption}>
+                    {sizeOption}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <Button
+              maxWidth={'120px'}
+              width={'100%'}
+              margin={'0 0 10px 0 '}
+              className={styles.addButton}
+              text="Add to Cart"
+              onClick={handleCartAdd}
+            />
+            <Accordion title='RETURN POLICY' child={<ReturnPolicy />} />
+            <Accordion title='PRODUCT DETAILS' child={<Descrpition category={category} gender={gender} />} />
           </div>
-          <Button
-            className={styles.addButton}
-            text="Add to Cart"
-            onClick={handleCartAdd}
-          />
-          <Accordion title='Return Policy' child={<ReturnPolicy />} />
-          <Accordion title='Descrption' child={<Descrpition />} />
         </div>
+        <Button
+          maxWidth={'200px'}
+          width={'100%'}
+          margin={'15px auto '}
+          className={styles.addButton}
+          text="BACK TO HOME"
+          backgroundColor={'#000'}
+        />
       </div>
     </>
   );

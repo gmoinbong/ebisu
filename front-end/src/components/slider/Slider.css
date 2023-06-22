@@ -3,6 +3,12 @@
   overflow: hidden;
 }
 
+.index {
+  position: absolute;
+  bottom: 10px;
+  right: 50%;
+}
+
 .slider-item {
   flex-shrink: 0;
 }

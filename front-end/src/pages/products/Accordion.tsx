@@ -6,27 +6,26 @@ type Props = {
   title: string
 }
 const Accordion = ({ child, title }: Props) => {
-  const [isReturnPolicyExpanded, setIsReturnPolicyExpanded] = useState(false);
+  const [isAccordionExpanded, setIsAccordionExpanded] = useState(false);
   const [isInitialRender, setIsInitialRender] = useState(false);
 
-
-
-  const toggleReturnPolicy = () => {
+  const toggleAccordion = () => {
     setIsInitialRender(true);
-    setIsReturnPolicyExpanded((prevExpanded) => !prevExpanded);
+    setIsAccordionExpanded((prevExpanded) => !prevExpanded);
   };
 
+
   return (
-    <div className={`${styles.returnPolicy} ${isReturnPolicyExpanded ? styles.collapsed : styles.expanded}`}>
-      <div className={styles.toggleButton} onClick={toggleReturnPolicy} aria-expanded={isReturnPolicyExpanded}>
-        {isReturnPolicyExpanded ? (
+    <div className={`${styles.Accordion}  ${isAccordionExpanded ? styles.collapsed : styles.expanded} }`}>
+      <div className={styles.toggleButton} onClick={toggleAccordion} aria-expanded={isAccordionExpanded}>
+        {isAccordionExpanded ? (
           <AiOutlineMinus className={styles.toggleIcon} />
         ) : (
           <AiOutlinePlus className={styles.toggleIcon} />
         )}
         {title}
       </div>
-      <div className={`${styles.returnPolicyContent} ${isReturnPolicyExpanded ? styles.show : styles.hide}`}>
+      <div className={`${styles.AccordionContent} ${isAccordionExpanded ? styles.show : styles.hide}`}>
         {isInitialRender ? <>{child} </> : null}
       </div>
     </div >

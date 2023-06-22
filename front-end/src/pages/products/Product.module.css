@@ -2,7 +2,7 @@
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  height: 80vh;
+  height: 100vh;
   padding-top: 10px;
 }
 
@@ -21,6 +21,7 @@
   flex-direction: column;
   background: #f2f2f2;
   padding: 20px 25px;
+  width: 50vh;
 }
 
 .collection {
@@ -75,6 +76,10 @@
   margin-top: 30px;
 }
 
+.productComponent {
+  display: flex;
+  flex-direction: column;
+}
 
 @media (max-width: 767px) {
   .wrapper {
@@ -128,6 +133,7 @@
 }
 
 .toggleButton {
+  font-size: 14px;
   max-width: 500px;
   width: 99%;
   display: flex;
@@ -135,6 +141,7 @@
   flex-direction: row-reverse;
   padding-bottom: 5px;
   border-bottom: 1px solid #2f2f2f;
+  font-weight: 700;
 }
 
 .toggleButton svg {
@@ -176,15 +183,33 @@
   }
 }
 
-.returnPolicyContent {
+.Accordion {
+  padding-top: 10px;
+}
+
+.AccordionContent {
   opacity: 1;
   transform: translateY(0);
   animation: fadeOut 0.3s ease-in-out forwards;
 
 }
 
-.collapsed .returnPolicyContent {
+.collapsed .AccordionContent {
   opacity: 0;
   transform: translateY(10px);
   animation: fadeIn 0.3s ease-in-out forwards;
+}
+
+.show {
+  display: block;
+}
+
+.hide {
+  display: none;
+}
+
+
+
+.description {
+  text-transform: capitalize;
 }

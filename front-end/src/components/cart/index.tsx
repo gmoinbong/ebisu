@@ -32,7 +32,11 @@ const CartComponent = ({ isVisible, setIsVisible }: Props) => {
           <h3 >Shopping basket </h3>
           <AiOutlineClose onClick={handleClick} className={styles.closeIcon} />
         </div>
-        <SingleBlock  {...BlockData1} />
+        <div>
+          <h3></h3>
+          <p></p>
+          <img src="" alt="" />
+        </div>
         <ul>
           {cartItems && cartItems.map((item: CartItem, index: number) =>
             <li className={styles.listItem} key={index}>

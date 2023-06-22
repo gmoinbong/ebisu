@@ -3,8 +3,8 @@
   background-color: white;
   right: 0;
   position: fixed;
-  width: 40%;
-  z-index: 5;
+  width: 32vh;
+  z-index: 10;
   height: 100%;
   overflow-y: scroll;
 

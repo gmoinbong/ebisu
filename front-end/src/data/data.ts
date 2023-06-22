@@ -40,7 +40,7 @@ export const BlockData2 = {
   image1: img5,
   button1Text: SHOP_NOW
 }
-export const availableSizes = ['S', 'M', 'L', 'XL'];
+export const availableSizes = ['XS', 'S', 'M', 'L', 'XL'];
 
 export const mainCountries = [
   'United States',

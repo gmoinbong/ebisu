@@ -107,6 +107,7 @@
 }
 
 .links {
+  width: 101%;
   font-size: 14px;
   color: #ffff;
   display: flex;
@@ -121,6 +122,10 @@
 .links li {
   padding-left: 10px;
   cursor: pointer;
+}
+
+.links {
+  margin-left: 10px;
 }
 
 .hovered {
@@ -143,6 +148,8 @@ img {
 .mobileRow {
   align-items: center;
   display: flex;
+  margin: 0 auto;
+  justify-content: center;
 }
 
 .wrapper {
