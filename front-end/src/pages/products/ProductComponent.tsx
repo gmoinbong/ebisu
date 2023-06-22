@@ -29,6 +29,7 @@ const ProductComponent = () => {
         name: product[0].name,
         url: product[0].url,
         size: product[0].size,
+        quantity: 1
       })
     );
   };

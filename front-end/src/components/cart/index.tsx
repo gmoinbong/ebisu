@@ -1,10 +1,10 @@
 import styles from './Cart.module.css'
+
 import { AiOutlineClose } from 'react-icons/ai';
-import { BlockData1 } from '../../data/data';
-import SingleBlock from '../single-block';
 import { useDispatch, useSelector } from 'react-redux';
-import { CartItem, removeFromCart } from '../../redux/slices/cartSlice';
+import { CartItem, removeFromCart, updateCart } from '../../redux/slices/cartSlice';
 import { RootState } from '../../app/store';
+import QuantitySelect from './QuantitySelect';
 
 
 type Props = {
@@ -24,6 +24,10 @@ const CartComponent = ({ isVisible, setIsVisible }: Props) => {
   const handleRemoveClick = (item: string) => {
     dispatch(removeFromCart(item))
   }
+  const handleQuantityChange = (id: string, quantity: number) => {
+    dispatch(updateCart({ id, quantity }));
+  };
+
 
   return (
     <div className={styles.cart}>
@@ -45,6 +49,7 @@ const CartComponent = ({ isVisible, setIsVisible }: Props) => {
                 <p>{item.name}</p>
                 <p>Size: {item.size}</p>
                 <p>{item.price}</p>
+                <QuantitySelect id={item.id} onSelect={handleQuantityChange} />
                 <AiOutlineClose onClick={() => handleRemoveClick(item.id)}
                   className={styles.closeIcon} />
               </div>

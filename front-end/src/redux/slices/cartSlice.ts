@@ -7,6 +7,7 @@ export interface CartItem {
   name?: string;
   size?: string | [];
   url?: string;
+  quantity?: number
 }
 
 const cartSlice = createSlice({
@@ -14,8 +15,8 @@ const cartSlice = createSlice({
   initialState: [] as CartItem[],
   reducers: {
     addToCart: (state, action: PayloadAction<CartItem>) => {
-      const { id, price, color, name, size, url } = action.payload;
-      const newItem: CartItem = { id, price, color, name, size, url };
+      const { id, price, color, name, size, url, quantity } = action.payload;
+      const newItem: CartItem = { id, price, color, name, size, url, quantity };
       state.push(newItem);
     },
 
@@ -26,9 +27,16 @@ const cartSlice = createSlice({
         state.splice(itemIndex, 1);
       }
     },
+    updateCart: (state, action: PayloadAction<{ id: string; quantity: number }>) => {
+      const { id, quantity } = action.payload;
+      const item = state.find(item => item.id === id);
+      if (item) {
+        item.quantity = quantity;
+      }
+    }
   },
 });
 
-export const { addToCart, removeFromCart } = cartSlice.actions;
+export const { addToCart, removeFromCart, updateCart } = cartSlice.actions;
 
 export default cartSlice.reducer;
