@@ -1,23 +1,28 @@
 import { useParams } from 'react-router-dom';
-import { useFetchProduct } from '../../hooks/useFetchProduct';
 import { useDispatch } from 'react-redux';
+import { useFetchProduct } from '../../hooks/useFetchProduct';
 import { addToCart } from '../../redux/slices/cartSlice';
 import Button from '../../components/layout/button';
 import PagesInformer from '../../components/pages-informer';
 import LoaderGif from '../../components/layout/loaderGif';
-import styles from './Product.module.css';
-import { availableSizes } from '../../data/data';
-import Accordion from './Accordion';
-import { ReturnPolicy } from './ReturnPolicy';
-import Descrpition from './Descrpition';
+import Accordion from './product-elements/Accordion';
+import { ReturnPolicy } from './product-elements/ReturnPolicy';
+import Descrpition from './product-elements/Descrpition';
 import ProductSlider, { ProductSliderItem } from '../../components/slider/ProductSlider';
 import { useRouteChange } from '../../hooks/useRouteChange';
 
-const ProductComponent = () => {
+import styles from './Product.module.css';
+import SizeSelect from './product-elements/size-select';
+
+const SingleProductPage = () => {
   const { id } = useParams();
   const product = useFetchProduct(id);
   const dispatch = useDispatch();
+  const routeChange = useRouteChange()
 
+  const handleClickToHome = () => {
+    routeChange('/')
+  }
 
   if (product?.length === 0 || product === null) {
     return <LoaderGif />;
@@ -34,15 +39,11 @@ const ProductComponent = () => {
     );
   };
 
-  const {
-    collection,
-    price,
-    name,
-    category,
-    gender,
-    color,
-    size,
-    url,
+
+  const { collection, price,
+    name, category,
+    gender, color,
+    size, url,
   } = product[0];
 
   return (
@@ -63,39 +64,27 @@ const ProductComponent = () => {
               <p className={styles.price}>$ {price}</p>
             </div>
             <p className={styles.color}>{color} COLOR</p>
-            <div className={styles.sizeBlock}>
-              <p>Available Sizes:</p>
-              <ul className={styles.sizeList}>
-                {availableSizes.map((sizeOption) => (
-                  <li key={sizeOption} className={styles.sizeOption}>
-                    {sizeOption}
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <Button
-              maxWidth={'120px'}
+            <SizeSelect />
+            <Button maxWidth={'120px'}
               width={'100%'}
-              margin={'0 0 10px 0 '}
+              margin={' 10px 0  10px 0 '}
               className={styles.addButton}
               text="Add to Cart"
-              onClick={handleCartAdd}
-            />
+              onClick={handleCartAdd} />
             <Accordion title='RETURN POLICY' child={<ReturnPolicy />} />
             <Accordion title='PRODUCT DETAILS' child={<Descrpition category={category} gender={gender} />} />
           </div>
         </div>
-        <Button
+        <Button onClick={handleClickToHome}
           maxWidth={'200px'}
           width={'100%'}
           margin={'15px auto '}
           className={styles.addButton}
           text="BACK TO HOME"
-          backgroundColor={'#000'}
-        />
+          backgroundColor={'#000'} />
       </div>
     </>
   );
 };
 
-export default ProductComponent;
+export default SingleProductPage;

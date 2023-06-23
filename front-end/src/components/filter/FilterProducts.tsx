@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import Filter from './index';
 import { FiChevronDown, FiChevronRight } from 'react-icons/fi';
-import styles from './Filter.module.css';
+import Filter from './index';
 import { categoryOptions, collectionOptions, colorOptions, genderOptions, sizeOptions } from '../../data/data';
+
+import styles from './Filter.module.css';
 
 type Props = {
   filter: boolean;
@@ -20,7 +21,7 @@ const FilterProducts: React.FC<Props> = ({ filter, setFilter }: Props) => {
   return (
     <div className={`${styles.wrapper} ${filter === true ? styles.filterProductsOpened : ''}`}>
       <div className={`${styles.title} ${isOpen ? styles.opened : ''}`}>
-        <p onClick={handleClick} className={styles.filterTitle}>
+        <p onClick={handleClick} className={`${styles.filterTitle}  ${filter ? styles.filterOpened : ''}`}>
           FILTER
         </p>
         {isOpen ? (

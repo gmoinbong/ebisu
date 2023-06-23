@@ -1,6 +1,6 @@
 import { useState } from "react";
 import FilterProducts from "../../components/filter/FilterProducts"
-import ProductCard from "../../components/layout/product-card"
+import ProductCard from "./product-elements/product-card"
 import PagesInformer from "../../components/pages-informer"
 
 const ProductPage = () => {

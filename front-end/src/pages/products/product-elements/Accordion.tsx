@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai';
-import styles from './Product.module.css';
+import styles from '../Product.module.css';
 type Props = {
   child: React.ReactNode
   title: string

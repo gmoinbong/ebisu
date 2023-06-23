@@ -67,10 +67,10 @@ const ProductSlider = ({ children, width, maxWidth }: Props) => {
       </div>
       <div className="index">{`${activeIndex + 1} / ${React.Children.count(children)}`}</div>
       <div className="prev-button" onClick={() => updateIndex(activeIndex - 1)}>
-        <FaChevronLeft />
+        <FaChevronLeft style={{ color: '#323131' }} />
       </div>
       <div className="next-button" onClick={() => updateIndex(activeIndex + 1)}>
-        <FaChevronRight />
+        <FaChevronRight style={{ color: '#323131' }} />
       </div>
     </div>
   );

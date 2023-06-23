@@ -2,15 +2,15 @@ import styles from './ProductCard.module.css';
 
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-
-import { useFetchProducts } from '../../../hooks/useFetchProducts';
-import { addToCart } from '../../../redux/slices/cartSlice';
-import { Product } from '../../../redux/slices/productSlice';
-import { isMobile } from '../../../utils/isMobile';
-import Button from '../button';
-import loaderGif from '../../../assets/loader-1.gif'
 import { Link } from 'react-router-dom';
-import { availableSizes } from '../../../data/data';
+import Button from '../../../../components/layout/button';
+import loaderGif from '../../../../components/layout/loaderGif';
+import { availableSizes } from '../../../../data/data';
+import { useFetchProducts } from '../../../../hooks/useFetchProducts';
+import { addToCart } from '../../../../redux/slices/cartSlice';
+import { Product } from '../../../../redux/slices/productSlice';
+import { isMobile } from '../../../../utils/isMobile';
+
 type Props = {
   isOpenFilter: boolean
 }
@@ -46,8 +46,10 @@ function ProductCard({ isOpenFilter: isFilterOpen }: Props) {
   }
 
   if (products.length === 0) {
+
     return <div><img style={{ width: 'auto', margin: "0 auto" }} src={loaderGif} /></div>;
   }
+
   else {
     return (
       <div className={`${styles.productCard} ${isFilterOpen ? styles.filterOpened : ''} `}>
@@ -56,7 +58,7 @@ function ProductCard({ isOpenFilter: isFilterOpen }: Props) {
             className={styles.card}
             onMouseEnter={() => handleCardMouseEnter(index)}
             onMouseLeave={handleCardMouseLeave}>
-            <Link to={`/ ${product.name} `}>
+            <Link to={`/${product.name} `}>
               <img key={product.url} src={product.url} alt="Product" />
             </Link>
             <div className={styles.wrapperContent}>
@@ -64,7 +66,7 @@ function ProductCard({ isOpenFilter: isFilterOpen }: Props) {
                 <p key={product.category} className={styles.color}>
                   {product.collection}
                 </p>
-                <Link to={`/ ${product.name} `}>
+                <Link to={`/${product.name} `}>
                   <h2 key={product.name}>{product.name}</h2>
                 </Link>
                 <h3 key={product.color} className={styles.color}>
