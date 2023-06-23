@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Button from '../../../../components/layout/button';
 import loaderGif from '../../../../components/layout/loaderGif';
-import { availableSizes } from '../../../../data/data';
+import { availableSizes } from '../../../../data/availableSizesData';
 import { useFetchProducts } from '../../../../hooks/useFetchProducts';
 import { addToCart } from '../../../../redux/slices/cartSlice';
 import { Product } from '../../../../redux/slices/productSlice';

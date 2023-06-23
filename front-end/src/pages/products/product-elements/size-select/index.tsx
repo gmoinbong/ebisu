@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { FiChevronDown } from 'react-icons/fi';
 import styles from './SizeSelect.module.css';
-import { availableSizes } from '../../../../data/data';
+import { availableSizes } from '../../../../data/availableSizesData';
 
 
 const SizeSelect = () => {

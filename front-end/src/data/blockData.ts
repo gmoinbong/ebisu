@@ -40,23 +40,6 @@ export const BlockData2 = {
   image1: img5,
   button1Text: SHOP_NOW
 }
-export const availableSizes = ['XS', 'S', 'M', 'L', 'XL'];
 
-export const mainCountries = [
-  'United States',
-  'China',
-  'Ukraine',
-  'Germany',
-  'United Kingdom',
-  'France',
-  'Japan',
-  'Brazil',
-  'Australia',
-  'Canada',
-];
 
-export const collectionOptions = ['Evisu'];
-export const categoryOptions = ['t-shirt', 'shorts', 'shirt', 'pants', 'cap', 'jeans', 'skirt', 'jacket'];
-export const genderOptions = ['KID', 'MEN', 'UNISEX', 'woman'];
-export const sizeOptions = ['xs', 's', 'm', 'l', 'xl'];
-export const colorOptions = ['white', 'black', 'indigo', 'beige', 'blue'];
+

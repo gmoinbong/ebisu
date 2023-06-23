@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { mainCountries } from '../../data/data';
+import { mainCountries } from '../../data/countryData';
 import { AiOutlineClose } from 'react-icons/ai';
 import { useDispatch } from 'react-redux';
 import { setCountry } from '../../redux/slices/profileSlice';

@@ -2,7 +2,7 @@ import Slider, { SliderItem } from "../../components/slider"
 import sliderItem from '../../assets/main-slider.jpg'
 import sliderItem2 from '../../assets/slider-item2.jpg'
 import CollectionBlock from "../../components/collection-block"
-import { BlockData1, BlockData2, collectionData1, collectionData2 } from "../../data/data"
+import { BlockData1, BlockData2, collectionData1, collectionData2 } from "../../data/blockData"
 import SingleBlock from "../../components/single-block"
 
 const MainPage = () => {

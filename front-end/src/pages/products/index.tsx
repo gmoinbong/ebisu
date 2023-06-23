@@ -9,7 +9,7 @@ const ProductPage = () => {
   return (
     <>
       <PagesInformer />
-      <FilterProducts filter={isOpenfilter} setFilter={setIsOpenFilter} />
+      <FilterProducts isFilterOpen={isOpenfilter} setFilter={setIsOpenFilter} />
       <ProductCard isOpenFilter={isOpenfilter} />
     </>
   )

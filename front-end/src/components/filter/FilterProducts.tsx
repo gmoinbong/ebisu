@@ -1,27 +1,35 @@
 import React, { useState } from 'react';
 import { FiChevronDown, FiChevronRight } from 'react-icons/fi';
 import Filter from './index';
-import { categoryOptions, collectionOptions, colorOptions, genderOptions, sizeOptions } from '../../data/data';
+import { categoryOptions, collectionOptions, colorOptions, genderOptions, sizeOptions } from '../../data/filterOptions';
 
 import styles from './Filter.module.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../app/store';
 
 type Props = {
-  filter: boolean;
+  isFilterOpen: boolean;
   setFilter: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const FilterProducts: React.FC<Props> = ({ filter, setFilter }: Props) => {
+const FilterProducts: React.FC<Props> = ({ isFilterOpen, setFilter }: Props) => {
+  const dispatch = useDispatch()
+  const selectedOptions = useSelector((state: RootState) => state.filter.selectedOptions)
   const [isOpen, setIsOpen] = useState(false);
 
   const handleClick = () => {
-    setFilter(!filter);
+    setFilter(!isFilterOpen);
     setIsOpen(!isOpen);
   };
 
+  const handelChangeOptions = (option) => {
+    selectedOptions()
+  }
+
   return (
-    <div className={`${styles.wrapper} ${filter === true ? styles.filterProductsOpened : ''}`}>
+    <div className={`${styles.wrapper} ${isFilterOpen === true ? styles.filterProductsOpened : ''}`}>
       <div className={`${styles.title} ${isOpen ? styles.opened : ''}`}>
-        <p onClick={handleClick} className={`${styles.filterTitle}  ${filter ? styles.filterOpened : ''}`}>
+        <p onClick={handleClick} className={`${styles.filterTitle}  ${isFilterOpen ? styles.filterOpened : ''}`}>
           FILTER
         </p>
         {isOpen ? (
@@ -31,35 +39,35 @@ const FilterProducts: React.FC<Props> = ({ filter, setFilter }: Props) => {
         )}
       </div>
       {
-        filter && (
+        isFilterOpen && (
           <>
             <Filter title="Collection" options={collectionOptions.map((option) => (
               <label key={option} className={styles.filterOption}>
-                <input type="checkbox" className={styles.checkbox} />
+                <input onChange={() => handelChangeOptions(option)} type="checkbox" className={styles.checkbox} />
                 {option}
               </label>
             ))} />
             <Filter title="Categories" options={categoryOptions.map((option) => (
               <label key={option} className={styles.filterOption}>
-                <input type="checkbox" className={styles.checkbox} />
+                <input onChange={() => handelChangeOptions(option)} type="checkbox" className={styles.checkbox} />
                 {option}
               </label>
             ))} />
             <Filter title="Gender" options={genderOptions.map((option) => (
               <label key={option} className={styles.filterOption}>
-                <input type="checkbox" className={styles.checkbox} />
+                <input onChange={() => handelChangeOptions(option)} type="checkbox" className={styles.checkbox} />
                 {option}
               </label>
             ))} />
             <Filter title="Size" options={sizeOptions.map((option) => (
               <label key={option} className={styles.filterOption}>
-                <input type="checkbox" className={styles.checkbox} />
+                <input onChange={() => handelChangeOptions(option)} type="checkbox" className={styles.checkbox} />
                 {option}
               </label>
             ))} />
             <Filter title="Color" options={colorOptions.map((option) => (
               <label key={option} className={styles.filterOption}>
-                <input type="checkbox" className={styles.checkbox} />
+                <input onChange={() => handelChangeOptions(option)} type="checkbox" className={styles.checkbox} />
                 {option}
               </label>
             ))} />
