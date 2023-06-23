@@ -10,8 +10,11 @@ import { isMobile } from '../../../utils/isMobile';
 import Button from '../button';
 import loaderGif from '../../../assets/loader-1.gif'
 import { Link } from 'react-router-dom';
-
-function ProductCard() {
+import { availableSizes } from '../../../data/data';
+type Props = {
+  isOpenFilter: boolean
+}
+function ProductCard({ isOpenFilter: isFilterOpen }: Props) {
   const products = useFetchProducts()
   const dispatch = useDispatch()
 
@@ -26,7 +29,6 @@ function ProductCard() {
     setHoveredIndex(-1);
   };
 
-  const availableSizes = ['s', 'm', 'l', 'xl'];
 
   const handleButtonClick = (index: number,) => {
     setMenuOpenIndex((prevIndex) => (prevIndex === index ? -1 : index))
@@ -48,13 +50,13 @@ function ProductCard() {
   }
   else {
     return (
-      <div className={styles['product-card']}>
+      <div className={`${styles.productCard} ${isFilterOpen ? styles.filterOpened : ''} `}>
         {Array.isArray(products) ? (products.map((product: Product, index) => (
           <div key={index}
             className={styles.card}
             onMouseEnter={() => handleCardMouseEnter(index)}
             onMouseLeave={handleCardMouseLeave}>
-            <Link to={`/${product.name}`}>
+            <Link to={`/ ${product.name} `}>
               <img key={product.url} src={product.url} alt="Product" />
             </Link>
             <div className={styles.wrapperContent}>
@@ -62,7 +64,7 @@ function ProductCard() {
                 <p key={product.category} className={styles.color}>
                   {product.collection}
                 </p>
-                <Link to={`/${product.name}`}>
+                <Link to={`/ ${product.name} `}>
                   <h2 key={product.name}>{product.name}</h2>
                 </Link>
                 <h3 key={product.color} className={styles.color}>

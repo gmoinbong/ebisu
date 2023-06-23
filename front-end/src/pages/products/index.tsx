@@ -1,13 +1,16 @@
+import { useState } from "react";
 import FilterProducts from "../../components/filter/FilterProducts"
 import ProductCard from "../../components/layout/product-card"
 import PagesInformer from "../../components/pages-informer"
 
 const ProductPage = () => {
+  const [isOpenfilter, setIsOpenFilter] = useState(false);
+
   return (
     <>
       <PagesInformer />
-      <FilterProducts />
-      <ProductCard />
+      <FilterProducts filter={isOpenfilter} setFilter={setIsOpenFilter} />
+      <ProductCard isOpenFilter={isOpenfilter} />
     </>
   )
 }

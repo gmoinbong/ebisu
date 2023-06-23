@@ -1,8 +1,12 @@
-.product-card {
+.productCard {
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
 }
+
+
+
+
 
 .card {
   width: 100%;
@@ -16,9 +20,8 @@
   text-transform: uppercase;
 }
 
-.sizeList ul,
-{
-padding: 0;
+.sizeList ul {
+  padding: 0;
 }
 
 .sizeList {
@@ -110,6 +113,16 @@ padding: 0;
 .card button:hover {
   background: #fff;
   color: #000;
+}
+
+@media(min-width: 768px) {
+  .filterOpened {
+    margin-left: 220px;
+  }
+
+  .productCard {
+    margin-top: 25px;
+  }
 }
 
 @media (max-width: 1024px) {
