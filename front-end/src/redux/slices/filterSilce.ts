@@ -12,6 +12,7 @@ export interface Filter {
 const initialState = {
   selectedOptions: {},
   filteredProducts: [],
+  isFiltered: false,
   loading: false,
   error: null,
 }
@@ -22,9 +23,11 @@ const filterSlice = createSlice({
   reducers: {
     setSelectedOptions: (state, action) => {
       state.selectedOptions = action.payload
+      state.isFiltered = true
     },
     resetFilterOptions: (state) => {
       state.selectedOptions = []
+      state.isFiltered = false
     },
 
   }

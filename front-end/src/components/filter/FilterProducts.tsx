@@ -29,7 +29,6 @@ type SelectedOptions = {
 const FilterProducts: React.FC<Props> = ({ isFilterOpen, setFilter }: Props) => {
   const dispatch = useDispatch()
   const selectedOptions: SelectedOptions = useSelector((state: RootState) => state.filter.selectedOptions)
-  const filteredProducts = useSelector((state: RootState) => state.products.filteredProducts);
 
 
   const [isOpen, setIsOpen] = useState(false);
@@ -63,16 +62,12 @@ const FilterProducts: React.FC<Props> = ({ isFilterOpen, setFilter }: Props) => 
         delete updatedOptions[key];
       }
     });
-
     dispatch(setSelectedOptions(updatedOptions));
   };
-
-
 
   useEffect(() => {
     dispatch(fetchFilteredProducts(selectedOptions));
   }, [dispatch, selectedOptions]);
-  console.log(filteredProducts);
 
   return (
     <div className={`${styles.wrapper} ${isFilterOpen === true ? styles.filterProductsOpened : ''}`}>
