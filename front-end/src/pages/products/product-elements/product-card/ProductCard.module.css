@@ -6,8 +6,6 @@
 
 
 
-
-
 .card {
   width: 100%;
   max-width: calc(25% - 10px);
@@ -60,7 +58,6 @@
   height: 30px;
 }
 
-.wrapperContent {}
 
 .card h3 {
   font-size: 14px;
@@ -122,11 +119,13 @@
   }
 
   .wrapperItems {
-    min-height: 110px;
+    min-height: 130px;
+    max-height: 140px;
+    height: 100%;
   }
 
   .card {
-    min-height: 580px;
+    min-height: 520px;
     height: 100%;
   }
 
@@ -137,26 +136,13 @@
 
 /* anything else > */
 @media (max-width: 1024px) {
-
   .card {
     max-width: calc(33.33% - 10px);
-    height: 100%;
   }
-
-  .wrapperItems {
-    min-height: 160px;
-    height: 100%;
-  }
-
-
-
 }
 
 @media (max-width: 767px) {
-
   .card {
     max-width: calc(50% - 10px);
   }
-
-
 }

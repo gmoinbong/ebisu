@@ -18,7 +18,6 @@ export function useFetchProduct(name: string) {
         console.error(error);
       }
     };
-
     fetchData();
   }, [dispatch, name]);
 

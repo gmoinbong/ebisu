@@ -9,7 +9,7 @@ type FilterProps = {
   options: FilterOption[];
 };
 
-const Filter: React.FC<FilterProps> = ({ title, options }) => {
+export const Filter: React.FC<FilterProps> = ({ title, options }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleToggle = () => {
@@ -28,8 +28,8 @@ const Filter: React.FC<FilterProps> = ({ title, options }) => {
       </div>
       {isOpen && (
         <ul className={styles.filterOptions}>
-          {options.map((option) => (
-            <li key={option} className={styles.filterOption}>
+          {options.map((option, index) => (
+            <li key={option + index} className={styles.filterOption}>
               {option}
             </li>
           ))}
@@ -39,4 +39,3 @@ const Filter: React.FC<FilterProps> = ({ title, options }) => {
   );
 };
 
-export default Filter;

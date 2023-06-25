@@ -1,7 +1,7 @@
 import styles from './ProductCard.module.css';
 
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Button from '../../../../components/layout/button';
 import loaderGif from '../../../../components/layout/loaderGif';
@@ -10,6 +10,7 @@ import { useFetchProducts } from '../../../../hooks/useFetchProducts';
 import { addToCart } from '../../../../redux/slices/cartSlice';
 import { Product } from '../../../../redux/slices/productSlice';
 import { isMobile } from '../../../../utils/isMobile';
+import LoaderGif from '../../../../components/layout/loaderGif';
 
 type Props = {
   isOpenFilter: boolean
@@ -101,7 +102,7 @@ function ProductCard({ isOpenFilter: isFilterOpen }: Props) {
             </div>
           </div>
         )))
-          : <div><img style={{ margin: "0 auto" }} src={loaderGif} /></div>
+          : <LoaderGif />
         }
       </div >
     );

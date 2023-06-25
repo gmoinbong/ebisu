@@ -6,26 +6,40 @@ import { validateClothes } from "../validation/validation.js";
 const router = express.Router()
 
 router.get('/', async (req, res) => {
-  const { gender, search, name } = req.query;
+  const { gender, search, name, size, color, category } = req.query;
   const query = {};
+
   if (gender) {
-    query.gender = gender
+    query.gender = Array.isArray(gender) ? { $in: gender } : gender;
   }
   if (name) {
-    query.name = name
+    query.name = { $regex: name, $options: 'i' };
   }
   if (search) {
     query.name = { $regex: search, $options: 'i' };
   }
-  try {
-    let collection = await dbProducts.collection("Clothes");
-    let results = await collection.find(query).toArray();
-    res.send(results).status(200)
-  } catch (error) {
-    res.status(500).send("Internal Server Error")
+  if (size) {
+    query.size = Array.isArray(size) ? { $in: size.map(s => s.toLowerCase()) } : { $in: [size.toLowerCase()] };
+  }
+  if (color) {
+    query.color = Array.isArray(color) ? { $in: color } : { $in: [color] };
+  }
+  if (category) {
+    query.category = Array.isArray(category) ? { $in: category } : { $in: [category] };
   }
 
-})
+  try {
+    const collection = await dbProducts.collection("Clothes");
+    const results = await collection.find(query).toArray();
+    res.status(200).send(results);
+  } catch (error) {
+    res.status(500).send("Internal Server Error");
+  }
+});
+
+
+
+
 
 router.post('/', validateClothes, async (req, res) => {
   const errors = validationResult(req);

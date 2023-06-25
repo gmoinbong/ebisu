@@ -1,7 +1,19 @@
 import { createSlice } from "@reduxjs/toolkit";
+export interface Filter {
+  collection: string[];
+  price?: string[];
+  name: string[];
+  category: string[];
+  gender: string[];
+  color: string[];
+  size: string[];
+}
 
 const initialState = {
-  selectedOptions: []
+  selectedOptions: {},
+  filteredProducts: [],
+  loading: false,
+  error: null,
 }
 
 const filterSlice = createSlice({
@@ -14,6 +26,7 @@ const filterSlice = createSlice({
     resetFilterOptions: (state) => {
       state.selectedOptions = []
     },
+
   }
 })
 export const { resetFilterOptions, setSelectedOptions } = filterSlice.actions
