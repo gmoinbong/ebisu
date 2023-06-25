@@ -51,15 +51,14 @@ export const getClothesBySearch = async (search: string) => {
 export const getClothesByFilter = async (options: FilterOptions) => {
   try {
     const queryParams = Object.entries(options)
-      .map(([key, value]) => {
+      .flatMap(([key, value]) => {
         if (Array.isArray(value)) {
           return value.map((v) => `${encodeURIComponent(key)}=${encodeURIComponent(v)}`);
         }
         return `${encodeURIComponent(key)}=${encodeURIComponent(value)}`;
       })
-      .flat()
       .join('&');
-    const query = `?/${queryParams}`;
+    const query = `?${queryParams}`;
 
     const response = await instance.get(`/Clothes${query}`);
     const filteredProducts = response.data;
@@ -69,3 +68,4 @@ export const getClothesByFilter = async (options: FilterOptions) => {
     throw error;
   }
 };
+

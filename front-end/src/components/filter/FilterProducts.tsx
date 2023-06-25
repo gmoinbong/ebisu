@@ -29,8 +29,8 @@ type SelectedOptions = {
 const FilterProducts: React.FC<Props> = ({ isFilterOpen, setFilter }: Props) => {
   const dispatch = useDispatch()
   const selectedOptions: SelectedOptions = useSelector((state: RootState) => state.filter.selectedOptions)
+  const filteredProducts = useSelector((state: RootState) => state.products.filteredProducts);
 
-  console.log(selectedOptions);
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -41,10 +41,13 @@ const FilterProducts: React.FC<Props> = ({ isFilterOpen, setFilter }: Props) => 
 
   const handelChangeOptions = (category: string, value: string) => {
     const updatedOptions: UpdatedOptions = { ...selectedOptions };
+
     if (updatedOptions[category]) {
       const optionValues = updatedOptions[category];
+
       if (optionValues.includes(value)) {
         updatedOptions[category] = optionValues.filter((v: string) => v !== value);
+
         if (updatedOptions[category].length === 0) {
           delete updatedOptions[category];
         }
@@ -54,6 +57,7 @@ const FilterProducts: React.FC<Props> = ({ isFilterOpen, setFilter }: Props) => 
     } else {
       updatedOptions[category] = [value];
     }
+
     Object.keys(updatedOptions).forEach((key) => {
       if (updatedOptions[key].length === 0) {
         delete updatedOptions[key];
@@ -63,8 +67,7 @@ const FilterProducts: React.FC<Props> = ({ isFilterOpen, setFilter }: Props) => 
     dispatch(setSelectedOptions(updatedOptions));
   };
 
-  // const filterProducts = getClothesByFilter(options);
-  const filteredProducts = useSelector((state: RootState) => state.products.filteredProducts);
+
 
   useEffect(() => {
     dispatch(fetchFilteredProducts(selectedOptions));

@@ -1,5 +1,5 @@
-export const collectionOptions = ['Evisu'];
+export const collectionOptions = ['summer collection 2023'];
 export const categoryOptions = ['t-shirt', 'shorts', 'shirt', 'pants', 'cap', 'jeans', 'skirt', 'jacket'];
-export const genderOptions = ['KID', 'MEN', 'UNISEX', 'woman'];
+export const genderOptions = ['men', 'unisex', 'woman'];
 export const sizeOptions = ['xs', 's', 'm', 'l', 'xl'];
 export const colorOptions = ['white', 'black', 'indigo', 'beige', 'blue'];
