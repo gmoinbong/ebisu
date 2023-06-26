@@ -33,7 +33,7 @@ const Footer = () => {
             </ul>
           </div>
           <div className={`${styles.footerColumn} ${styles.follow}`}>
-            <h4 className={styles.footerHeading}>FOLLOW US</h4>
+            <h4 className={styles.followUs}>FOLLOW US</h4>
             <ul className={styles.footerSocialLinks}>
               <li className={styles.footerSocialLinkItem}>
                 <a href="https://www.instagram.com/evisu1991/" className={styles.footerSocialLink}>

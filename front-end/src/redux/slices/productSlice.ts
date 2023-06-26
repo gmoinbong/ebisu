@@ -20,6 +20,7 @@ export interface Product {
   size: string;
   url: string;
   id?: any;
+  quantity?: number,
 }
 
 interface ProductState {

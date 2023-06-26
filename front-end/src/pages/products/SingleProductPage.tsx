@@ -34,7 +34,9 @@ const SingleProductPage = () => {
         name: product[0].name,
         url: product[0].url,
         size: product[0].size,
-        quantity: 1
+        color: product[0].color,
+        quantity: 1,
+        price: product[0].price
       })
     );
   };
