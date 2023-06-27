@@ -41,6 +41,12 @@ const RegPage: React.FC = () => {
     } else {
       alert('Invalid input');
     }
+    setUser({
+      confirmPassword: '',
+      email: '',
+      fullName: '',
+      password: ''
+    })
   };
 
   return (

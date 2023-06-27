@@ -1,46 +1,25 @@
 import styles from './Cart.module.css'
 
 import { AiOutlineClose } from 'react-icons/ai';
-import { useDispatch, useSelector } from 'react-redux';
-import { CartItem, removeFromCart, updateCart } from '../../redux/slices/cartSlice';
 import { RootState } from '../../app/store';
 import QuantitySelect from './QuantitySelect';
 import Button from '../layout/Button';
-
+import useCartLogic from './cartLogic';
+import { useSelector } from 'react-redux';
+import { CartItem } from '../../redux/slices/cartSlice';
 
 type Props = {
   isVisible: boolean;
   setIsVisible: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-
 const CartComponent = ({ isVisible, setIsVisible }: Props) => {
-  const dispatch = useDispatch();
+  const { handleClick, handleRemoveClick, handleQuantityChange, calculateTotal } = useCartLogic(isVisible, setIsVisible);
+
   const cartItems: CartItem[] = useSelector((state: RootState) => state.cartItems);
 
-  const handleClick = () => {
-    setIsVisible(!isVisible);
-  };
-
-  const handleRemoveClick = (item: string) => {
-    dispatch(removeFromCart(item));
-  };
-
-  const handleQuantityChange = (id: string, quantity: number) => {
-    dispatch(updateCart({ id, quantity }));
-  };
-
-  const calculateTotal = () => {
-    let total = 0;
-    cartItems.forEach((item) => {
-      const itemQuantity = item.quantity || 1;
-      total += parseFloat(item.price) * itemQuantity;
-    });
-    return total.toFixed(2);
-  };
-
   return (
-    <div className={styles.cart}>
+    <div className={`${styles.cart} ${isVisible ? styles.cartVisible : ''} ${isVisible ? styles.darkOverlay : ''}`}>
       <div className={styles.cartBlock}>
         <div className={styles.heading}>
           <h3>Shopping basket</h3>

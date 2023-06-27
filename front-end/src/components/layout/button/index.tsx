@@ -11,7 +11,7 @@ type Props = {
   backgroundColor?: Property.Color
   color?: Property.Color
   disabled?: boolean
-
+  type?: string
 }
 
 const Button = ({ text, className, onClick, width, maxWidth, margin, color, backgroundColor }: Props) => {

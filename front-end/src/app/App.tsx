@@ -8,6 +8,7 @@ import Login from '../auth/login';
 import RegPage from '../auth/register';
 import SingleProductPage from '../pages/products/SingleProductPage';
 import ScrollToTop from '../utils/ScrollTop';
+import UserProfile from '../auth/profile';
 
 
 
@@ -25,6 +26,7 @@ const App = () => {
         <Route path='/admin' element={<FormClothesCreate />} />
         <Route path='/register' element={<RegPage />} />
         <Route path='/login' element={<Login />} />
+        <Route path='/account' element={<UserProfile />} />
         <Route />
       </Routes >
       <Footer />

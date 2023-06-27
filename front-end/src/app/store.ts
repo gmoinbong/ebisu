@@ -5,6 +5,7 @@ import cartReducer from '../redux/slices/cartSlice';
 import searchProductsReducer from '../redux/slices/searchProductsSlice';
 import profileReducer from '../redux/slices/profileSlice'
 import filterReducer from '../redux/slices/filterSilce'
+import { authReducer } from '../redux/slices/authSlice';
 
 
 const rootReducer = combineReducers({
@@ -14,6 +15,8 @@ const rootReducer = combineReducers({
   selectedProduct: selectedProductReducer,
   setCountry: profileReducer,
   filter: filterReducer,
+  profile: profileReducer,
+  auth: authReducer
 });
 
 const store = configureStore({

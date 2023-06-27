@@ -33,9 +33,9 @@ const HelpPannel = ({ toggleSearch, openPopup }: Props) => {
       {showAuth && <Dropdown handleProfileClick={handleProfileClick} />}
       <div className={styles.helpPannel}>
         <CiSearch onClick={toggleSearch} style={{ cursor: 'pointer', marginRight: '16px', color: '#fff' }} />
+        {isMobile ? < CountryPannel popupOpen={openPopup} /> : null}
         <AiOutlineShopping onClick={toggleCart} style={{ cursor: 'pointer', marginRight: '16px', color: '#fff' }} />
         <CgProfile onClick={handleProfileClick} style={{ cursor: 'pointer', marginRight: '16px', color: '#fff' }} />
-        {isMobile ? < CountryPannel popupOpen={openPopup} /> : null}
       </div>
     </>
   )

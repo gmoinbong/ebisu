@@ -87,6 +87,8 @@
   filter: brightness(0) invert(1);
 }
 
+
+
 .switcher {
   padding: 5px;
   display: flex;

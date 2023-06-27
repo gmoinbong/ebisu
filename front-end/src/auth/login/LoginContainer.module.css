@@ -4,8 +4,9 @@
   align-items: center;
   justify-content: center;
   padding: 10px;
-  height: 100vh;
+  height: 90vh;
   border-bottom: 1px solid;
+
 }
 
 .form {
@@ -82,5 +83,4 @@ button[type="submit"]:disabled {
 
 .isMobile {
   margin-top: 71px;
-  height: 100%;
 }

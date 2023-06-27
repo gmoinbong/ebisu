@@ -47,7 +47,7 @@ const Header = () => {
             {!isMobile && <CountryPannel popupOpen={handlePopupOpen} />}
             <p> USD</p>
           </div>
-          <div className={menuOpen ? styles.row : styles.mobileRow}>
+          <div className={`${menuOpen ? styles.row : styles.mobileRow} ${isMobile ? styles.headerMobileLogo : ''} `}>
             <img
               src={logo}
               alt="logo"
