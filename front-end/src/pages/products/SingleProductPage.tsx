@@ -2,7 +2,7 @@ import { useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { useFetchProduct } from '../../hooks/useFetchProduct';
 import { addToCart } from '../../redux/slices/cartSlice';
-import Button from '../../components/layout/button';
+import Button from '../../components/layout/Button';
 import PagesInformer from '../../components/pages-informer';
 import LoaderGif from '../../components/layout/loaderGif';
 import Accordion from './product-elements/Accordion';

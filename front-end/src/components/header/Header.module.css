@@ -53,6 +53,8 @@
 
 }
 
+
+
 .mobileNav {
   flex-direction: column-reverse;
 }
@@ -163,6 +165,15 @@ img {
   margin: 0 24px;
   padding: 10px 0;
   width: 90%;
+}
+
+.category p {
+  color: #fff;
+  text-decoration: none;
+}
+
+.category link {
+  text-decoration: none;
 }
 
 .popup {
@@ -295,6 +306,12 @@ img {
 
   .mobileHeader {
     height: 100%;
+  }
+
+  .countryPannel {
+    height: 16px;
+    width: 16px;
+    margin-right: 16px;
   }
 
   .row {

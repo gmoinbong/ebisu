@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { CartItem, removeFromCart, updateCart } from '../../redux/slices/cartSlice';
 import { RootState } from '../../app/store';
 import QuantitySelect from './QuantitySelect';
-import Button from '../layout/button';
+import Button from '../layout/Button';
 
 
 type Props = {

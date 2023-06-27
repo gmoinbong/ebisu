@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { mainCountries } from '../../data/countryData';
 import { AiOutlineClose } from 'react-icons/ai';
 import { useDispatch } from 'react-redux';
-import { setCountry } from '../../redux/slices/profileSlice';
 import { debounce } from 'lodash';
 
-import styles from './Header.module.css';
+import styles from '../Header.module.css';
+import { setCountry } from '../../../redux/slices/profileSlice';
+import { mainCountries } from '../../../data/countryData';
 
 type Props = {
   onClose: () => void;

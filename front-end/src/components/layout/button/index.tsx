@@ -10,6 +10,7 @@ type Props = {
   margin?: string | number
   backgroundColor?: Property.Color
   color?: Property.Color
+  disabled?: boolean
 
 }
 

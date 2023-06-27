@@ -1,5 +1,5 @@
-import { useRouteChange } from '../../hooks/useRouteChange'
-import styles from './Header.module.css'
+import { useRouteChange } from '../../../hooks/useRouteChange'
+import styles from '../Header.module.css'
 
 type Props = {
   handleProfileClick: () => void

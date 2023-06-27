@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 import styles from './LoginContainer.module.css';
 
 import axios from 'axios';
-import { isMobile } from '../../utils/isMobile';
 import { Link } from 'react-router-dom';
+import useIsMobile from '../../utils/useIsMobile';
 
 const LoginContainer: React.FC = () => {
+  const isMobile = useIsMobile()
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);

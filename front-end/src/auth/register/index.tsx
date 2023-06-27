@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import styles from './RegPage.module.css';
 import axios from 'axios';
-import { isMobile } from '../../utils/isMobile';
+import useIsMobile from '../../utils/useIsMobile';
 
 
 const RegPage: React.FC = () => {
+  const isMobile = useIsMobile()
+
   const navigate = useNavigate();
   const handleGoBack = () => {
     navigate(-1);

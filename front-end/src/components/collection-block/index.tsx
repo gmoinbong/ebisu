@@ -1,8 +1,8 @@
 import styles from "./CollectionBlock.module.css";
 
 import { useRouteChange } from "../../hooks/useRouteChange";
-import { isMobile } from "../../utils/isMobile";
-import Button from "../layout/button";
+import Button from "../layout/Button";
+import useIsMobile from "../../utils/useIsMobile";
 
 export interface collectionProps {
   title: string;
@@ -15,6 +15,7 @@ export interface collectionProps {
 }
 const CollectionBlock = ({ title, subtitle, image1, image2, button1Text, button2Text, }: collectionProps) => {
   const routeChange = useRouteChange()
+  const isMobile = useIsMobile()
 
   const handleClickMen = async (): Promise<void> => {
     routeChange('/products/men')

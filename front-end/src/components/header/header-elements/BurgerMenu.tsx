@@ -1,5 +1,5 @@
 import { GiHamburgerMenu } from "react-icons/gi";
-// import styles from './Header.module.css'
+
 type Props = {
   isOpen: boolean;
   toggleMenu: () => void;

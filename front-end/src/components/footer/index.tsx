@@ -4,9 +4,16 @@ import FooterBlocks from "./FooterBlocks"
 import { BsInstagram } from 'react-icons/bs'
 import { FiFacebook } from 'react-icons/fi'
 import { AiOutlineWeibo, AiOutlineYoutube } from 'react-icons/ai'
-import Button from '../layout/button'
+import Button from '../layout/Button'
+import { useRef } from 'react'
 
 const Footer = () => {
+  const emailRef = useRef(null);
+
+  const handleSubscribeClick = () => {
+    emailRef.current.value = '';
+  };
+
   return (
     <>
       <FooterBlocks />
@@ -57,8 +64,8 @@ const Footer = () => {
               </li>
             </ul>
             <div className={styles.wrapper}>
-              <input type='email' className={styles.input} placeholder='Input e-mail address here' />
-              <Button className={styles.subscribe} text='Subscribe' />
+              <input ref={emailRef} type='email' className={styles.input} placeholder='Input e-mail address here' />
+              <Button onClick={handleSubscribeClick} className={styles.subscribe} text='Subscribe' />
             </div>
           </div>
         </div>

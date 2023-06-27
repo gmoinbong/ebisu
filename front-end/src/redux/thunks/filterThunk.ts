@@ -18,8 +18,6 @@ export const fetchFilteredProducts = createAsyncThunk<Product[], void, { state: 
   'products/fetchFilteredProducts',
   async (_, { getState, dispatch }) => {
     const selectedOptions = getState().filter.selectedOptions;
-    console.log(selectedOptions);
-
     try {
       const filteredProducts = await getClothesByFilter(selectedOptions as FilterOptions);
       dispatch(setFilteredProducts(filteredProducts));

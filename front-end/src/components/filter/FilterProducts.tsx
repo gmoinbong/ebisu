@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { FiChevronDown, FiChevronRight } from 'react-icons/fi';
-import { categoryOptions, collectionOptions, colorOptions, genderOptions, sizeOptions } from '../../data/filterOptions';
 
 import styles from './Filter.module.css';
-import { RootState } from '../../app/store';
-import { setSelectedOptions } from '../../redux/slices/filterSilce';
-import { Filter } from './index';
 import { useSelector } from 'react-redux/es/hooks/useSelector';
 import { useDispatch } from 'react-redux';
+import { Filter } from '.';
+import { RootState } from '../../app/store';
+import { collectionOptions, categoryOptions, genderOptions, sizeOptions, colorOptions } from '../../data/filterOptions';
+import { setSelectedOptions } from '../../redux/slices/filterSilce';
 import { fetchFilteredProducts } from '../../redux/thunks/filterThunk';
 
 type Props = {
@@ -101,8 +101,6 @@ const FilterProducts: React.FC<Props> = ({ isFilterOpen, setFilter }: Props) => 
                 );
               })}
             />
-
-
             <Filter
               title="Categories"
               options={categoryOptions.map((option, index) => {
@@ -110,7 +108,7 @@ const FilterProducts: React.FC<Props> = ({ isFilterOpen, setFilter }: Props) => 
                 return (
                   <label key={`categories-${index}`} className={styles.filterOption}>
                     <input
-                      onClick={() => handelChangeOptions("categories", option)}
+                      onClick={() => handelChangeOptions("category", option)}
                       type="checkbox"
                       className={styles.checkbox}
                       checked={isSelected}
@@ -137,7 +135,6 @@ const FilterProducts: React.FC<Props> = ({ isFilterOpen, setFilter }: Props) => 
                 )
               })}
             />
-
             <Filter
               title="Size"
               options={sizeOptions.map((option, index) => {
@@ -173,8 +170,6 @@ const FilterProducts: React.FC<Props> = ({ isFilterOpen, setFilter }: Props) => 
                 );
               })}
             />
-
-
           </>
         )
       }
