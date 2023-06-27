@@ -3,10 +3,10 @@ import axios from 'axios';
 import { RootState } from '../../app/store';
 
 export const fetchProfile = createAsyncThunk('profile/fetchProfile', async (_, { getState }) => {
-  const token = getState().auth.data.token;
+  const token = (getState() as RootState).auth.token;
   const response = await axios.get('http://localhost:5172/api/me', {
     headers: {
-      Authorization: `Bearer ${token}`,
+      authorization: `Bearer ${token}`,
     },
   });
   return response.data;
@@ -17,6 +17,7 @@ const initialState = {
   status: 'idle',
   error: null,
   country: 'Ukraine',
+  token: null
 };
 
 const profileSlice = createSlice({
@@ -26,6 +27,9 @@ const profileSlice = createSlice({
     setCountry: (state, action) => {
       state.country = action.payload;
     },
+    setToken: (state, action) => {
+      state.token = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -34,6 +38,7 @@ const profileSlice = createSlice({
       })
       .addCase(fetchProfile.fulfilled, (state, action) => {
         state.status = 'succeeded';
+        state.token = action.meta.arg.token;
         state.data = action.payload;
       })
       .addCase(fetchProfile.rejected, (state, action) => {

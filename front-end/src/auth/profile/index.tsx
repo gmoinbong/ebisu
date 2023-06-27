@@ -1,23 +1,22 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectProfileData, selectProfileStatus, fetchProfile } from '../../redux/slices/profileSlice';
-import { initializeAuthData, selectAuthData } from '../../redux/slices/authSlice';
+import { selectProfileStatus, fetchProfile } from '../../redux/slices/profileSlice';
+import { RootState } from '../../app/store';
+import { initializeAuthData } from '../../redux/slices/authSlice';
 
 const Profile = () => {
   const dispatch = useDispatch();
-  const profileData = useSelector(selectProfileData);
+  const profileData = useSelector((state: RootState) => state.profile.data);
   const profileStatus = useSelector(selectProfileStatus);
-  const authData = useSelector(selectAuthData)
-  useEffect(() => {
-    dispatch(fetchProfile());
-  }, [dispatch]);
-
+  const token = useSelector((state: RootState) => state.auth.token);
+  console.log('profiledata', profileData);
 
   useEffect(() => {
-    if (!authData) {
-      dispatch(initializeAuthData())
-    }
-  }, [authData, dispatch]);
+    dispatch(initializeAuthData());
+    dispatch(fetchProfile({ token }));
+  }, [dispatch, token]);
+
+  console.log('token ==>', token);
 
   if (profileStatus === 'loading') {
     return <div>Loading...</div>;
@@ -27,16 +26,16 @@ const Profile = () => {
     return <div>Error occurred while fetching profile.</div>;
   }
 
+  if (!profileData) {
+    return <div>No profile data available.</div>;
+  }
+
   return (
     <div>
       <h2>Profile</h2>
-      {profileData && (
-        <div>
-          <p>Name: {profileData.name}</p>
-          <p>Email: {profileData.email}</p>
-          {/* Отображайте другие данные профиля */}
-        </div>
-      )}
+      <div>
+        <p>Email: {profileData.email}</p>
+      </div>
     </div>
   );
 };
