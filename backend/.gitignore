@@ -10,10 +10,6 @@ node_modules/
 # Ignore client dependencies
 client/node_modules/
 
-# Ignore environment files
-.env
-client/.env
-
 # Ignore IDE specific files
 .vscode/
 .idea/
