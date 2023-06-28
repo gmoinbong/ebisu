@@ -3,10 +3,10 @@ import { useDispatch } from 'react-redux';
 import styles from './LoginContainer.module.css';
 import { Link } from 'react-router-dom';
 import useIsMobile from '../../utils/useIsMobile';
-import LoginForm from './LoginForm';
 import { fetchAuth } from '../../redux/thunks/authThunk';
+import LoginForm from './LoginForm';
 
-const LoginContainer: React.FC = () => {
+const Login: React.FC = () => {
   const dispatch = useDispatch();
   const isMobile = useIsMobile();
 
@@ -26,4 +26,4 @@ const LoginContainer: React.FC = () => {
   );
 };
 
-export default LoginContainer;
+export default Login;

@@ -12,10 +12,17 @@ type Props = {
   color?: Property.Color
   disabled?: boolean
   type?: string
+  position?: string
+  top?: string
+  left?: string
 }
 
-const Button = ({ text, className, onClick, width, maxWidth, margin, color, backgroundColor }: Props) => {
-  return <button style={{ width, maxWidth, margin, color, backgroundColor }} onClick={onClick} className={`${styles.button} ${className}`}> {text} </button>
+const Button = ({ text, className, onClick, width, maxWidth, margin, color, backgroundColor, position, top, left }: Props) => {
+  return <button style={{
+    width, maxWidth, margin, color,
+    backgroundColor, position, top, left
+  }}
+    onClick={onClick} className={`${styles.button} ${className}`}> {text} </button>
 };
 
 export default Button;

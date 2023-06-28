@@ -8,7 +8,7 @@ import LoaderGif from '../../components/layout/loaderGif';
 import Accordion from './product-elements/Accordion';
 import { ReturnPolicy } from './product-elements/ReturnPolicy';
 import Descrpition from './product-elements/Descrpition';
-import ProductSlider, { ProductSliderItem } from '../../components/slider/ProductSlider';
+import ProductSlider, { ProductSliderItem } from '../../components/Slider/ProductSlider';
 import { useRouteChange } from '../../hooks/useRouteChange';
 
 import styles from './Product.module.css';
@@ -45,7 +45,7 @@ const SingleProductPage = () => {
   const { collection, price,
     name, category,
     gender, color,
-    size, url,
+    size, url, images
   } = product[0];
 
   return (
@@ -56,7 +56,9 @@ const SingleProductPage = () => {
           <div className={styles.imageContainer}>
             <ProductSlider maxWidth={'500px'} width={'100%'}>
               <ProductSliderItem><img className={styles.image} alt="product" src={url} /></ProductSliderItem>
-              <ProductSliderItem><img className={styles.image} alt="product" src={url} /></ProductSliderItem>
+              {images && images.map((image, index) =>
+                < ProductSliderItem key={index} > <img className={styles.image} alt="product" src={image} /></ProductSliderItem>
+              )}
             </ProductSlider>
           </div>
           <div className={styles.detailsContainer}>
@@ -84,7 +86,7 @@ const SingleProductPage = () => {
           className={styles.addButton}
           text="BACK TO HOME"
           backgroundColor={'#000'} />
-      </div>
+      </div >
     </>
   );
 };

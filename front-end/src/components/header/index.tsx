@@ -3,7 +3,7 @@ import { BurgerMenu } from './header-elements/BurgerMenu';
 import { BsX } from 'react-icons/bs';
 
 import styles from './Header.module.css';
-import SearchComponent from '../search';
+import Search from '../Search';
 import HeaderLinks from './header-elements/HeaderLinks';
 import HelpPannel from './header-elements/HelpPannel';
 import MobileLinks from './header-elements/MobileLinks';
@@ -27,7 +27,7 @@ const Header = () => {
     <>
       <header onFocus={handleFocus} className={headerStyles}>
         {isSearchVisible && (
-          <SearchComponent
+          <Search
             isSearchVisible={isSearchVisible}
             setIsSearchVisible={setIsSearchVisible}
           />

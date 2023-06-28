@@ -145,8 +145,16 @@
   font-weight: 700;
 }
 
+.toggleButton h6 {
+  cursor: pointer;
+  width: max-content;
+  margin: 0;
+  font-size: 16px;
+}
+
 .toggleButton svg {
   margin-right: 10px;
+  cursor: pointer;
 }
 
 .collapsed,

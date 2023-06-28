@@ -5,7 +5,7 @@ import axios from 'axios';
 import useIsMobile from '../../utils/useIsMobile';
 
 
-const RegPage: React.FC = () => {
+const Register: React.FC = () => {
   const isMobile = useIsMobile()
 
   const navigate = useNavigate();
@@ -100,4 +100,4 @@ const RegPage: React.FC = () => {
   );
 };
 
-export default RegPage;
+export default Register;

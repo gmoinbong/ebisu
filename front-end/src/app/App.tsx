@@ -1,14 +1,15 @@
 import Header from '../components/header';
-import MainPage from '../pages/main';
-import Footer from '../components/footer';
+import MainPage from '../pages/MainPage';
+import Footer from '../components/Footer';
 import { Route, Routes } from 'react-router-dom';
 import ProductPage from '../pages/products';
-import { FormClothesCreate } from '../admin/form-create';
-import Login from '../auth/login';
-import RegPage from '../auth/register';
+import { FormClothesCreate } from '../admin/FormClothesCreate';
+import Login from '../auth/Login';
+import Register from '../auth/Register';
 import SingleProductPage from '../pages/products/SingleProductPage';
 import ScrollToTop from '../utils/ScrollTop';
-import UserProfile from '../auth/profile';
+import ProfilePage from '../pages/ProfilePage';
+import NotFoundPage from '../pages/NotFoundPage';
 
 
 
@@ -20,13 +21,18 @@ const App = () => {
       <Header />
       <Routes >
         <Route path='/' element={<MainPage />} />
+        <Route path='/products/men' element={<ProductPage />} />
+        <Route path='/products/woman' element={<ProductPage />} />
+        <Route path='products/woman/:id' element={<SingleProductPage />} />
+        <Route path='products/men/:id' element={<SingleProductPage />} />
+        <Route path='products/:id' element={<SingleProductPage />} />
         <Route path='/products/*' element={<ProductPage />} />
-        <Route path=':id' element={<SingleProductPage />} />
         <Route path='/test' element={<ProductPage />} />
         <Route path='/admin' element={<FormClothesCreate />} />
-        <Route path='/register' element={<RegPage />} />
+        <Route path='/register' element={<Register />} />
         <Route path='/login' element={<Login />} />
-        <Route path='/account' element={<UserProfile />} />
+        <Route path='/account' element={<ProfilePage />} />
+        <Route path='*' element={<NotFoundPage />} />
         <Route />
       </Routes >
       <Footer />

@@ -4,7 +4,7 @@ import { CiSearch } from 'react-icons/ci'
 import styles from '../Header.module.css'
 import { useState } from 'react'
 import Dropdown from './Dropdown'
-import CartComponent from '../../cart'
+import Cart from '../../Cart'
 import { CountryPannel } from './countryPannel'
 import useIsMobile from '../../../utils/useIsMobile'
 
@@ -29,7 +29,7 @@ const HelpPannel = ({ toggleSearch, openPopup }: Props) => {
 
   return (
     <>
-      {isCartVisible && <CartComponent isVisible={isCartVisible} setIsVisible={setIsCartVisible} />}
+      {isCartVisible && <Cart isVisible={isCartVisible} setIsVisible={setIsCartVisible} />}
       {showAuth && <Dropdown handleProfileClick={handleProfileClick} />}
       <div className={styles.helpPannel}>
         <CiSearch onClick={toggleSearch} style={{ cursor: 'pointer', marginRight: '16px', color: '#fff' }} />

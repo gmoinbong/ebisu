@@ -1,14 +1,29 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, createSelector } from "@reduxjs/toolkit";
 import { fetchAuth } from "../thunks/authThunk";
 import { RootState } from "../../app/store";
+import { useDispatch } from "react-redux";
+const dispatch = useDispatch
 
 const loadAuthFromStorage = () => {
   const authData = localStorage.getItem('authData');
   if (authData) {
-    return JSON.parse(authData);
+    const parsedAuthData = JSON.parse(authData);
+    return {
+      ...parsedAuthData,
+      logout: () => {
+        localStorage.removeItem('authData');
+        dispatch(clearAuthData());
+      },
+    };
   }
   return null;
-}
+};
+
+export const logout = createAsyncThunk('auth/logout', async (_, { dispatch }) => {
+  localStorage.removeItem('authData');
+  dispatch(clearAuthData());
+});
+
 
 const saveAuthToStorage = (authData) => {
   localStorage.setItem('authData', JSON.stringify(authData));
@@ -38,9 +53,13 @@ const authSlice = createSlice({
   reducers: {
     setAuthData: (state, action) => {
       state.authData = action.payload;
+      state.token = action.payload.token;
+      state.status = 'loaded';
     },
     clearAuthData: (state) => {
       state.authData = null;
+      state.token = null;
+      state.status = 'loading';
     },
   },
   extraReducers: (builder) => {
@@ -65,7 +84,10 @@ const authSlice = createSlice({
 
 export const { setAuthData, clearAuthData } = authSlice.actions;
 
-export const selectIsAuth = (state: RootState) => Boolean(state.auth.authData);
+export const selectIsAuth = createSelector(
+  (state: RootState) => state.auth.authData,
+  (authData) => !!authData
+);
 export const selectAuthData = (state: RootState) => state.auth.authData;
 
 export default authSlice.reducer;

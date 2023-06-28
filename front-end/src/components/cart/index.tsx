@@ -2,18 +2,18 @@ import styles from './Cart.module.css'
 
 import { AiOutlineClose } from 'react-icons/ai';
 import { RootState } from '../../app/store';
-import QuantitySelect from './QuantitySelect';
 import Button from '../layout/Button';
-import useCartLogic from './cartLogic';
 import { useSelector } from 'react-redux';
 import { CartItem } from '../../redux/slices/cartSlice';
+import useCartLogic from './cartLogic';
+import QuantitySelect from './QuantitySelect';
 
 type Props = {
   isVisible: boolean;
   setIsVisible: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const CartComponent = ({ isVisible, setIsVisible }: Props) => {
+const Cart = ({ isVisible, setIsVisible }: Props) => {
   const { handleClick, handleRemoveClick, handleQuantityChange, calculateTotal } = useCartLogic(isVisible, setIsVisible);
 
   const cartItems: CartItem[] = useSelector((state: RootState) => state.cartItems);
@@ -71,4 +71,4 @@ const CartComponent = ({ isVisible, setIsVisible }: Props) => {
   );
 };
 
-export default CartComponent;
+export default Cart;

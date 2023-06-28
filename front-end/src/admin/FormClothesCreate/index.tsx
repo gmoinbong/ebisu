@@ -3,7 +3,6 @@ import { ChangeEvent, FormEvent, useState } from "react"
 import PagesInformer from "../../components/pages-informer";
 
 interface FormData {
-  _id: string;
   name: string;
   collection: string;
   category: string;
@@ -23,7 +22,7 @@ export const FormClothesCreate = () => {
     color: '',
     size: '',
     url: '',
-    price: ''
+    price: '',
   })
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();

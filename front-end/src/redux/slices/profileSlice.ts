@@ -9,7 +9,11 @@ export const fetchProfile = createAsyncThunk('profile/fetchProfile', async (_, {
       authorization: `Bearer ${token}`,
     },
   });
-  return response.data;
+  return response.data; ``
+});
+
+export const logout = createAsyncThunk('profile/logout', async (_, { dispatch }) => {
+  dispatch(clearProfileData());
 });
 
 const initialState = {
@@ -30,6 +34,9 @@ const profileSlice = createSlice({
     setToken: (state, action) => {
       state.token = action.payload;
     },
+    clearProfileData: (state, action) => {
+      state.data = null
+    }
   },
   extraReducers: (builder) => {
     builder
@@ -48,7 +55,7 @@ const profileSlice = createSlice({
   },
 });
 
-export const { setCountry } = profileSlice.actions;
+export const { setCountry, clearProfileData } = profileSlice.actions;
 export const selectProfileData = (state: RootState) => state.profile.data;
 export const selectProfileStatus = (state: RootState) => state.profile.status;
 export const selectProfileCountry = (state: RootState) => state.profile.country;

@@ -23,7 +23,7 @@ const Accordion = ({ child, title }: Props) => {
         ) : (
           <AiOutlinePlus className={styles.toggleIcon} />
         )}
-        {title}
+        <h6>{title}</h6>
       </div>
       <div className={`${styles.AccordionContent} ${isAccordionExpanded ? styles.show : styles.hide}`}>
         {isInitialRender ? <>{child} </> : null}

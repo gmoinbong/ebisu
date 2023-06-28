@@ -13,7 +13,7 @@ type Props = {
   setIsSearchVisible: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const SearchComponent = ({ isSearchVisible, setIsSearchVisible }: Props) => {
+const Search = ({ isSearchVisible, setIsSearchVisible }: Props) => {
   const [inputValue, setInputValue] = useState('');
   const searchedProducts = useSelector((state: RootState) => state.searchProducts.searchedProducts);
   const dispatch = useDispatch();
@@ -21,7 +21,7 @@ const SearchComponent = ({ isSearchVisible, setIsSearchVisible }: Props) => {
   const debouncedSearch = useCallback(
     debounce((value: string) => {
       dispatch(searchProducts({ search: value }));
-    }, 700),
+    }, 500),
     []
   );
 
@@ -79,4 +79,4 @@ const SearchComponent = ({ isSearchVisible, setIsSearchVisible }: Props) => {
   );
 };
 
-export default SearchComponent;
+export default Search;

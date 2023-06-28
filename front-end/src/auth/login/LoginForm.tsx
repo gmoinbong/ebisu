@@ -1,17 +1,22 @@
 import React, { useState } from 'react';
 import * as Yup from 'yup';
 import Button from '../../components/layout/Button';
+import { selectAuthData, selectIsAuth } from '../../redux/slices/authSlice';
+import { useRouteChange } from '../../hooks/useRouteChange';
+import { useDispatch, useSelector } from 'react-redux';
 
 interface LoginFormProps {
   onSubmit: (email: string, password: string) => void;
 }
 
 const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
+  const dispatch = useDispatch()
+  const isAuth = useSelector(selectIsAuth);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
-
+  const routChange = useRouteChange()
   const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
   };
@@ -33,6 +38,9 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
     try {
       await schema.validate({ email, password }, { abortEarly: false });
       onSubmit(email, password);
+      if (isAuth === true) {
+        return routChange('/account')
+      }
     } catch (error) {
       if (error.name === 'ValidationError') {
         const validationErrors: { [key: string]: string } = {};

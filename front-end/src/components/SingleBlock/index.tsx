@@ -1,5 +1,5 @@
 import React from "react";
-import { collectionProps } from "../collection-block";
+import { collectionProps } from "../CollectionBlock";
 import styles from './SingleBlock.module.css'
 import Button from "../layout/Button";
 import { useRouteChange } from "../../hooks/useRouteChange";
