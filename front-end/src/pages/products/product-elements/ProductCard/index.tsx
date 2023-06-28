@@ -33,11 +33,11 @@ function ProductCard({ isOpenFilter }: Props) {
     return <LoaderGif />;
   }
 
-  const handleSizeSelect = (size: string) => {
-    setSelectedSize(size);
+  const handleSizeSelect = (itemSize: string) => {
+    setSelectedSize(itemSize);
     const product = renderProducts[menuOpenIndex];
-    if (size === 'one-size' || product.size.includes(size)) {
-      handleCartAdd(menuOpenIndex, product, size);
+    if (itemSize === 'one-size' || product.size.includes(itemSize)) {
+      handleCartAdd(menuOpenIndex, product, itemSize);
     }
   };
 

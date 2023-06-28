@@ -13,40 +13,39 @@ import { useRouteChange } from '../../hooks/useRouteChange';
 
 import styles from './Product.module.css';
 import SizeSelect from './product-elements/size-select';
+import { useState } from 'react';
 
 const SingleProductPage = () => {
   const { id } = useParams();
+  const [selectedSize, setSelectedSize] = useState('');
   const product = useFetchProduct(id);
   const dispatch = useDispatch();
-  const routeChange = useRouteChange()
+  const routeChange = useRouteChange();
 
   const handleClickToHome = () => {
-    routeChange('/')
-  }
+    routeChange('/');
+  };
 
   if (product?.length === 0 || product === null) {
     return <LoaderGif />;
   }
 
-  const handleCartAdd = () => {
+  const handleCartAdd = (size: string) => {
     dispatch(
       addToCart({
         name: product[0].name,
         url: product[0].url,
-        size: product[0].size,
+        size: size,
         color: product[0].color,
         quantity: 1,
-        price: product[0].price
+        price: product[0].price,
       })
     );
   };
 
 
-  const { collection, price,
-    name, category,
-    gender, color,
-    size, url, images
-  } = product[0];
+
+  const { collection, price, name, category, gender, color, size, url, images } = product[0];
 
   return (
     <>
@@ -55,10 +54,15 @@ const SingleProductPage = () => {
         <div className={styles.wrapper}>
           <div className={styles.imageContainer}>
             <ProductSlider maxWidth={'500px'} width={'100%'}>
-              <ProductSliderItem><img className={styles.image} alt="product" src={url} /></ProductSliderItem>
-              {images && images.map((image, index) =>
-                < ProductSliderItem key={index} > <img className={styles.image} alt="product" src={image} /></ProductSliderItem>
-              )}
+              <ProductSliderItem>
+                <img className={styles.image} alt="product" src={url} />
+              </ProductSliderItem>
+              {images &&
+                images.map((image, index) => (
+                  <ProductSliderItem key={index}>
+                    <img className={styles.image} alt="product" src={image} />
+                  </ProductSliderItem>
+                ))}
             </ProductSlider>
           </div>
           <div className={styles.detailsContainer}>
@@ -68,25 +72,29 @@ const SingleProductPage = () => {
               <p className={styles.price}>$ {price}</p>
             </div>
             <p className={styles.color}>{color} COLOR</p>
-            <SizeSelect />
-            <Button maxWidth={'120px'}
+            <SizeSelect selectedSize={selectedSize} setSelectedSize={setSelectedSize} size={size} product={product[0]} />
+            <Button
+              maxWidth={'120px'}
               width={'100%'}
-              margin={' 10px 0  10px 0 '}
+              margin={' 10px 0 10px 0 '}
               className={styles.addButton}
               text="Add to Cart"
-              onClick={handleCartAdd} />
-            <Accordion title='RETURN POLICY' child={<ReturnPolicy />} />
-            <Accordion title='PRODUCT DETAILS' child={<Descrpition category={category} gender={gender} />} />
+              onClick={() => handleCartAdd(selectedSize)}
+            />
+            <Accordion title="RETURN POLICY" child={<ReturnPolicy />} />
+            <Accordion title="PRODUCT DETAILS" child={<Descrpition category={category} gender={gender} />} />
           </div>
         </div>
-        <Button onClick={handleClickToHome}
+        <Button
+          onClick={handleClickToHome}
           maxWidth={'200px'}
           width={'100%'}
           margin={'15px auto '}
           className={styles.addButton}
           text="BACK TO HOME"
-          backgroundColor={'#000'} />
-      </div >
+          backgroundColor={'#000'}
+        />
+      </div>
     </>
   );
 };

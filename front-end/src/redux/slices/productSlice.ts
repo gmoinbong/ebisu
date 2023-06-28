@@ -17,7 +17,7 @@ export interface Product {
   category: string;
   gender: string;
   color: string;
-  size: string;
+  size: string[];
   url: string;
   id?: any;
   quantity?: number,

@@ -2,32 +2,44 @@ import { useState } from 'react';
 import { FiChevronDown } from 'react-icons/fi';
 import styles from './SizeSelect.module.css';
 import { availableSizes } from '../../../../data/availableSizesData';
+import { Product } from '../../../../redux/slices/productSlice';
 
+type Props = {
+  size: string[];
+  product: Product;
+  setSelectedSize: React.Dispatch<React.SetStateAction<string>>
+  selectedSize: string
+};
 
-const SizeSelect = () => {
+const SizeSelect = ({ size, setSelectedSize, selectedSize }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedSize, setSelectedSize] = useState('CHOOSE SIZE');
 
   const handleToggle = () => {
     setIsOpen(!isOpen);
   };
 
-  const handleSizeSelect = (size: string) => {
+  const handleSizeClick = (size: string) => {
     setSelectedSize(size);
     setIsOpen(false);
   };
 
   return (
-    <div className={styles.wrapper} >
+    <div className={styles.wrapper}>
       <div className={styles.selectContainer} onClick={handleToggle}>
         <span className={styles.selectValue}>{selectedSize || 'CHOOSE SIZE'}</span>
         <FiChevronDown className={styles.selectArrow} />
       </div>
       {isOpen && (
         <ul className={`${styles.optionsContainer} ${styles.showOptions}`}>
-          {availableSizes.map((size) => (
-            <li key={size} className={styles.option} onClick={() => handleSizeSelect(size)}>
-              {size}
+          {availableSizes.map((itemSize) => (
+            <li
+              key={itemSize}
+              className={`${styles.option} ${!size.includes(itemSize) ? styles.outOfStock : ''}`}
+              onClick={() => handleSizeClick(itemSize)}
+            >
+              <p>
+                {itemSize} {size.includes(itemSize) ? '' : '(Out of stock)'}
+              </p>
             </li>
           ))}
         </ul>
