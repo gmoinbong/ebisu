@@ -12,17 +12,17 @@ const loadAuthFromStorage = () => {
       ...parsedAuthData,
       logout: () => {
         localStorage.removeItem('authData');
-        dispatch(clearAuthData());
+        dispatch(clearAuthData(null));
       },
     };
   }
   return null;
 };
 
-export const logout = createAsyncThunk('auth/logout', async (_, { dispatch }) => {
+export const logout = () => async (dispatch) => {
   localStorage.removeItem('authData');
   dispatch(clearAuthData());
-});
+};
 
 
 const saveAuthToStorage = (authData) => {

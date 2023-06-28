@@ -1,25 +1,56 @@
-import styles from './Cart.module.css'
+import styles from './Cart.module.css';
 
+import { debounce } from 'lodash';
+import { useEffect } from 'react';
 import { AiOutlineClose } from 'react-icons/ai';
+import { useSelector } from 'react-redux';
 import { RootState } from '../../app/store';
 import Button from '../layout/Button';
-import { useSelector } from 'react-redux';
 import { CartItem } from '../../redux/slices/cartSlice';
 import useCartLogic from './cartLogic';
 import QuantitySelect from './QuantitySelect';
+import { Link } from 'react-router-dom';
 
 type Props = {
   isVisible: boolean;
   setIsVisible: React.Dispatch<React.SetStateAction<boolean>>;
-}
+};
 
 const Cart = ({ isVisible, setIsVisible }: Props) => {
-  const { handleClick, handleRemoveClick, handleQuantityChange, calculateTotal } = useCartLogic(isVisible, setIsVisible);
-
   const cartItems: CartItem[] = useSelector((state: RootState) => state.cartItems);
+
+  const { handleClick, handleRemoveClick, handleQuantityChange, calculateTotal, handleCheckoutCart, showSuccessNotification, setShowSuccessNotification } = useCartLogic(
+    isVisible,
+    setIsVisible,
+  );
+
+  const onClose = () => {
+    undefined
+  };
+
+  useEffect(() => {
+    if (showSuccessNotification) {
+      const timer = setTimeout(() => {
+        setShowSuccessNotification(false);
+        onClose();
+      }, 3000);
+
+      return () => {
+        setIsVisible(!isVisible)
+        clearTimeout(timer);
+      };
+    }
+  }, [showSuccessNotification, onClose]);
+
+  const debouncedClose = debounce(onClose, 500);
+
+  const handleCheckoutCartWithNotification = () => {
+    handleCheckoutCart();
+  };
 
   return (
     <div className={`${styles.cart} ${isVisible ? styles.cartVisible : ''} ${isVisible ? styles.darkOverlay : ''}`}>
+
       <div className={styles.cartBlock}>
         <div className={styles.heading}>
           <h3>Shopping basket</h3>
@@ -30,9 +61,16 @@ const Cart = ({ isVisible, setIsVisible }: Props) => {
           <p></p>
           <img src="" alt="" />
         </div>
-        <div className={styles.blockWrapper}>
-          {cartItems.length === 0 ? (
-            <p className={styles.emptyCartMessage}>You have no items in your shopping cart.</p>
+        <div className={styles.blockWrapper} style={showSuccessNotification ? { justifyContent: 'flex-start', marginTop: '10px', alignItems: 'center' } : { display: 'flex' }}>
+          {cartItems.length === 0 ? (showSuccessNotification ? (
+            <div className={styles.successNotification} onClick={onClose}>
+              <p>Purchase was successful!</p>
+              <Link to="/account" className={styles.accountLink}>
+                Go to Account
+              </Link>
+            </div>)
+            : < p className={styles.emptyCartMessage}>You have no items in your shopping cart.</p>
+
           ) : (
             <>
               <ul className={styles.product}>
@@ -61,13 +99,13 @@ const Cart = ({ isVisible, setIsVisible }: Props) => {
                 <p>
                   Grand Total: $ <span>{calculateTotal()}</span>
                 </p>
-                <Button text='CHECKOUT NOW' backgroundColor="#000 " width="100%" />
+                <Button onClick={handleCheckoutCartWithNotification} text='CHECKOUT NOW' backgroundColor="#000" width="100%" />
               </div>
             </>
           )}
         </div>
       </div>
-    </div>
+    </div >
   );
 };
 

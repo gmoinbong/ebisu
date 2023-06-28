@@ -2,6 +2,31 @@
   border-bottom: 1px solid gray;
 }
 
+.successNotification {
+  justify-content: flex-start;
+  background-color: green;
+  color: white;
+  padding: 10px;
+  border-radius: 4px;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+}
+
+.successNotification p {
+  margin: 0;
+}
+
+
+.successNotification a {
+  color: white;
+  text-decoration: underline;
+  display: block;
+  margin-left: 10px;
+}
+
 .cartBlock {
   color: black;
   background-color: white;

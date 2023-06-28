@@ -1,16 +1,33 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../app/store';
-import { CartItem, removeFromCart, updateCart } from '../../redux/slices/cartSlice';
+import { CartItem, clearCart, removeFromCart, updateCart } from '../../redux/slices/cartSlice';
 import styles from './Cart.module.css'
+import { selectIsAuth } from '../../redux/slices/authSlice';
+import { useRouteChange } from '../../hooks/useRouteChange';
 
 const useCartLogic = (isVisible: boolean, setIsVisible: React.Dispatch<React.SetStateAction<boolean>>) => {
+  const routeChange = useRouteChange()
+  const [showSuccessNotification, setShowSuccessNotification] = useState(false);
+
+  const isAuth = useSelector(selectIsAuth);
   const dispatch = useDispatch();
   const cartItems: CartItem[] = useSelector((state: RootState) => state.cartItems);
 
   const handleClick = () => {
     setIsVisible(!isVisible);
   };
+
+  const handleCheckoutCart = () => {
+    if (isAuth === true) {
+      dispatch(clearCart())
+      setShowSuccessNotification(!showSuccessNotification);
+    }
+    else {
+      setIsVisible(false)
+      return routeChange('/login')
+    }
+  }
 
   const handleRemoveClick = (item: string) => {
     dispatch(removeFromCart(item));
@@ -45,6 +62,9 @@ const useCartLogic = (isVisible: boolean, setIsVisible: React.Dispatch<React.Set
     handleRemoveClick,
     handleQuantityChange,
     calculateTotal,
+    handleCheckoutCart,
+    showSuccessNotification,
+    setShowSuccessNotification
   };
 };
 

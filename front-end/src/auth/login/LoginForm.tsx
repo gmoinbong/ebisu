@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import * as Yup from 'yup';
 import Button from '../../components/layout/Button';
-import { selectAuthData, selectIsAuth } from '../../redux/slices/authSlice';
+import { selectIsAuth } from '../../redux/slices/authSlice';
 import { useRouteChange } from '../../hooks/useRouteChange';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -10,13 +10,13 @@ interface LoginFormProps {
 }
 
 const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
-  const dispatch = useDispatch()
+  const routChange = useRouteChange()
   const isAuth = useSelector(selectIsAuth);
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
-  const routChange = useRouteChange()
   const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
   };
