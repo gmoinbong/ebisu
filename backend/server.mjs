@@ -6,7 +6,7 @@ import clothesRoutes from './routes/clothes.mjs'
 import { loginValidation, registerValidation } from './validation/validation.js';
 import checkAuth from './validation/checkAuth.js'
 import handleValidationErrors from './validation/handleValidationErrors.js';
-import { getMe, login, register } from './controllers/UserController.js';
+import { getMe, login, register } from './controllers/UserController.mjs';
 
 const app = express();
 const port = process.env.PORT || 5172;
