@@ -7,7 +7,7 @@ import { collectionOptions, categoryOptions, genderOptions, sizeOptions, colorOp
 import { FilterOptions, fetchFilteredProducts } from '../../redux/thunks/filterThunk';
 import { ThunkDispatch } from '@reduxjs/toolkit';
 import { setSelectedOptions } from '../../redux/slices/filterSilce';
-import { Filter } from '../filter/index';
+import { Filter } from './index';
 
 type Props = {
   isFilterOpen: boolean;

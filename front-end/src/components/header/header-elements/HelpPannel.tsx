@@ -4,7 +4,7 @@ import { CiSearch } from 'react-icons/ci'
 import styles from '../Header.module.css'
 import { useState } from 'react'
 import Dropdown from './Dropdown'
-import Cart from '../../Cart'
+import Cart from '../../cart'
 import { CountryPannel } from './countryPannel'
 import useIsMobile from '../../../utils/useIsMobile'
 

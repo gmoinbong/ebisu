@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
-import Login from "../auth/Login/index";
-import Register from "../auth/Register";
-import Footer from "../components/Footer";
+import Login from "../auth/login";
+import Register from "../auth/register";
+import Footer from "../components/footer";
 import Header from "../components/header";
 import MainPage from "../pages/MainPage";
 import NotFoundPage from "../pages/NotFoundPage";
