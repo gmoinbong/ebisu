@@ -2,10 +2,10 @@
   "name": "ebisu",
   "version": "1.0.0",
   "description": "",
-  "main": "server.mjs",
+  "main": "./backend/server.mjs",
   "type": "module",
   "scripts": {
-    "start": "node server.mjs",
+    "start": "cd ./backend && node server.mjs",
     "build": "echo \"No build step required for backend.\""
   },
   "keywords": [],
