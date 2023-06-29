@@ -1,14 +1,14 @@
-import Header from '../components/header';
-import MainPage from '../pages/MainPage';
-import Footer from '../components/Footer';
-import { Route, Routes } from 'react-router-dom';
-import ProductPage from '../pages/products';
-import Login from '../auth/Login';
-import Register from '../auth/Register';
-import SingleProductPage from '../pages/products/SingleProductPage';
-import ScrollToTop from '../utils/ScrollTop';
-import ProfilePage from '../pages/ProfilePage';
-import NotFoundPage from '../pages/NotFoundPage';
+import { Routes, Route } from "react-router-dom";
+import Login from "../auth/Login";
+import Register from "../auth/Register";
+import Footer from "../components/Footer";
+import Header from "../components/header";
+import MainPage from "../pages/MainPage";
+import NotFoundPage from "../pages/NotFoundPage";
+import ProfilePage from "../pages/ProfilePage";
+import ProductPage from "../pages/products";
+import SingleProductPage from "../pages/products/SingleProductPage";
+import ScrollToTop from "../utils/ScrollTop";
 
 
 

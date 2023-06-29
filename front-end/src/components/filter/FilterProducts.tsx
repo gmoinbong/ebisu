@@ -3,11 +3,11 @@ import { FiChevronDown, FiChevronRight } from 'react-icons/fi';
 import styles from './Filter.module.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../app/store';
-import { Filter } from '.';
 import { collectionOptions, categoryOptions, genderOptions, sizeOptions, colorOptions } from '../../data/filterOptions';
 import { FilterOptions, fetchFilteredProducts } from '../../redux/thunks/filterThunk';
 import { ThunkDispatch } from '@reduxjs/toolkit';
 import { setSelectedOptions } from '../../redux/slices/filterSilce';
+import { Filter } from '../filter/index';
 
 type Props = {
   isFilterOpen: boolean;

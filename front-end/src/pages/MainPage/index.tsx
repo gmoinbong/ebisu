@@ -1,4 +1,4 @@
-import Slider, { SliderItem } from "../../components/Slider"
+import Slider, { SliderItem } from "../../components/slider"
 import sliderItem from '../../assets/main-slider.jpg'
 import sliderItem2 from '../../assets/slider-item2.jpg'
 import CollectionBlock from "../../components/CollectionBlock"

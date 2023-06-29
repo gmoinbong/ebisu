@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import Button from '../../../../components/layout/Button';
+import Button from '../../../../components/layout/button';
 import LoaderGif from '../../../../components/layout/loaderGif';
 import styles from './ProductCard.module.css';
 import { availableSizes } from '../../../../data/availableSizesData';

@@ -3,7 +3,7 @@ import { BurgerMenu } from './header-elements/BurgerMenu';
 import { BsX } from 'react-icons/bs';
 
 import styles from './Header.module.css';
-import Search from '../Search';
+import Search from '../search';
 import HeaderLinks from './header-elements/HeaderLinks';
 import HelpPannel from './header-elements/HelpPannel';
 import MobileLinks from './header-elements/MobileLinks';

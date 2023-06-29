@@ -2,7 +2,7 @@ import React, { useEffect, useState, ChangeEvent, FormEvent } from 'react';
 import * as yup from 'yup';
 import styles from './Profile.module.css';
 
-import Button from '../../components/layout/Button';
+import Button from '../../components/layout/button';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../app/store';
 import { clearAuthData, initializeAuthData } from '../../redux/slices/authSlice';

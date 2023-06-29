@@ -1,7 +1,7 @@
 import React from "react";
 import { collectionProps } from "../CollectionBlock";
 import styles from './SingleBlock.module.css'
-import Button from "../layout/Button";
+import Button from "../layout/button";
 import { useRouteChange } from "../../hooks/useRouteChange";
 
 export type NewComponentProps = Omit<collectionProps, "image2" | "button2Text">

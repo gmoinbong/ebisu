@@ -1,12 +1,11 @@
+import { RefObject, useRef } from 'react';
 import styles from './Footer.module.css'
+import { AiOutlineWeibo, AiOutlineYoutube } from 'react-icons/ai';
+import { BsInstagram } from 'react-icons/bs';
+import { FiFacebook } from 'react-icons/fi';
+import Button from '../layout/button';
+import FooterBlocks from './FooterBlocks';
 
-import FooterBlocks from "./FooterBlocks"
-import { BsInstagram } from 'react-icons/bs'
-import { FiFacebook } from 'react-icons/fi'
-import { AiOutlineWeibo, AiOutlineYoutube } from 'react-icons/ai'
-import Button from '../layout/Button'
-import { useRef } from 'react'
-import { RefObject } from 'react';
 
 const Footer = () => {
   const emailRef: RefObject<HTMLInputElement> = useRef<HTMLInputElement>(null);

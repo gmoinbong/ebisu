@@ -2,13 +2,13 @@ import { useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { useFetchProduct } from '../../hooks/useFetchProduct';
 import { addToCart } from '../../redux/slices/cartSlice';
-import Button from '../../components/layout/Button';
+import Button from '../../components/layout/button';
 import PagesInformer from '../../components/pages-informer';
 import LoaderGif from '../../components/layout/loaderGif';
 import Accordion from './product-elements/Accordion';
 import { ReturnPolicy } from './product-elements/ReturnPolicy';
 import Descrpition from './product-elements/Descrpition';
-import ProductSlider, { ProductSliderItem } from '../../components/Slider/ProductSlider';
+import ProductSlider, { ProductSliderItem } from '../../components/slider/ProductSlider';
 import { useRouteChange } from '../../hooks/useRouteChange';
 
 import styles from './Product.module.css';
