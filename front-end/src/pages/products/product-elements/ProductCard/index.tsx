@@ -34,12 +34,14 @@ function ProductCard({ isOpenFilter }: Props) {
   }
 
   const handleSizeSelect = (itemSize: string) => {
+    selectedSize
     setSelectedSize(itemSize);
     const product = renderProducts[menuOpenIndex];
     if (itemSize === 'one-size' || product.size.includes(itemSize)) {
-      handleCartAdd(menuOpenIndex, product, itemSize);
+      (handleCartAdd as any)(menuOpenIndex, product, itemSize);
     }
   };
+
 
   return (
     <>

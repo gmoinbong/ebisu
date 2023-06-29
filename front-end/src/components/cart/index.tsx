@@ -78,7 +78,7 @@ const Cart = ({ isVisible, setIsVisible }: Props) => {
                       <div className={styles.itemName}>
                         <p className={styles.name}>{item.name}</p>
                         <AiOutlineClose
-                          onClick={() => handleRemoveClick(item.id)}
+                          onClick={() => handleRemoveClick(item.id as any)}
                           className={styles.closeIcon}
                         />
                       </div>

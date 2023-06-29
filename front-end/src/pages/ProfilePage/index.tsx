@@ -80,6 +80,7 @@ const ProfilePage: React.FC = () => {
 
   const handleLastNameChange = (e: ChangeEvent<HTMLInputElement>) => {
     setLastName(e.target.value);
+    setFirstName('')
   };
 
   const handleAddressChange = (e: ChangeEvent<HTMLInputElement>) => {

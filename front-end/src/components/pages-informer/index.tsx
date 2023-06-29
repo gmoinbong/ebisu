@@ -6,7 +6,7 @@ import styles from './PagesInformer.module.css';
 
 const PagesInformer = () => {
   const location = useLocation();
-  const breadCrumbs = breadCrumbUtils(location);
+  const breadCrumbs = breadCrumbUtils(location as any);
 
   return (
     <div className={styles.wrapper}>

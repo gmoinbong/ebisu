@@ -2,15 +2,22 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { RootState } from '../../app/store';
 
-export const fetchProfile = createAsyncThunk('profile/fetchProfile', async (_, { getState }) => {
-  const token = (getState() as RootState).auth.token;
-  const response = await axios.get('http://localhost:5172/api/me', {
-    headers: {
-      authorization: `Bearer ${token}`,
-    },
-  });
-  return response.data; ``
-});
+interface FetchProfileArgs {
+  token: string;
+}
+
+export const fetchProfile = createAsyncThunk<any, FetchProfileArgs>(
+  'profile/fetchProfile',
+  async (_, { getState }) => {
+    const token = (getState() as RootState).auth.token;
+    const response = await axios.get('http://localhost:5172/api/me', {
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    });
+    return response.data;
+  }
+);
 
 export const logout = createAsyncThunk('profile/logout', async (_, { dispatch }) => {
   dispatch(clearProfileData());
@@ -21,7 +28,7 @@ const initialState = {
   status: 'idle',
   error: '',
   country: 'Ukraine',
-  token: null
+  token: null as string | null,
 };
 
 const profileSlice = createSlice({

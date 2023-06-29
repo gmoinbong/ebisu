@@ -6,13 +6,16 @@ import { FiFacebook } from 'react-icons/fi'
 import { AiOutlineWeibo, AiOutlineYoutube } from 'react-icons/ai'
 import Button from '../layout/Button'
 import { useRef } from 'react'
+import { RefObject } from 'react';
 
 const Footer = () => {
-  const emailRef = useRef(null);
-
+  const emailRef: RefObject<HTMLInputElement> = useRef<HTMLInputElement>(null);
   const handleSubscribeClick = () => {
-    emailRef.current.value = '';
+    if (emailRef && emailRef.current) {
+      (emailRef.current.value) = '';
+    }
   };
+
 
   return (
     <>

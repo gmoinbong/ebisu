@@ -41,14 +41,14 @@ const useCartLogic = (isVisible: boolean, setIsVisible: React.Dispatch<React.Set
     let total = 0;
     cartItems.forEach((item) => {
       const itemQuantity = item.quantity || 1;
-      total += parseFloat(item.price) * itemQuantity;
+      total += parseFloat(item.price as any) * itemQuantity;
     });
     return total.toFixed(2);
   };
 
   useEffect(() => {
     document.body.style.overflow = isVisible ? 'hidden' : 'auto';
-    const cartElement = document.querySelector(`.${styles.cart}`);
+    const cartElement = document.querySelector(`.${styles.cart}`) as HTMLElement | null;
     if (cartElement) {
       cartElement.style.overflow = isVisible ? 'auto' : 'hidden';
     }
@@ -56,6 +56,7 @@ const useCartLogic = (isVisible: boolean, setIsVisible: React.Dispatch<React.Set
       document.body.style.overflow = 'auto';
     };
   }, [isVisible]);
+
 
   return {
     handleClick,
