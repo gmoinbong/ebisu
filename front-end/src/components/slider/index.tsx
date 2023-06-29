@@ -71,7 +71,7 @@ const Slider = ({ children }: Props) => {
         className="inner"
         style={{ transform: `translateX(-${activeIndex * 100}%)` }}
       >
-        {React.Children.map(children, (child: any, index) => {
+        {React.Children.map(children, (child: any) => {
           if (child) {
             return React.cloneElement(child, { width: "100%" });
           }

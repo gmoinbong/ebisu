@@ -1,23 +1,22 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FiChevronDown, FiChevronRight } from 'react-icons/fi';
-
 import styles from './Filter.module.css';
-import { useSelector } from 'react-redux/es/hooks/useSelector';
-import { useDispatch } from 'react-redux';
-import { Filter } from '.';
+import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../app/store';
+import { Filter } from '.';
 import { collectionOptions, categoryOptions, genderOptions, sizeOptions, colorOptions } from '../../data/filterOptions';
+import { FilterOptions, fetchFilteredProducts } from '../../redux/thunks/filterThunk';
+import { ThunkDispatch } from '@reduxjs/toolkit';
 import { setSelectedOptions } from '../../redux/slices/filterSilce';
-import { fetchFilteredProducts } from '../../redux/thunks/filterThunk';
 
 type Props = {
   isFilterOpen: boolean;
-  setFilter: React.Dispatch<React.SetStateAction<boolean>>
-}
+  setFilter: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
 type UpdatedOptions = {
   [key: string]: string[];
-}
-
+};
 type SelectedOptions = {
   Collection?: string[];
   Size?: string[];
@@ -27,9 +26,8 @@ type SelectedOptions = {
 }
 
 const FilterProducts: React.FC<Props> = ({ isFilterOpen, setFilter }: Props) => {
-  const dispatch = useDispatch()
-  const selectedOptions: SelectedOptions = useSelector((state: RootState) => state.filter.selectedOptions)
-
+  const dispatch: ThunkDispatch<RootState, unknown, any> = useDispatch();
+  const selectedOptions: SelectedOptions = useSelector((state: RootState) => state.filter.selectedOptions);
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -62,17 +60,18 @@ const FilterProducts: React.FC<Props> = ({ isFilterOpen, setFilter }: Props) => 
         delete updatedOptions[key];
       }
     });
+
     dispatch(setSelectedOptions(updatedOptions));
   };
 
   useEffect(() => {
-    dispatch(fetchFilteredProducts(selectedOptions));
+    dispatch(fetchFilteredProducts(selectedOptions as FilterOptions));
   }, [dispatch, selectedOptions]);
 
   return (
     <div className={`${styles.wrapper} ${isFilterOpen === true ? styles.filterProductsOpened : ''}`}>
       <div className={`${styles.title} ${isOpen ? styles.opened : ''}`}>
-        <p onClick={handleClick} className={`${styles.filterTitle}  ${isFilterOpen ? styles.filterOpened : ''}`}>
+        <p onClick={handleClick} className={`${styles.filterTitle} ${isFilterOpen ? styles.filterOpened : ''}`}>
           FILTER
         </p>
         {isOpen ? (
@@ -81,99 +80,71 @@ const FilterProducts: React.FC<Props> = ({ isFilterOpen, setFilter }: Props) => 
           <FiChevronRight onClick={handleClick} className={styles.filterIcon} />
         )}
       </div>
-      {
-        isFilterOpen && (
-          <>
-            <Filter
-              title="Collection"
-              options={collectionOptions.map((option, index) => {
-                const isSelected = selectedOptions["Collection"] && selectedOptions["Collection"].includes(option);
-                return (
-                  <label key={`collection-${index}`} className={styles.filterOption}>
-                    <input
-                      onClick={() => handelChangeOptions("collection", option)}
-                      type="checkbox"
-                      className={styles.checkbox}
-                      checked={isSelected}
-                    />
-                    {option}
-                  </label>
-                );
-              })}
-            />
-            <Filter
-              title="Categories"
-              options={categoryOptions.map((option, index) => {
-                const isSelected = selectedOptions["Categories"] && selectedOptions["Categories"].includes(option);
-                return (
-                  <label key={`categories-${index}`} className={styles.filterOption}>
-                    <input
-                      onClick={() => handelChangeOptions("category", option)}
-                      type="checkbox"
-                      className={styles.checkbox}
-                      checked={isSelected}
-                    />
-                    {option}
-                  </label>
-                )
-              })}
-            />
-            <Filter
-              title="Gender"
-              options={genderOptions.map((option, index) => {
-                const isSelected = selectedOptions["Gender"] && selectedOptions["Gender"].includes(option);
-                return (
-                  <label key={`gender-${index}`} className={styles.filterOption}>
-                    <input
-                      onClick={() => handelChangeOptions("gender", option)}
-                      type="checkbox"
-                      className={styles.checkbox}
-                      checked={isSelected}
-                    />
-                    {option}
-                  </label>
-                )
-              })}
-            />
-            <Filter
-              title="Size"
-              options={sizeOptions.map((option, index) => {
-                const isSelected = selectedOptions["Size"] && selectedOptions["Size"].includes(option);
-                return (
-                  <label key={`size-${index}`} className={styles.filterOption}>
-                    <input
-                      onClick={() => handelChangeOptions("size", option)}
-                      type="checkbox"
-                      className={styles.checkbox}
-                      checked={isSelected}
-
-                    />
-                    {option}
-                  </label>
-                )
-              })}
-            />
-            <Filter
-              title="Color"
-              options={colorOptions.map((option, index) => {
-                const isSelected = selectedOptions["Color"] && selectedOptions["Color"].includes(option);
-                return (
-                  <label key={`color-${index}`} className={styles.filterOption}>
-                    <input
-                      onClick={() => handelChangeOptions("color", option)}
-                      type="checkbox"
-                      className={styles.checkbox}
-                      checked={isSelected}
-                    />
-                    {option}
-                  </label>
-                );
-              })}
-            />
-          </>
-        )
-      }
-    </div >
+      {isFilterOpen && (
+        <>
+          <Filter
+            title="Collection"
+            options={collectionOptions.map((option: string) => {
+              const isSelected = selectedOptions.Collection && selectedOptions.Collection.includes(option);
+              return {
+                label: option,
+                value: option,
+                selected: isSelected,
+                onChange: () => handelChangeOptions('collection', option.toString())
+              };
+            })}
+          />
+          <Filter
+            title="Categories"
+            options={categoryOptions.map((option) => {
+              const isSelected = selectedOptions.Categories && selectedOptions.Categories.includes(option);
+              return {
+                label: option,
+                value: option,
+                selected: isSelected,
+                onChange: () => handelChangeOptions('Categories', option)
+              };
+            })}
+          />
+          <Filter
+            title="Gender"
+            options={genderOptions.map((option) => {
+              const isSelected = selectedOptions.Gender && selectedOptions.Gender.includes(option);
+              return {
+                label: option,
+                value: option,
+                selected: isSelected,
+                onChange: () => handelChangeOptions('gender', option)
+              };
+            })}
+          />
+          <Filter
+            title="Size"
+            options={sizeOptions.map((option) => {
+              const isSelected = selectedOptions.Size && selectedOptions.Size.includes(option);
+              return {
+                label: option,
+                value: option,
+                selected: isSelected,
+                onChange: () => handelChangeOptions('size', option)
+              };
+            })}
+          />
+          <Filter
+            title="Color"
+            options={colorOptions.map((option) => {
+              const isSelected = selectedOptions.Color && selectedOptions.Color.includes(option);
+              return {
+                label: option,
+                value: option,
+                selected: isSelected,
+                onChange: () => handelChangeOptions('color', option)
+              };
+            })}
+          />
+        </>
+      )}
+    </div>
   );
 };
 

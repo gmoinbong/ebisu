@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-type Params = {
+export type Params = {
   email: string,
   password: string
 }

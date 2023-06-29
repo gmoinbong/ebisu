@@ -7,6 +7,8 @@ import { debounce } from 'lodash';
 import { searchProducts } from '../../redux/thunks/searchThunk';
 import { RootState } from '../../app/store';
 import styles from './Search.module.css';
+import { AnyAction, AsyncThunkAction, ThunkDispatch } from '@reduxjs/toolkit';
+import { FetchProductsOptions, Product } from '../../redux/slices/productSlice';
 
 type Props = {
   isSearchVisible: boolean;
@@ -16,13 +18,13 @@ type Props = {
 const Search = ({ isSearchVisible, setIsSearchVisible }: Props) => {
   const [inputValue, setInputValue] = useState('');
   const searchedProducts = useSelector((state: RootState) => state.searchProducts.searchedProducts);
-  const dispatch = useDispatch();
+  const dispatch: ThunkDispatch<RootState, unknown, AnyAction> = useDispatch();
 
   const debouncedSearch = useCallback(
     debounce((value: string) => {
-      dispatch(searchProducts({ search: value }));
+      dispatch(searchProducts({ search: value }) as AsyncThunkAction<Product[], FetchProductsOptions, {}>);
     }, 500),
-    []
+    [dispatch]
   );
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -55,7 +57,7 @@ const Search = ({ isSearchVisible, setIsSearchVisible }: Props) => {
           {searchedProducts.length > 0 ? (
             searchedProducts.slice(0, 3).map((product) => (
               <div key={product.name} className={styles.productItem}>
-                <Link onClick={handleClick} to={`/${product.name}`}>
+                <Link onClick={handleClick} to={`/products/${product.name}`}>
                   {product.name}
                 </Link>
               </div>

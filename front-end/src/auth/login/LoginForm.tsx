@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import * as Yup from 'yup';
 import Button from '../../components/layout/Button';
+import * as Yup from 'yup';
 import { selectIsAuth } from '../../redux/slices/authSlice';
 import { useRouteChange } from '../../hooks/useRouteChange';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 interface LoginFormProps {
   onSubmit: (email: string, password: string) => void;
@@ -41,7 +41,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
       if (isAuth === true) {
         return routChange('/account')
       }
-    } catch (error) {
+    } catch (error: any) {
       if (error.name === 'ValidationError') {
         const validationErrors: { [key: string]: string } = {};
         error.inner.forEach((err: any) => {

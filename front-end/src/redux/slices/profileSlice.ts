@@ -19,7 +19,7 @@ export const logout = createAsyncThunk('profile/logout', async (_, { dispatch })
 const initialState = {
   data: null,
   status: 'idle',
-  error: null,
+  error: '',
   country: 'Ukraine',
   token: null
 };
@@ -34,7 +34,7 @@ const profileSlice = createSlice({
     setToken: (state, action) => {
       state.token = action.payload;
     },
-    clearProfileData: (state, action) => {
+    clearProfileData: (state) => {
       state.data = null
     }
   },
@@ -46,11 +46,11 @@ const profileSlice = createSlice({
       .addCase(fetchProfile.fulfilled, (state, action) => {
         state.status = 'succeeded';
         state.token = action.meta.arg.token;
+        console.log(state.token);
         state.data = action.payload;
       })
-      .addCase(fetchProfile.rejected, (state, action) => {
+      .addCase(fetchProfile.rejected, (state) => {
         state.status = 'failed';
-        state.error = action.error.message;
       });
   },
 });

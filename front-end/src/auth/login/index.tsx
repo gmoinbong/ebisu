@@ -3,11 +3,11 @@ import { useDispatch } from 'react-redux';
 import styles from './LoginContainer.module.css';
 import { Link } from 'react-router-dom';
 import useIsMobile from '../../utils/useIsMobile';
-import { fetchAuth } from '../../redux/thunks/authThunk';
+import { Params, fetchAuth } from '../../redux/thunks/authThunk';
 import LoginForm from './LoginForm';
-
+import { AnyAction, ThunkDispatch } from '@reduxjs/toolkit';
 const Login: React.FC = () => {
-  const dispatch = useDispatch();
+  const dispatch: ThunkDispatch<string, Params, AnyAction> = useDispatch();
   const isMobile = useIsMobile();
 
   const handleSubmit = async (email: string, password: string) => {

@@ -1,9 +1,11 @@
-import { createSlice, createAsyncThunk, createSelector } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, createSelector, Dispatch } from "@reduxjs/toolkit";
 import { fetchAuth } from "../thunks/authThunk";
 import { RootState } from "../../app/store";
-import { useDispatch } from "react-redux";
-const dispatch = useDispatch
 
+interface AuthData {
+  email: string
+  fullName: string
+}
 const loadAuthFromStorage = () => {
   const authData = localStorage.getItem('authData');
   if (authData) {
@@ -12,20 +14,19 @@ const loadAuthFromStorage = () => {
       ...parsedAuthData,
       logout: () => {
         localStorage.removeItem('authData');
-        dispatch(clearAuthData(null));
       },
     };
   }
   return null;
 };
 
-export const logout = () => async (dispatch) => {
+export const logout = () => async (dispatch: Dispatch) => {
   localStorage.removeItem('authData');
   dispatch(clearAuthData());
 };
 
 
-const saveAuthToStorage = (authData) => {
+const saveAuthToStorage = (authData: AuthData | null) => {
   localStorage.setItem('authData', JSON.stringify(authData));
 }
 
@@ -42,7 +43,7 @@ export const initializeAuthData = createAsyncThunk(
 );
 
 const initialState = {
-  authData: loadAuthFromStorage(),
+  authData: loadAuthFromStorage() as AuthData | null,
   status: loadAuthFromStorage() ? 'loaded' : 'loading',
   token: loadAuthFromStorage() ? loadAuthFromStorage().token : null
 };

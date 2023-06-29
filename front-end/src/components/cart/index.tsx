@@ -1,6 +1,4 @@
 import styles from './Cart.module.css';
-
-import { debounce } from 'lodash';
 import { useEffect } from 'react';
 import { AiOutlineClose } from 'react-icons/ai';
 import { useSelector } from 'react-redux';
@@ -42,7 +40,6 @@ const Cart = ({ isVisible, setIsVisible }: Props) => {
     }
   }, [showSuccessNotification, onClose]);
 
-  const debouncedClose = debounce(onClose, 500);
 
   const handleCheckoutCartWithNotification = () => {
     handleCheckoutCart();

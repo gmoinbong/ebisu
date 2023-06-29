@@ -21,6 +21,7 @@ export interface Product {
   url: string;
   id?: any;
   quantity?: number,
+  images?: string[]
 }
 
 interface ProductState {

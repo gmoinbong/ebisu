@@ -3,7 +3,6 @@ import { getClothesByFilter } from './../../utils/api';
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { RootState } from "../../app/store";
 import { Product, setFilteredProducts } from "../slices/productSlice";
-import _ from 'lodash';
 
 export type FilterOptions = {
   collection?: string;
@@ -14,7 +13,7 @@ export type FilterOptions = {
 };
 
 
-export const fetchFilteredProducts = createAsyncThunk<Product[], void, { state: RootState }>(
+export const fetchFilteredProducts = createAsyncThunk<Product[], FilterOptions, { state: RootState }>(
   'products/fetchFilteredProducts',
   async (_, { getState, dispatch }) => {
     const selectedOptions = getState().filter.selectedOptions;

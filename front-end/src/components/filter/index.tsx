@@ -1,15 +1,21 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { FiChevronDown, FiChevronRight } from 'react-icons/fi';
 import styles from './Filter.module.css';
 
-type FilterOption = string;
+
+type FilterOption = {
+  label: string;
+  value: string;
+  selected: boolean | undefined;
+  onChange: () => void;
+};
 
 type FilterProps = {
   title: string;
   options: FilterOption[];
 };
 
-export const Filter: React.FC<FilterProps> = ({ title, options }) => {
+export const Filter = ({ title, options }: FilterProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleToggle = () => {
@@ -29,8 +35,16 @@ export const Filter: React.FC<FilterProps> = ({ title, options }) => {
       {isOpen && (
         <ul className={styles.filterOptions}>
           {options.map((option, index) => (
-            <li key={option + index} className={styles.filterOption}>
-              {option}
+            <li key={option.label + index} className={styles.filterOption}>
+              <label>
+                <input
+                  type="checkbox"
+                  className={styles.checkbox}
+                  checked={option.selected}
+                  onChange={option.onChange}
+                />
+                {option.label}
+              </label>
             </li>
           ))}
         </ul>

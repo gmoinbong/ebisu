@@ -59,7 +59,7 @@ const ProductSlider = ({ children, width, maxWidth }: Props) => {
         className="inner"
         style={{ transform: `translateX(-${activeIndex * 100}%)`, width, maxWidth }}
       >
-        {React.Children.map(children, (child: any, index: number) => {
+        {React.Children.map(children, (child: any) => {
           if (child) {
             return React.cloneElement(child, { width: "100%" });
           }

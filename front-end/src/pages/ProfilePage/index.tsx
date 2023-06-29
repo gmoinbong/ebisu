@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState, ChangeEvent, FormEvent } from 'react';
 import * as yup from 'yup';
 import styles from './Profile.module.css';
 
@@ -6,33 +6,39 @@ import Button from '../../components/layout/Button';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../app/store';
 import { clearAuthData, initializeAuthData } from '../../redux/slices/authSlice';
-import { selectProfileStatus, fetchProfile } from '../../redux/slices/profileSlice';
+import { fetchProfile, selectProfileStatus } from '../../redux/slices/profileSlice';
 import { Link } from 'react-router-dom';
 import { useRouteChange } from '../../hooks/useRouteChange';
 
-const ProfilePage = () => {
+type ProfileData = {
+  email: string | null;
+  fullName: string | null;
+};
+
+
+const ProfilePage: React.FC = () => {
   const dispatch = useDispatch();
-  const profileData = useSelector((state: RootState) => state.profile.data);
+  const profileData = useSelector((state: RootState) => state.profile.data) as ProfileData | null;
   const profileStatus = useSelector(selectProfileStatus);
-  const country = useSelector((state: RootState) => state.setCountry.country)
-  const token = useSelector((state: RootState) => state.auth.token);
-  const routChange = useRouteChange()
+  const country = useSelector((state: RootState) => state.setCountry.country) as string;
+  const token = useSelector((state: RootState) => state.auth.token) as string;
+  const routChange = useRouteChange();
 
   useEffect(() => {
-    dispatch(initializeAuthData());
-    dispatch(fetchProfile({ token }));
+    dispatch((initializeAuthData()) as any);
+    dispatch(fetchProfile({ token }) as any);
   }, [dispatch, token]);
 
   useEffect(() => {
     if (profileStatus === 'loading' || profileStatus === 'error') {
-      dispatch(fetchProfile({ token }));
+      dispatch(fetchProfile({ token }) as any);
     }
   }, [profileStatus, dispatch, token]);
 
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [address, setAddress] = useState('');
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState<{ [key: string]: string }>({});
 
   const schema = yup.object().shape({
     firstName: yup.string().required('Please enter your first name'),
@@ -44,22 +50,22 @@ const ProfilePage = () => {
     address: yup.string().required('Please enter your address'),
     country: yup.string().required('Please select your country'),
   });
-  const handleSubmit = async (e) => {
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     try {
       await schema.validate({
         firstName,
         lastName,
-        email,
+        email: profileData?.email || '',
         address,
       });
-
     } catch (error) {
       if (error instanceof yup.ValidationError) {
-        const newErrors = {};
+        const newErrors: { [key: string]: string } = {};
         error.inner.forEach((err) => {
-          newErrors[err.path] = err.message;
+          newErrors[err.path as keyof ProfileData] = err.message;
         });
         setErrors(newErrors);
       }
@@ -67,20 +73,18 @@ const ProfilePage = () => {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem('authData')
+    localStorage.removeItem('authData');
     dispatch(clearAuthData());
-    routChange('/login')
+    routChange('/login');
   };
 
-  const handleLastNameChange = (e) => {
+  const handleLastNameChange = (e: ChangeEvent<HTMLInputElement>) => {
     setLastName(e.target.value);
   };
 
-  const handleAddressChange = (e) => {
+  const handleAddressChange = (e: ChangeEvent<HTMLInputElement>) => {
     setAddress(e.target.value);
   };
-
-
 
   if (profileStatus === 'loading') {
     return <div className={styles.profileContainer}>Loading...</div>;
@@ -92,14 +96,18 @@ const ProfilePage = () => {
 
   if (!profileData) {
     return (
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', textAlign: 'center' }} className={styles.profileContainer}>
+      <div className={styles.profileContainer}>
         <div className={styles.content}>
           <h2>Welcome!</h2>
           <p>Please sign up or sign in to view your profile.</p>
           <div>
-            <Link to='/login' className={styles.link}>Sign In</Link>
+            <Link to="/login" className={styles.link}>
+              Sign In
+            </Link>
             <br />
-            <Link to='/signup' className={styles.link}>Sign Up</Link>
+            <Link to="/signup" className={styles.link}>
+              Sign Up
+            </Link>
           </div>
         </div>
       </div>
@@ -111,15 +119,21 @@ const ProfilePage = () => {
       <h2 className={styles.profileTitle}>Profile</h2>
       <form className={styles.profileForm} onSubmit={handleSubmit}>
         <div className={styles.profileField}>
-          <label style={{ minHeight: '46px' }} className={styles.profileLabel} htmlFor="email">Email: </label>
+          <label style={{ minHeight: '46px' }} className={styles.profileLabel} htmlFor="email">
+            Email:
+          </label>
           <p style={{ fontWeight: '500' }}>{profileData.email}</p>
         </div>
         <div className={styles.profileField}>
-          <label style={{ minHeight: '46px' }} className={styles.profileLabel} htmlFor="email">Country: </label>
+          <label style={{ minHeight: '46px' }} className={styles.profileLabel} htmlFor="email">
+            Country:
+          </label>
           <p style={{ fontWeight: '500' }}>{country}</p>
         </div>
         <div className={styles.profileField}>
-          <label className={styles.profileLabel} htmlFor="firstName">First Name:</label>
+          <label className={styles.profileLabel} htmlFor="firstName">
+            First Name:
+          </label>
           <input
             className={styles.profileInput}
             type="text"
@@ -130,7 +144,9 @@ const ProfilePage = () => {
           {errors.firstName && <span className={styles.profileError}>{errors.firstName}</span>}
         </div>
         <div className={styles.profileField}>
-          <label className={styles.profileLabel} htmlFor="lastName">Last Name:</label>
+          <label className={styles.profileLabel} htmlFor="lastName">
+            Last Name:
+          </label>
           <input
             className={styles.profileInput}
             type="text"
@@ -142,7 +158,9 @@ const ProfilePage = () => {
           {errors.lastName && <span className={styles.profileError}>{errors.lastName}</span>}
         </div>
         <div className={styles.profileField}>
-          <label className={styles.profileLabel} htmlFor="address">Address:</label>
+          <label className={styles.profileLabel} htmlFor="address">
+            Address:
+          </label>
           <input
             className={styles.profileInput}
             type="text"
@@ -154,11 +172,18 @@ const ProfilePage = () => {
           {errors.address && <span className={styles.profileError}>{errors.address}</span>}
         </div>
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-          <Button width='100%' margin='10px' maxWidth={200} text='save' type="submit" />
-          <Button width='100%' margin='10px' onClick={handleLogout} backgroundColor='#000' maxWidth={200} text='logout' />
+          <Button width="100%" margin="10px" maxWidth={200} text="save" type="submit" />
+          <Button
+            width="100%"
+            margin="10px"
+            onClick={handleLogout}
+            backgroundColor="#000"
+            maxWidth={200}
+            text="logout"
+          />
         </div>
-      </form >
-    </div >
+      </form>
+    </div>
   );
 };
 

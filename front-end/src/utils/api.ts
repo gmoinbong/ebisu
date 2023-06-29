@@ -49,6 +49,9 @@ export const getClothesBySearch = async (search: string) => {
 }
 
 export const getClothesByFilter = async (options: FilterOptions) => {
+  if (Object.keys(options).length === 0) {
+    return [];
+  }
   try {
     const queryParams = Object.entries(options)
       .flatMap(([key, value]) => {
@@ -59,7 +62,6 @@ export const getClothesByFilter = async (options: FilterOptions) => {
       })
       .join('&');
     const query = `?${queryParams}`;
-
     const response = await instance.get(`/Clothes${query}`);
     const filteredProducts = response.data;
     return filteredProducts;

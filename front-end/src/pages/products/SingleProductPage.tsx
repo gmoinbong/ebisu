@@ -18,7 +18,7 @@ import { useState } from 'react';
 const SingleProductPage = () => {
   const { id } = useParams();
   const [selectedSize, setSelectedSize] = useState('');
-  const product = useFetchProduct(id);
+  const product = useFetchProduct(id || '');
   const dispatch = useDispatch();
   const routeChange = useRouteChange();
 
@@ -58,7 +58,7 @@ const SingleProductPage = () => {
                 <img className={styles.image} alt="product" src={url} />
               </ProductSliderItem>
               {images &&
-                images.map((image, index) => (
+                images.map((image: string, index: number) => (
                   <ProductSliderItem key={index}>
                     <img className={styles.image} alt="product" src={image} />
                   </ProductSliderItem>

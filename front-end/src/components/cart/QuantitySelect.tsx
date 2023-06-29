@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styles from './Cart.module.css';
 
 type QuantitySelectProps = {
-  id: string;
+  id?: string;
   onSelect: (id: string, quantity: number) => void;
 };
 
@@ -16,8 +16,11 @@ const QuantitySelect: React.FC<QuantitySelectProps> = ({ onSelect, id }) => {
   };
 
   const handleConfirmClick = () => {
-    onSelect(id, quantity);
-    setIsVisibleSelect(!isVisibleSelect)
+    if (id) {
+      onSelect(id, quantity);
+      setIsVisibleSelect(!isVisibleSelect)
+
+    }
   };
   const handleOpenSelect = () => {
     setIsVisibleSelect(!isVisibleSelect)
