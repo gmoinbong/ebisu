@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { FiChevronDown, FiChevronRight } from 'react-icons/fi';
-import styles from './Filter.module.css';
+import styles from '../filter/FilterProducts';
 
 
 type FilterOption = {

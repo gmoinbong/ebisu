@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { FiChevronDown, FiChevronRight } from 'react-icons/fi';
-import styles from './Filter.module.css';
+import styles from '../filter/FIlter.module.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../app/store';
 import { collectionOptions, categoryOptions, genderOptions, sizeOptions, colorOptions } from '../../data/filterOptions';
