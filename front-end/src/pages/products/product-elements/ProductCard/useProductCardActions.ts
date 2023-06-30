@@ -5,7 +5,7 @@ import { Product } from '../../../../redux/slices/productSlice';
 export function useProductCardActions() {
   const dispatch = useDispatch();
 
-  const handleCartAdd = (product: Product, size: string) => {
+  const handleCartAdd = (index: number, product: Product, size: string) => {
     dispatch(addToCart({
       price: product.price,
       color: product.color,
@@ -13,8 +13,8 @@ export function useProductCardActions() {
       size: size,
       url: product.url,
     }));
+    index
   };
-
   return {
     handleCartAdd,
   };

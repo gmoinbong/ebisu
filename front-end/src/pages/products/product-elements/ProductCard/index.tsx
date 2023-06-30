@@ -23,25 +23,23 @@ function ProductCard({ isOpenFilter }: Props) {
     handleButtonClick,
     loadMoreProducts,
   } = useProductCard();
-  const isMobile = useIsMobile()
+  const isMobile = useIsMobile();
 
   const { handleCartAdd } = useProductCardActions();
 
   const [selectedSize, setSelectedSize] = useState('');
 
-  if (renderProducts.length === 0) {
-    return <LoaderGif />;
-  }
-
   const handleSizeSelect = (itemSize: string) => {
-    selectedSize
     setSelectedSize(itemSize);
     const product = renderProducts[menuOpenIndex];
     if (itemSize === 'one-size' || product.size.includes(itemSize)) {
-      (handleCartAdd as any)(menuOpenIndex, product, itemSize);
+      handleCartAdd(menuOpenIndex, product, itemSize);
     }
   };
 
+  if (renderProducts.length === 0) {
+    return <LoaderGif />;
+  }
 
   return (
     <>
@@ -71,15 +69,22 @@ function ProductCard({ isOpenFilter }: Props) {
                 </div>
                 {menuOpenIndex === index && hoveredIndex === index && (
                   <ul className={styles.sizeList}>
-                    {product.category !== "cap" ? availableSizes.map((size) => (
-                      <li key={size}>
-                        <p
-                          onClick={() => handleSizeSelect(size)}
-                          className={!product.size.includes(size) ? styles.outOfStock : ''}>
-                          {size} {!product.size.includes(size) ? '(Out of stock)' : ''}
-                        </p>
+                    {product.category !== "cap" ? (
+                      availableSizes.map((size) => (
+                        <li key={size}>
+                          <p
+                            onClick={() => handleSizeSelect(size)}
+                            className={!product.size.includes(size) ? styles.outOfStock : ''}
+                          >
+                            {size} {!product.size.includes(size) ? '(Out of stock)' : ''}
+                          </p>
+                        </li>
+                      ))
+                    ) : (
+                      <li>
+                        <p onClick={() => handleSizeSelect('one-size')}>one-size</p>
                       </li>
-                    )) : <p onClick={() => handleSizeSelect('one-size')}>one-size</p>}
+                    )}
                   </ul>
                 )}
                 <div className={styles.wrapper}>
@@ -97,15 +102,19 @@ function ProductCard({ isOpenFilter }: Props) {
           ))
         ) : (
           <LoaderGif />
-        )
-        }
-
-      </div >
-      {
-        visibleProductsCount < renderProducts.length && (
-          <Button top='0' left={` ${isMobile ? "40%" : '45%'}`} position='relative' text="Load More" margin="30px auto 10px " backgroundColor="#000" onClick={loadMoreProducts} />
-        )
-      }
+        )}
+      </div>
+      {visibleProductsCount < renderProducts.length && (
+        <Button
+          top="0"
+          left={` ${isMobile ? '40%' : '45%'}`}
+          position="relative"
+          text="Load More"
+          margin="30px auto 10px "
+          backgroundColor="#000"
+          onClick={loadMoreProducts}
+        />
+      )}
     </>
   );
 }

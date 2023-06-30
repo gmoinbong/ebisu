@@ -17,13 +17,18 @@ type Props = {
 const Cart = ({ isVisible, setIsVisible }: Props) => {
   const cartItems: CartItem[] = useSelector((state: RootState) => state.cartItems);
 
-  const { handleClick, handleRemoveClick, handleQuantityChange, calculateTotal, handleCheckoutCart, showSuccessNotification, setShowSuccessNotification } = useCartLogic(
-    isVisible,
-    setIsVisible,
-  );
+  const {
+    handleClick,
+    handleRemoveClick,
+    handleQuantityChange,
+    calculateTotal,
+    handleCheckoutCart,
+    showSuccessNotification,
+    setShowSuccessNotification,
+  } = useCartLogic(isVisible, setIsVisible);
 
   const onClose = () => {
-    undefined
+    setIsVisible(false);
   };
 
   useEffect(() => {
@@ -34,12 +39,10 @@ const Cart = ({ isVisible, setIsVisible }: Props) => {
       }, 3000);
 
       return () => {
-        setIsVisible(!isVisible)
         clearTimeout(timer);
       };
     }
   }, [showSuccessNotification, onClose]);
-
 
   const handleCheckoutCartWithNotification = () => {
     handleCheckoutCart();
@@ -47,7 +50,6 @@ const Cart = ({ isVisible, setIsVisible }: Props) => {
 
   return (
     <div className={`${styles.cart} ${isVisible ? styles.cartVisible : ''} ${isVisible ? styles.darkOverlay : ''}`}>
-
       <div className={styles.cartBlock}>
         <div className={styles.heading}>
           <h3>Shopping basket</h3>
@@ -59,15 +61,17 @@ const Cart = ({ isVisible, setIsVisible }: Props) => {
           <img src="" alt="" />
         </div>
         <div className={styles.blockWrapper} style={showSuccessNotification ? { justifyContent: 'flex-start', marginTop: '10px', alignItems: 'center' } : { display: 'flex' }}>
-          {cartItems.length === 0 ? (showSuccessNotification ? (
-            <div className={styles.successNotification} onClick={onClose}>
-              <p>Purchase was successful!</p>
-              <Link to="/account" className={styles.accountLink}>
-                Go to Account
-              </Link>
-            </div>)
-            : < p className={styles.emptyCartMessage}>You have no items in your shopping cart.</p>
-
+          {cartItems.length === 0 ? (
+            showSuccessNotification ? (
+              <div className={styles.successNotification} onClick={onClose}>
+                <p>Purchase was successful!</p>
+                <Link to="/account" className={styles.accountLink}>
+                  Go to Account
+                </Link>
+              </div>
+            ) : (
+              <p className={styles.emptyCartMessage}>You have no items in your shopping cart.</p>
+            )
           ) : (
             <>
               <ul className={styles.product}>
@@ -77,10 +81,7 @@ const Cart = ({ isVisible, setIsVisible }: Props) => {
                     <div className={styles.wrapper}>
                       <div className={styles.itemName}>
                         <p className={styles.name}>{item.name}</p>
-                        <AiOutlineClose
-                          onClick={() => handleRemoveClick(item.id as any)}
-                          className={styles.closeIcon}
-                        />
+                        <AiOutlineClose onClick={() => handleRemoveClick(item.id as any)} className={styles.closeIcon} />
                       </div>
                       <p>
                         Size: <span className={styles.size}>{item.size} / {item.color}</span>
@@ -96,13 +97,13 @@ const Cart = ({ isVisible, setIsVisible }: Props) => {
                 <p>
                   Grand Total: $ <span>{calculateTotal()}</span>
                 </p>
-                <Button onClick={handleCheckoutCartWithNotification} text='CHECKOUT NOW' backgroundColor="#000" width="100%" />
+                <Button onClick={handleCheckoutCartWithNotification} text="CHECKOUT NOW" backgroundColor="#000" width="100%" />
               </div>
             </>
           )}
         </div>
       </div>
-    </div >
+    </div>
   );
 };
 

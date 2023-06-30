@@ -7,25 +7,35 @@ const options = {
   useUnifiedTopology: true,
 };
 
-mongoose
-  .connect(connectionString, options)
-  .then(() => {
-    console.log('MongoDB is connected');
-  })
-  .catch((err) => {
-    console.error(err);
-  });
-const client = new MongoClient(connectionString);
+let client
+let conn
+let dbProducts
 
-let conn;
-try {
-  conn = await client.connect();
-} catch (e) {
-  console.error(e);
+async function connectToMongoDB() {
+  try {
+    await mongoose.connect(connectionString, options);
+    console.log('MongoDB is connected');
+  } catch (err) {
+    console.error(err);
+  }
 }
 
-export const dbProducts = conn.db("Products");
+async function connectToMongoClient() {
+  try {
+    client = new MongoClient(connectionString);
+    await client.connect();
+    conn = client.db("Products");
+    dbProducts = conn;
+  } catch (e) {
+    console.error(e);
+  }
+}
 
+async function initialize() {
+  await Promise.all([connectToMongoDB(), connectToMongoClient()]);
+}
 
-const db = mongoose.connection;
-export default db;
+initialize();
+
+export { conn, dbProducts };
+export default mongoose.connection;
