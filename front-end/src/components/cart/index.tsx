@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { AiOutlineClose } from 'react-icons/ai';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../app/store';
-import Button from '../layout/Button';
+import Button from '../layout/button';
 import { CartItem } from '../../redux/slices/cartSlice';
 import useCartLogic from './cartLogic';
 import QuantitySelect from './QuantitySelect';

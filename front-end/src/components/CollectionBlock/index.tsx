@@ -1,7 +1,7 @@
 import styles from "./CollectionBlock.module.css";
 
 import { useRouteChange } from "../../hooks/useRouteChange";
-import Button from "../layout/Button";
+import Button from "../layout/button";
 import useIsMobile from "../../utils/useIsMobile";
 
 export interface collectionProps {
