@@ -2,7 +2,7 @@ import { FilterOptions } from '../redux/thunks/filterThunk';
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: 'http://localhost:5172/api/'
+  baseURL: 'https://ebisu-backend.onrender.com/api'
 })
 
 export const getClothesByGender = async (gender: string) => {

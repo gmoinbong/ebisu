@@ -6,6 +6,6 @@ export type Params = {
   password: string
 }
 export const fetchAuth = createAsyncThunk('auth/FetchAuth', async ({ email, password }: Params) => {
-  const { data } = await axios.post('http://localhost:5172/api/login', { email, password });
+  const { data } = await axios.post('https://ebisu-backend.onrender.com/api/login', { email, password });
   return data;
 });

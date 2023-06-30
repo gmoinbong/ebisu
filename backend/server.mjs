@@ -11,7 +11,7 @@ import { getMe, login, register } from './controllers/UserController.mjs';
 const app = express();
 const port = process.env.PORT || 5172;
 
-app.use(cors({ origin: 'http://localhost:5173' }));
+app.use(cors({ origin: 'https://ebisu-backend.onrender.com' }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 

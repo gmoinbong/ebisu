@@ -10,7 +10,7 @@ export const fetchProfile = createAsyncThunk<any, FetchProfileArgs>(
   'profile/fetchProfile',
   async (_, { getState }) => {
     const token = (getState() as RootState).auth.token;
-    const response = await axios.get('http://localhost:5172/api/me', {
+    const response = await axios.get('https://ebisu-backend.onrender.com/api/me', {
       headers: {
         authorization: `Bearer ${token}`,
       },

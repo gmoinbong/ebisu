@@ -13,7 +13,7 @@ export const fetchProducts = createAsyncThunk<Product[], FetchProductsOptions>(
     }
 
     else {
-      const response = await axios.get<Product[]>('http://localhost:5172/api/Clothes');
+      const response = await axios.get<Product[]>('https://ebisu-backend.onrender.com/api/Clothes');
       return response.data;
     }
   }
