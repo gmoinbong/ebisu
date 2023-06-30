@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Button from '../../components/layout/Button';
+import Button from '../../components/layout/button';
 import * as Yup from 'yup';
 import { selectIsAuth } from '../../redux/slices/authSlice';
 import { useRouteChange } from '../../hooks/useRouteChange';
