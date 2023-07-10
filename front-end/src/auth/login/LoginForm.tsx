@@ -10,13 +10,14 @@ interface LoginFormProps {
 }
 
 const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
-  const routChange = useRouteChange()
+  const routChange = useRouteChange();
   const isAuth = useSelector(selectIsAuth);
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
+
   const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
   };
@@ -39,12 +40,12 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
       await schema.validate({ email, password }, { abortEarly: false });
       onSubmit(email, password);
       if (isAuth === true) {
-        return routChange('/account')
+        return routChange('/account');
       }
-    } catch (error: any) {
+    } catch (error) {
       if (error.name === 'ValidationError') {
         const validationErrors: { [key: string]: string } = {};
-        error.inner.forEach((err: any) => {
+        error.inner.forEach((err: Yup.ValidationError) => {
           validationErrors[err.path] = err.message;
         });
         setErrors(validationErrors);
@@ -70,7 +71,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
         <label>Remember Me:</label>
         <input type="checkbox" checked={rememberMe} onChange={handleRememberMeChange} />
       </div>
-      <Button margin='0 auto' text='Sign In' type="submit" />
+      <Button margin="0 auto" text="Sign In" type="submit" />
     </form>
   );
 };

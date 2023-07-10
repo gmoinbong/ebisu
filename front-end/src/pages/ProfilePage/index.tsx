@@ -106,7 +106,7 @@ const ProfilePage: React.FC = () => {
               Sign In
             </Link>
             <br />
-            <Link to="/signup" className={styles.link}>
+            <Link to="/register" className={styles.link}>
               Sign Up
             </Link>
           </div>
