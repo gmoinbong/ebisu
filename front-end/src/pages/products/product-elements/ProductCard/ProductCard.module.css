@@ -112,6 +112,13 @@
   color: #000;
 }
 
+.wrapperContent {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 /* Desktop >> */
 @media(min-width: 768px) {
   .filterOpened {
@@ -144,5 +151,9 @@
 @media (max-width: 767px) {
   .card {
     max-width: calc(50% - 10px);
+  }
+
+  .wrapperItems {
+    min-height: 150px;
   }
 }

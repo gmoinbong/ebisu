@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { FiChevronDown, FiChevronRight } from 'react-icons/fi';
-import styles from '../filter/FilterProducts';
+import styles from '../filter/FIlter.module.css';
 
 
 type FilterOption = {
@@ -13,9 +13,10 @@ type FilterOption = {
 type FilterProps = {
   title: string;
   options: FilterOption[];
+  className?: string
 };
 
-export const Filter = ({ title, options }: FilterProps) => {
+export const Filter = ({ title, options, className }: FilterProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleToggle = () => {

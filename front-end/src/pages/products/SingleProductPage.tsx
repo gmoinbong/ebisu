@@ -54,9 +54,6 @@ const SingleProductPage = () => {
         <div className={styles.wrapper}>
           <div className={styles.imageContainer}>
             <ProductSlider maxWidth={'500px'} width={'100%'}>
-              <ProductSliderItem>
-                <img className={styles.image} alt="product" src={url} />
-              </ProductSliderItem>
               {images &&
                 images.map((image: string, index: number) => (
                   <ProductSliderItem key={index}>
@@ -79,7 +76,7 @@ const SingleProductPage = () => {
               margin={' 10px 0 10px 0 '}
               className={styles.addButton}
               text="Add to Cart"
-              onClick={() => handleCartAdd(selectedSize)}
+              onClick={() => selectedSize && handleCartAdd(selectedSize)}
             />
             <Accordion title="RETURN POLICY" child={<ReturnPolicy />} />
             <Accordion title="PRODUCT DETAILS" child={<Descrpition category={category} gender={gender} />} />

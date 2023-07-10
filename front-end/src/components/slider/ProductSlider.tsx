@@ -39,12 +39,18 @@ const ProductSlider = ({ children, width, maxWidth }: Props) => {
     const currentX = event.touches[0].clientX;
     const diff = startX - currentX;
 
-    if (diff > 0) {
-      updateIndex(activeIndex + 1);
-    } else if (diff < 0) {
-      updateIndex(activeIndex - 1);
+    if (Math.abs(diff) > 100) {
+      if (diff > 0) {
+        updateIndex(activeIndex + 1);
+      } else {
+        updateIndex(activeIndex - 1);
+      }
     }
+
+    setStartX(currentX);
   };
+
+
 
 
 

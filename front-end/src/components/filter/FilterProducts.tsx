@@ -83,6 +83,7 @@ const FilterProducts: React.FC<Props> = ({ isFilterOpen, setFilter }: Props) => 
       {isFilterOpen && (
         <>
           <Filter
+            className={styles.s}
             title="Collection"
             options={collectionOptions.map((option: string) => {
               const isSelected = selectedOptions.Collection && selectedOptions.Collection.includes(option);
@@ -102,7 +103,7 @@ const FilterProducts: React.FC<Props> = ({ isFilterOpen, setFilter }: Props) => 
                 label: option,
                 value: option,
                 selected: isSelected,
-                onChange: () => handelChangeOptions('Categories', option)
+                onChange: () => handelChangeOptions('categories', option)
               };
             })}
           />

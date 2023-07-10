@@ -55,48 +55,46 @@ function ProductCard({ isOpenFilter }: Props) {
               <Link to={`${product.name}`}>
                 <img key={product.url} src={product.url} alt="Product" />
               </Link>
-              <div className={styles.wrapperContent}>
-                <div className={styles.wrapperItems}>
-                  <p key={product.category} className={styles.color}>
-                    {product.collection}
-                  </p>
-                  <Link to={`${product.name}`}>
-                    <h2 key={product.name}>{product.name}</h2>
-                  </Link>
-                  <h3 key={product.color} className={styles.color}>
-                    {product.color}
-                  </h3>
-                </div>
-                {menuOpenIndex === index && hoveredIndex === index && (
-                  <ul className={styles.sizeList}>
-                    {product.category !== "cap" ? (
-                      availableSizes.map((size) => (
-                        <li key={size}>
-                          <p
-                            onClick={() => handleSizeSelect(size)}
-                            className={!product.size.includes(size) ? styles.outOfStock : ''}
-                          >
-                            {size} {!product.size.includes(size) ? '(Out of stock)' : ''}
-                          </p>
-                        </li>
-                      ))
-                    ) : (
-                      <li>
-                        <p onClick={() => handleSizeSelect('one-size')}>one-size</p>
+              <div className={styles.wrapperItems}>
+                <p key={product.category} className={styles.color}>
+                  {product.collection}
+                </p>
+                <Link to={`${product.name}`}>
+                  <h2 key={product.name}>{product.name}</h2>
+                </Link>
+                <h3 key={product.color} className={styles.color}>
+                  {product.color}
+                </h3>
+              </div>
+              {menuOpenIndex === index && hoveredIndex === index && (
+                <ul className={styles.sizeList}>
+                  {product.category !== "cap" ? (
+                    availableSizes.map((size) => (
+                      <li key={size}>
+                        <p
+                          onClick={() => handleSizeSelect(size)}
+                          className={!product.size.includes(size) ? styles.outOfStock : ''}
+                        >
+                          {size} {!product.size.includes(size) ? '(Out of stock)' : ''}
+                        </p>
                       </li>
-                    )}
-                  </ul>
-                )}
-                <div className={styles.wrapper}>
-                  <p className={styles.price}>$ {product.price}</p>
-                  {isMobile ? (
-                    <Button onClick={() => handleButtonClick(index)} text="Add to cart" className={styles.button} />
+                    ))
                   ) : (
-                    hoveredIndex === index && (
-                      <Button onClick={() => handleButtonClick(index)} text="Add to cart" className={styles.button} />
-                    )
+                    <li>
+                      <p onClick={() => handleSizeSelect('one-size')}>one-size</p>
+                    </li>
                   )}
-                </div>
+                </ul>
+              )}
+              <div className={styles.wrapper}>
+                <p className={styles.price}>$ {product.price}</p>
+                {isMobile ? (
+                  <Button onClick={() => handleButtonClick(index)} text="Add to cart" className={styles.button} />
+                ) : (
+                  hoveredIndex === index && (
+                    <Button onClick={() => handleButtonClick(index)} text="Add to cart" className={styles.button} />
+                  )
+                )}
               </div>
             </div>
           ))

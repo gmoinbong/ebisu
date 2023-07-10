@@ -27,7 +27,7 @@ const Header = () => {
     <>
       <header onFocus={handleFocus} className={headerStyles}>
         {isSearchVisible && (
-          <Search
+          <Search menuOpen={menuOpen}
             isSearchVisible={isSearchVisible}
             setIsSearchVisible={setIsSearchVisible}
           />

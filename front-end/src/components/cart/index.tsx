@@ -86,7 +86,7 @@ const Cart = ({ isVisible, setIsVisible }: Props) => {
                       <p>
                         Size: <span className={styles.size}>{item.size} / {item.color}</span>
                       </p>
-                      <p>{item.price}</p>
+                      <p>{item.price}$</p>
                       <QuantitySelect id={item.id} onSelect={handleQuantityChange} />
                     </div>
                   </li>
