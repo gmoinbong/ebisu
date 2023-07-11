@@ -11,6 +11,7 @@ import CountryPopup from './header-elements/countryPopup';
 import { CountryPannel } from './header-elements/countryPannel';
 import useHeaderState from './headerHooks/useHeaderState';
 import useScroll from './headerHooks/useScroll';
+import { useMemo } from 'react';
 
 const Header = () => {
   const isScrolled = useScroll();
@@ -19,9 +20,20 @@ const Header = () => {
     showPopup, handleClickRouteToMain, handleFocus, handleMobileMenuToggle,
     handlePopupClose, handlePopupOpen, toggleSearch, handleCountrySelect, isMobile } = useHeaderState();
 
-  const headerStyles = `${styles.header} ${location.pathname !== '/' ? styles.scrolled : ''}
-   ${isScrolled || menuOpen ? styles.scrolled : ''}  ${menuOpen ? styles.mobileHeader : ''}`;
-  const imgStyles = `${styles.logo} ${menuOpen ? styles.mobileLogo : ''} ${location.pathname !== '/' ? styles.hovered : ''}`
+  const headerStyles = useMemo(
+    () =>
+      `${styles.header} ${location.pathname !== '/' ? styles.scrolled : ''
+      } ${isScrolled || menuOpen ? styles.scrolled : ''}  ${menuOpen ? styles.mobileHeader : ''
+      }`,
+    [isScrolled, menuOpen]
+  );
+
+  const imgStyles = useMemo(
+    () =>
+      `${styles.logo} ${menuOpen ? styles.mobileLogo : ''
+      } ${location.pathname !== '/' ? styles.hovered : ''}`,
+    [menuOpen]
+  );
 
   return (
     <>

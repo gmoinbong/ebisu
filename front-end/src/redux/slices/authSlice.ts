@@ -6,6 +6,7 @@ interface AuthData {
   email: string
   fullName: string
 }
+
 const loadAuthFromStorage = () => {
   const authData = localStorage.getItem('authData');
   if (authData) {
@@ -43,7 +44,7 @@ export const initializeAuthData = createAsyncThunk(
 );
 
 const initialState = {
-  authData: loadAuthFromStorage() as AuthData | null,
+  authData: loadAuthFromStorage() as AuthData | null | any,
   status: loadAuthFromStorage() ? 'loaded' : 'loading',
   token: loadAuthFromStorage() ? loadAuthFromStorage().token : null
 };

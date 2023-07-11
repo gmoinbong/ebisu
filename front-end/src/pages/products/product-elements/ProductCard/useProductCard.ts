@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { useFetchProducts } from '../../../../hooks/useFetchProducts';
@@ -28,29 +28,27 @@ export function useProductCard() {
     dispatch(resetFilterOptions());
   }, [dispatch, path]);
 
-  let renderProducts = selectedOptions && Object.keys(selectedOptions).length > 0 && isFiltered
-    ? filteredProducts
-    : products;
-  useEffect(() => {
+  const renderProducts = useMemo(() => {
     if (selectedOptions && Object.keys(selectedOptions).length > 0 && isFiltered) {
-      renderProducts = filteredProducts;
+      return filteredProducts;
     } else {
-      renderProducts = products;
+      return products;
     }
   }, [selectedOptions, isFiltered, products, filteredProducts]);
 
-  const handleCardMouseEnter = (index: number) => {
+
+  const handleCardMouseEnter = useCallback((index: number) => {
     setHoveredIndex(index);
-  };
+  }, [])
 
-  const handleCardMouseLeave = () => {
+  const handleCardMouseLeave = useCallback(() => {
     setHoveredIndex(-1);
-  };
+  }, [])
 
-  const handleButtonClick = (index: number) => {
+  const handleButtonClick = useCallback((index: number) => {
     setMenuOpenIndex((prevIndex) => (prevIndex === index ? -1 : index));
     setHoveredIndex(index);
-  };
+  }, [])
 
   return {
     menuOpenIndex,

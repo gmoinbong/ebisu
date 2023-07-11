@@ -3,6 +3,6 @@ import axios from "axios";
 
 export const sendCartData = createAsyncThunk('cart/sendCartData',
   async (cartItems) => {
-    const response = await axios.post('https://ebisu-backend.onrender.com/api/cart', cartItems);
+    const response = await axios.post('http://localhost:5172/api/cart', cartItems);
     return response.data;
   });

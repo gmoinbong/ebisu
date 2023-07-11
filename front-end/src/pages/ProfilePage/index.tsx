@@ -5,8 +5,8 @@ import styles from './Profile.module.css';
 import Button from '../../components/layout/button';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../app/store';
-import { clearAuthData, initializeAuthData } from '../../redux/slices/authSlice';
-import { fetchProfile, selectProfileStatus } from '../../redux/slices/profileSlice';
+import { clearAuthData, initializeAuthData, logout } from '../../redux/slices/authSlice';
+import { fetchProfile, selectProfileData, selectProfileStatus } from '../../redux/slices/profileSlice';
 import { Link } from 'react-router-dom';
 import { useRouteChange } from '../../hooks/useRouteChange';
 
@@ -15,23 +15,22 @@ type ProfileData = {
   fullName: string | null;
 };
 
-
 const ProfilePage: React.FC = () => {
   const dispatch = useDispatch();
-  const profileData = useSelector((state: RootState) => state.profile.data) as ProfileData | null;
+  const profileData = useSelector(selectProfileData) as ProfileData | null;
   const profileStatus = useSelector(selectProfileStatus);
   const country = useSelector((state: RootState) => state.setCountry.country) as string;
   const token = useSelector((state: RootState) => state.auth.token) as string;
   const routChange = useRouteChange();
 
   useEffect(() => {
-    dispatch((initializeAuthData()) as any);
-    dispatch(fetchProfile({ token }) as any);
+    dispatch(initializeAuthData());
+    dispatch(fetchProfile({ token }));
   }, [dispatch, token]);
 
   useEffect(() => {
     if (profileStatus === 'loading' || profileStatus === 'error') {
-      dispatch(fetchProfile({ token }) as any);
+      dispatch(fetchProfile({ token }));
     }
   }, [profileStatus, dispatch, token]);
 
@@ -74,13 +73,13 @@ const ProfilePage: React.FC = () => {
 
   const handleLogout = () => {
     localStorage.removeItem('authData');
-    dispatch(clearAuthData());
+    dispatch(logout());
     routChange('/login');
   };
 
   const handleLastNameChange = (e: ChangeEvent<HTMLInputElement>) => {
     setLastName(e.target.value);
-    setFirstName('')
+    setFirstName('');
   };
 
   const handleAddressChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -97,15 +96,14 @@ const ProfilePage: React.FC = () => {
 
   if (!profileData) {
     return (
-      <div className={styles.profileContainer}>
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }} className={styles.profileContainer}>
         <div className={styles.content}>
-          <h2>Welcome!</h2>
+          <h2 style={{ textAlign: 'center', paddingBottom: 10 }}>Welcome!</h2>
           <p>Please sign up or sign in to view your profile.</p>
-          <div>
+          <div style={{ display: 'flex', alignItems: 'center', flexDirection: 'column', paddingTop: 10 }}>
             <Link to="/login" className={styles.link}>
               Sign In
             </Link>
-            <br />
             <Link to="/register" className={styles.link}>
               Sign Up
             </Link>
@@ -140,6 +138,7 @@ const ProfilePage: React.FC = () => {
             type="text"
             id="firstName"
             value={profileData.fullName || firstName}
+            onChange={(e) => setFirstName(e.target.value)}
             required
           />
           {errors.firstName && <span className={styles.profileError}>{errors.firstName}</span>}
